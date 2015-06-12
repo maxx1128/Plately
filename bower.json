@@ -1,0 +1,14 @@
+{
+  "name": "Gulp",
+  "version": "0.0.0",
+  "authors": [
+    "maxx1128 <maxx1128@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.4.0"
+  }
+}
