@@ -12,7 +12,7 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps');
 
 var config = {
-    projectPath: 'build'
+    projectPath: 'build/'
 }
 
 // Find errors!
@@ -31,12 +31,8 @@ gulp.task('homepage', function(){
 gulp.task('scripts', function(){
     gulp.src('js/*.js')
     .pipe(plumber())
-    .pipe(sourcemaps.init({loadMaps: true}))
-         .pipe(concat('main.js'))
-         .pipe(uglify( {
-            outSourceMap: true
-         }))
-    .pipe(sourcemaps.write())
+         .pipe(concat('all.js'))
+         .pipe(uglify())
     .pipe(rename('main.min.js'))
     .pipe(gulp.dest(config.projectPath))
     .pipe(livereload());
