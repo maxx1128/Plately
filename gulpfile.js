@@ -5,10 +5,11 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     prefix = require('gulp-autoprefixer'),
     imagemin = require('gulp-imagemin'),
-    pngquant = require('imagemin-pngquant'),
     concat = require('gulp-concat'),
     rename = require('gulp-rename'),
+    jade = require('gulp-jade'),
     plumber = require('gulp-plumber'),
+    notify = require('gulp-notify'),
     sourcemaps = require('gulp-sourcemaps');
 
 var config = {
@@ -53,7 +54,7 @@ gulp.task('sass', function() {
    })
     .pipe(prefix('> 1%', 'last 2 versions', 'Firefox > 20', 'Opera 12.1'))
     .pipe(sourcemaps.write())
-    .pipe(rename('style.css'))
+    .pipe(rename('style.min.css'))
     .pipe(gulp.dest(config.projectPath))
     .pipe(livereload());
 });
@@ -72,15 +73,27 @@ gulp.task('images', function () {
         .pipe(livereload());
 });
 
+// Get all the Jade things!
+gulp.task('jade', function() {
+    var my_locals = {};
+
+    gulp.src('lib/**/**/*.jade')
+        .pipe(jade({
+            locals: my_locals
+        }))
+        .pipe(gulp.dest(config.projectPath))
+});
+
 
 // Task to watch the things!
 gulp.task('watch', function(){
   livereload.listen();
-	gulp.watch('js/*.js', ['scripts']);
-	gulp.watch('sass/**/*.scss', ['sass']);
+    gulp.watch('js/*.js', ['scripts']);
+    gulp.watch('sass/**/*.scss', ['sass']);
+    gulp.watch('lib/**/**/*.jade', ['jade']);
   gulp.watch('img/*', ['images']);
   gulp.watch('index.html', ['homepage']);
 });
 
 
-gulp.task('default', ['scripts', 'sass', 'watch']);
+gulp.task('default', ['scripts', 'sass', 'jade', 'watch']);
