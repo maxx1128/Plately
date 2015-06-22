@@ -45,7 +45,7 @@ gulp.task('sass', function() {
     
     return sass('sass/style.scss',{
         sourcemap: true,
-        style: 'expanded',
+        style: 'compressed',
         require: ['susy'],
         require: ['breakpoint']
     }) 
