@@ -13,7 +13,8 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps');
 
 var config = {
-    projectPath: 'build/'
+    projectPath: 'build/',
+    componentPath: 'components/'
 }
 
 // Find errors!
@@ -95,5 +96,7 @@ gulp.task('watch', function(){
   gulp.watch('index.html', ['homepage']);
 });
 
+// For watching multiple files
+// gulp.watch(['sass/**/*.scss','other/path/to/file/*.scss'], ['sass']);
 
 gulp.task('default', ['scripts', 'sass', 'jade', 'watch']);
