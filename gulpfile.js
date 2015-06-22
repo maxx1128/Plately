@@ -35,7 +35,7 @@ gulp.task('scripts', function(){
          .pipe(concat('all.js'))
          .pipe(uglify())
     .pipe(rename('main.min.js'))
-    .pipe(gulp.dest(config.projectPath))
+    .pipe(gulp.dest(config.projectPath + '/assets/js'))
     .pipe(livereload());
 });
 
@@ -55,7 +55,7 @@ gulp.task('sass', function() {
     .pipe(prefix('> 1%', 'last 2 versions', 'Firefox > 20', 'Opera 12.1'))
     .pipe(sourcemaps.write())
     .pipe(rename('style.min.css'))
-    .pipe(gulp.dest(config.projectPath))
+    .pipe(gulp.dest(config.projectPath + '/assets/css'))
     .pipe(livereload());
 });
 
