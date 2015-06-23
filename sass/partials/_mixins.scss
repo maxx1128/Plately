@@ -1,0 +1,85 @@
+// Flex image mixin
+@mixin fix-cell($fix-direction,$fix-width) {
+  width: $fix-width;
+  display: block;
+  max-width: none;
+}
+
+@mixin flex-cell {
+  display: table-cell;
+  width: 100%;
+  vertical-align: middle;
+}
+
+@mixin fix-flex($fix-direction,$fix-width,$fix-margin) {
+  display: table;
+  width: 100%;
+  @if $fix-direction == 'left' {
+    & > :first-child {
+      @include fix-cell($fix-direction,$fix-width);
+      margin-right: $fix-margin;
+    }
+    & > :last-child {
+      @include flex-cell;
+    }
+  } @else {
+    & > :first-child {
+      @include flex-cell;
+    }
+    & > :last-child {
+      @include fix-cell($fix-direction,$fix-width);
+      margin-left: $fix-margin;
+    }
+  }
+}
+
+
+
+/* Animation Mixin */
+
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    -webkit-animation: $animations;
+    -moz-animation:    $animations;
+    -o-animation:      $animations;
+    animation:         $animations;
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+/*
+
+// -- Animation Mixin Notes --
+
+@include keyframes(name-here) {
+  0%   { color: black; }
+  50%   { color: white; }
+  100% { color: black; }
+}
+
+
+@include animation('name-here 1s linear 0s infinite');
+
+*/
