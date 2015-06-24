@@ -9,5 +9,9 @@
   ],
   "license": "MIT",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "bourbon": "~4.2.3",
+    "neat": "~1.7.2",
+    "bitters": "~1.0.0"
+  }
 }
