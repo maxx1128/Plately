@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
-    sass = require('gulp-ruby-sass'),
+    sass = require('gulp-sass'),
     minifyCSS = require('gulp-minify-css'),
     livereload = require('gulp-livereload'),
     prefix = require('gulp-autoprefixer'),
@@ -10,10 +10,12 @@ var gulp = require('gulp'),
     jade = require('gulp-jade'),
     plumber = require('gulp-plumber'),
     notify = require('gulp-notify'),
-    sourcemaps = require('gulp-sourcemaps');
+    sourcemaps = require('gulp-sourcemaps'),
+    sassdoc = require('sassdoc');
 
 var config = {
     projectPath: 'build/',
+    assetsPath: 'build/assets/',
     componentPath: 'components/'
 }
 
@@ -36,30 +38,36 @@ gulp.task('scripts', function(){
          .pipe(concat('all.js'))
          .pipe(uglify())
     .pipe(rename('main.min.js'))
-    .pipe(gulp.dest(config.projectPath + '/assets/js'))
+    .pipe(gulp.dest(config.assetsPath + '/js'))
     .pipe(livereload());
 });
-
 
 // Convert all the SASS to CSS
-gulp.task('sass', function() {
-    
-    return sass('sass/style.scss',{
-        sourcemap: true,
-        style: 'compressed',
-        require: ['susy'],
-        require: ['breakpoint']
-    }) 
-    .on('error', function (err) {
-      console.error('Error!', err.message);
-   })
-    .pipe(prefix('> 1%', 'last 2 versions', 'Firefox > 20', 'Opera 12.1'))
+var sassInput = 'sass/style.scss';
+var sassOptions = { 
+    outputStyle: 'compressed' 
+};
+var autoprefixerOptions = { browsers: ['last 2 versions', '> 5%', 'Firefox ESR'] };
+var sassdocOptions = { dest: 'public/sassdocs' };
+
+gulp.task('sass', function () {
+  return gulp
+    .src(sassInput)
+    .pipe(sourcemaps.init())
+    .pipe(sass(sassOptions).on('error', sass.logError))
     .pipe(sourcemaps.write())
-    .pipe(rename('style.min.css'))
-    .pipe(gulp.dest(config.projectPath + '/assets/css'))
-    .pipe(livereload());
+    .pipe(prefix(autoprefixerOptions))
+    .pipe(rename("style.min.css"))
+    .pipe(gulp.dest(config.assetsPath + '/css'));
 });
 
+// Start building the Sass Docs! Must be run separately!
+gulp.task('sassdoc', function () {
+  return gulp
+    .src('sass/**/*.scss')
+    .pipe(sassdoc(sassdocOptions))
+    .resume();
+});
 
 // Compress all the image things!
 gulp.task('images', function () {
