@@ -11,7 +11,8 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     notify = require('gulp-notify'),
     sourcemaps = require('gulp-sourcemaps'),
-    sassdoc = require('sassdoc');
+    sassdoc = require('sassdoc'),
+    notify = require('gulp-notify');
 
 var config = {
     projectPath: 'build/',
@@ -37,8 +38,10 @@ gulp.task('scripts', function(){
     .pipe(plumber())
          .pipe(concat('all.js'))
          .pipe(uglify())
+    .on("error", notify.onError("Error:" + errorLog))
     .pipe(rename('main.min.js'))
     .pipe(gulp.dest(config.assetsPath + '/js'))
+    .pipe(notify('JS Uglified!'))
     .pipe(livereload());
 });
 
@@ -55,30 +58,36 @@ gulp.task('sass', function () {
     .src(sassInput)
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on('error', sass.logError))
+    .on("error", notify.onError("Error:" + errorLog))
     .pipe(sourcemaps.write())
     .pipe(prefix(autoprefixerOptions))
     .pipe(rename("style.min.css"))
-    .pipe(gulp.dest(config.assetsPath + '/css'));
+    .pipe(gulp.dest(config.assetsPath + '/css'))
+    .pipe(notify('Sass Processed!'))
+    .pipe(livereload());
 });
 
 // Start building the Sass Docs! Must be run separately!
 gulp.task('sassdoc', function () {
   return gulp
     .src('sass/**/*.scss')
+    .on("error", notify.onError("Error:" + errorLog))
     .pipe(sassdoc(sassdocOptions))
+    .pipe(notify('Sass Documented!'))
     .resume();
 });
 
 // Compress all the image things!
 gulp.task('images', function () {
-    return gulp.src('img/*')
+    return gulp.src('build/img/*')
         .pipe(imagemin({
             progressive: true,
             svgoPlugins: [{removeViewBox: false}],
             use: [pngquant()]
         }))
-        .on('error', errorLog)
-        .pipe(gulp.dest('assets/img'))
+        .on("error", notify.onError("Error:" + errorLog))
+        .pipe(gulp.dest(config.assetsPath + 'assets/img'))
+        .pipe(notify('Images optimized!'))
         .pipe(livereload());
 });
 
@@ -90,7 +99,9 @@ gulp.task('jade', function() {
         .pipe(jade({
             locals: my_locals
         }))
+        .on("error", notify.onError("Error:" + errorLog))
         .pipe(gulp.dest(config.projectPath))
+        .pipe(notify('HTML Jaded!'));
 });
 
 
