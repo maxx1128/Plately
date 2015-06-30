@@ -8,28 +8,28 @@ This is a boilerplate for personal and professional web development projects, wi
 - Node.JS - For running the serv-erside javascript
 - Gulp - For organizing and creating the specific workflow
 ```sh
-gulp   //run + watch scripts, sass, jade, images for changes
-gulp watch   //Watch the above without running them
-gulp scripts   //only process JS files
-gulp sass   //only process Sass files to CSS
-gulp jade   //only process Jade files to HTML
-gulp images   //optimize image files
-gulp sassdoc   //Create documentation for Sass code
+$ gulp   //run + watch scripts, sass, jade, images for changes
+$ gulp watch   //Watch the above without running them
+$ gulp scripts   //only process JS files
+$ gulp sass   //only process Sass files to CSS
+$ gulp jade   //only process Jade files to HTML
+$ gulp images   //optimize image files
+$ gulp sassdoc   //Create documentation for Sass code
 ^C   //stop run + watch
 ```
 - NPM - Node package management
 ```sh
-npm install   //install dependencies (deps)
-npm install [component] --save-dev  //Install + save deps
-npm uninstall [component]   //Remove a dep
-npm search [component]   //Search Github for new deps
+$ npm install   //install dependencies (deps)
+$ npm install [component] --save-dev  //Install + save deps
+$ npm uninstall [component]   //Remove a dep
+$ npm search [component]   //Search Github for new deps
 ```
 - Bower - Component package management
 ```sh
-bower install
-bower install [component] --save-dev
-bower uninstall [component]
-bower search [component]
+$ bower install
+$ bower install [component] --save-dev
+$ bower uninstall [component]
+$ bower search [component]
 ```
 
 ## Organization:
