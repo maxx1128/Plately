@@ -23,6 +23,7 @@ $ gulp sass   //only process Sass files to CSS
 $ gulp jade   //only process Jade files to HTML
 $ gulp images   //optimize image files
 $ gulp sassdoc   //Create documentation for Sass code, is not watched
+$ gulp uncss   //Removes any CSS not being used in the project, is not watched
 $ ^C   //stop run + watch
 ```
 - [NPM] - Node package management
@@ -72,6 +73,7 @@ $ bower search [component]   //Search for new Bower components to install
 - gulp-sourcemaps: Adding sourcemaps to CSS and JS files to speed up debugging
 - gulp-uglify: For compressing JS files
 - sassdoc: For automated documentation of Sass functions, mixins, variables, etc
+- gulp-uncss: Removes any CSS element selectors that aren't being used in the Build folder
 
 > NOTE: These are not downloaded, but are only already part of Package.json. They need the NPM command to install all dependencies and use them in the workflow.
 

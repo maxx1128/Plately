@@ -12,7 +12,8 @@ var gulp = require('gulp'),
     notify = require('gulp-notify'),
     sourcemaps = require('gulp-sourcemaps'),
     sassdoc = require('sassdoc'),
-    notify = require('gulp-notify');
+    notify = require('gulp-notify'),
+    uncss = require('gulp-uncss');
 
 var config = {
     projectPath: 'build/',
@@ -59,12 +60,29 @@ gulp.task('sass', function () {
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on('error', sass.logError))
     .on("error", notify.onError("Error:" + errorLog))
-    .pipe(sourcemaps.write())
     .pipe(prefix(autoprefixerOptions))
+    .pipe(sourcemaps.write())
     .pipe(rename("style.min.css"))
     .pipe(gulp.dest(config.assetsPath + '/css'))
     .pipe(notify('Sass Processed!'))
     .pipe(livereload());
+});
+
+gulp.task('uncss', function () {
+  return gulp
+    .src(sassInput)
+    .pipe(sourcemaps.init())
+    .pipe(sass(sassOptions).on('error', sass.logError))
+    .on("error", notify.onError("Error:" + errorLog))
+    .pipe(prefix(autoprefixerOptions))
+    .pipe(rename("style.min.css"))
+    .pipe(uncss({
+        html: ['build/**/**/*.html']
+    }))
+    .pipe(minifyCSS())
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest(config.assetsPath + '/css'))
+    .pipe(notify('CSS Trimmed!'))
 });
 
 // Start building the Sass Docs! Must be run separately!
