@@ -1,12 +1,20 @@
-# In progress!
-# Maxwell Boilerplate Workflow
+# Maxwell Workflow
 
-This is a boilerplate for personal and professional web development projects, with standard components included and set up to include other ones as needed. It has no content already set up with it and is basically a blank slate.
+> This is a workflow for personal and professional web development projects, 
+> with standard components included and set up to include other ones as needed. 
+> It has no content already set up with it and is a blank slate.
 
-## Dependencies:
+## System and User Requirements
 
-- Node.JS - For running the serv-erside javascript
-- Gulp - For organizing and creating the specific workflow
+- Node.js
+- Gulp
+- Terminal
+- Understanding of JS, Sass, Jade, and basic front-end workflow
+
+## Workflow Dependencies and common commands:
+
+- [Node.JS] - For running the serv-erside javascript
+- [Gulp] - For organizing and creating the specific workflow
 ```sh
 $ gulp   //run + watch scripts, sass, jade, images for changes
 $ gulp watch   //Watch the above without running them
@@ -14,32 +22,33 @@ $ gulp scripts   //only process JS files
 $ gulp sass   //only process Sass files to CSS
 $ gulp jade   //only process Jade files to HTML
 $ gulp images   //optimize image files
-$ gulp sassdoc   //Create documentation for Sass code
-^C   //stop run + watch
+$ gulp sassdoc   //Create documentation for Sass code, is not watched
+$ ^C   //stop run + watch
 ```
-- NPM - Node package management
+- [NPM] - Node package management
 ```sh
 $ npm install   //install dependencies (deps)
 $ npm install [component] --save-dev  //Install + save deps
 $ npm uninstall [component]   //Remove a dep
 $ npm search [component]   //Search Github for new deps
 ```
-- Bower - Component package management
+- [Bower] - Component package management
 ```sh
-$ bower install
-$ bower install [component] --save-dev
-$ bower uninstall [component]
-$ bower search [component]
+$ bower install   //Install all Bower components from Bower.json
+$ bower install [component] --save-dev   //Install a single Bower component
+$ bower install [component] --save-dev   //Install a single Bower component and save it to Bower.json (if not already there)
+$ bower uninstall [component]   //Uninstall a component from the workflow and Bower components list
+$ bower search [component]   //Search for new Bower components to install
 ```
 
 ## Organization:
 
 - Bower.json: Bower file that organizes and saves Bower dependencies. Can be seen and manually removed here. When installed, are saved to the components folder.
-- Build: Where the project output is. Jade files are processed and output here at HTML files, and the CSS, JS, and image files are saved to the assets folder. Image files are also optimized and output in the Build folder.
+- Build: Where the project output is. Jade files are processed and output here at HTML files, and the CSS, JS, and image files are minified/optimized before going to the Assets folder for local reference.
 - Components: Bower files and dependencies are all saved here. Any relevant CSS or JS files can be referenced here without weighing down the Build folder.
 - Gulpfile.js: Code that controls the basic Gulp workflow and preprocessing of all files. Outputs files to the Build folders and notifies of the processes or the errors.
-- JS: All Javascript and jQuery files are placed. Are processed, minified, and output to the Build’s assets folder.
-- Lib: All Jade files are written here, are processed and output into the Build folder
+- JS: All Javascript and jQuery files are placed. Are processed, minified, and output to the Build’s Assets folder.
+- Lib: All Jade files are written here, and are then processed and output into the Build folder. Also where image files are placed, which are optimized for Build as well.
 - Node_modules: All node dependencies, essential to running the Gulp workflow. Is empty at first, see NPM above for how to install dependencies.
 - NPM-debug.log: Debug log of all NPM mistakes and entries with the NPM dependency manager.
 - Package.json: List of all NPM dependencies that will be installed, essential to quickly setting up the Gulp workflow.
@@ -48,71 +57,48 @@ $ bower search [component]
 
 ## Module Dependencies:
 
-- gulp:
-- gulp-autoprefixer:
-- gulp-bower:
-- gulp-concat:
-- gulp-imagemin:
-- gulp-jade:
-- gulp-livereload:
-- gulp-minify-css:
-- gulp-notify:
-- gulp-plumber:
-- gulp-rename:
-- gulp-sass:
-- gulp-sourcemaps:
-- gulp-uglify:
-- sassdac:
+- gulp: Basic Gulp module for running the workflow
+- gulp-autoprefixer: Automatically adds browser prefixes to certain CSS styles to ensure cross-compatibility
+- gulp-bower: Allows use of Bower in the Gulp workflow if needed
+- gulp-concat: For merging different JS files together from the JS folder into a single one for the Assets folder
+- gulp-imagemin: For optimizing images in the images placed in the Lib/Img folder and sent to Build
+- gulp-jade: For converting Jade files to HTML
+- gulp-livereload: For using the Chrome LiveReload extension so pages refresh automatically with changes
+- gulp-minify-css: Minifying CSS files
+- gulp-notify: Notifying of completed processes or errors
+- gulp-plumber: So any mistakes send a message without halting the workflow
+- gulp-rename: Renaming any files before sending them to the Build folder
+- gulp-sass: For converting Sass to CSS
+- gulp-sourcemaps: Adding sourcemaps to CSS and JS files to speed up debugging
+- gulp-uglify: For compressing JS files
+- sassdoc: For automated documentation of Sass functions, mixins, variables, etc
 
-## Bower Dependencies:
-- Bourbon:
-- Neat:
-- Bitters:
+> NOTE: These are not downloaded, but are only already part of Package.json. They need the NPM command to install all dependencies and use them in the workflow.
+
+## Bower Dependencies
+- [Bourbon]: A lightweight Sass mixin library
+- [Neat]: Lightweight, semantic grid that pairs with Bourbon
+- [Bitters]: Scaffold styles, variables and structure for Bourbon and Neat projects.
+
+> NOTE: Similar to the NPM dependencies, these are not downloaded, but are only already part of Bower.json. They need the Bower command to install and use in the workflow. Paths to reference them are already in the main Style.css file
 
 ## How to use:
 
-
-
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
-
-* [AngularJS] - HTML enhanced for web apps!
-* [Ace Editor] - awesome web-based text editor
-* [Marked] - a super fast port of Markdown to JavaScript
-* [Twitter Bootstrap] - great UI boilerplate for modern web apps
-* [node.js] - evented I/O for the backend
-* [Express] - fast node.js network app framework [@tjholowaychuk]
-* [Gulp] - the streaming build system
-* [keymaster.js] - awesome keyboard handler lib by [@thomasfuchs]
-* [jQuery] - duh
-
+1. Download the workflow and place files in accessible location.
+2. Execute commands to install NPM dependencies and Bower components (second optional).
+3. Locate folder in terminal with the cd command below.
 ```sh
-$ git clone [git-repo-url] dillinger
-$ cd dillinger
-$ npm i -d
-$ mkdir -p public/files/{md,html,pdf}
-$ gulp build --prod
-$ NODE_ENV=production node app
+$ cd Path/To/Workflow
 ```
+4. Execute Gulp command to run all or one of the processes.
+5. If Gulp is watching the files, then any changes made to the Sass, JS, Jade or images will happen automatically on any save.
+6. All changes made will be output in the Build folder.
+7. Serve and enjoy.
 
-
-
-
-[john gruber]:http://daringfireball.net/
-[@thomasfuchs]:http://twitter.com/thomasfuchs
-[1]:http://daringfireball.net/projects/markdown/
-[marked]:https://github.com/chjj/marked
-[Ace Editor]:http://ace.ajax.org
-[node.js]:http://nodejs.org
-[Twitter Bootstrap]:http://twitter.github.com/bootstrap/
-[keymaster.js]:https://github.com/madrobby/keymaster
-[jQuery]:http://jquery.com
-[@tjholowaychuk]:http://twitter.com/tjholowaychuk
-[express]:http://expressjs.com
-[AngularJS]:http://angularjs.org
-[Gulp]:http://gulpjs.com
+[Bourbon]:http://bourbon.io/
+[Neat]:http://neat.bourbon.io/
+[Bitters]:http://bitters.bourbon.io/
+[Bower]:http://bower.io/
+[NPM]:https://www.npmjs.com/
+[Node.JS]:https://nodejs.org/
+[Gulp]:http://gulpjs.com/

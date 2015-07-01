@@ -79,7 +79,7 @@ gulp.task('sassdoc', function () {
 
 // Compress all the image things!
 gulp.task('images', function () {
-    return gulp.src('build/img/*')
+    return gulp.src('lib/img/*')
         .pipe(imagemin({
             progressive: true,
             svgoPlugins: [{removeViewBox: false}],
