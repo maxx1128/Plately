@@ -88,10 +88,7 @@ $ bower search [component]   //Search for new Bower components to install
 
 1. Download the workflow and place files in accessible location.
 2. Execute commands to install NPM dependencies and Bower components (second optional).
-3. Locate folder in terminal with the cd command below.
-```sh
-$ cd Path/To/Workflow
-```
+3. Locate folder in terminal with the CD command.
 4. Execute Gulp command to run all or one of the processes.
 5. If Gulp is watching the files, then any changes made to the Sass, JS, Jade or images will happen automatically on any save.
 6. All changes made will be output in the Build folder.
