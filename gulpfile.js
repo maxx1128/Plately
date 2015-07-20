@@ -41,7 +41,7 @@ gulp.task('scripts', function(){
          .pipe(uglify())
     .on("error", notify.onError("Error:" + errorLog))
     .pipe(rename('main.min.js'))
-    .pipe(gulp.dest(config.assetsPath + '/js'))
+    .pipe(gulp.dest(config.assetsPath + 'js'))
     .pipe(notify('JS Uglified!'))
     .pipe(livereload());
 });
@@ -63,7 +63,7 @@ gulp.task('sass', function () {
     .pipe(prefix(autoprefixerOptions))
     .pipe(sourcemaps.write())
     .pipe(rename("style.min.css"))
-    .pipe(gulp.dest(config.assetsPath + '/css'))
+    .pipe(gulp.dest(config.assetsPath + 'css'))
     .pipe(notify('Sass Processed!'))
     .pipe(livereload());
 });
@@ -81,7 +81,7 @@ gulp.task('uncss', function () {
     }))
     .pipe(minifyCSS())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(config.assetsPath + '/css'))
+    .pipe(gulp.dest(config.assetsPath + 'css'))
     .pipe(notify('CSS Trimmed!'))
 });
 
