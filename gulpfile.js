@@ -124,7 +124,8 @@ gulp.task('jade', function() {
         }))
         .on("error", notify.onError("Error:" + errorLog))
         .pipe(gulp.dest(config.projectPath))
-        .pipe(notify('HTML Jaded!'));
+        .pipe(notify('HTML Jaded!'))
+        .pipe(livereload());
 });
 
 
