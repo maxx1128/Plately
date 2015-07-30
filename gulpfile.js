@@ -118,7 +118,7 @@ gulp.task('images', function () {
 gulp.task('jade', function() {
     var my_locals = {};
 
-    gulp.src('lib/**/**/*.jade')
+    gulp.src('lib/*.jade')
         .pipe(jade({
             locals: my_locals
         }))
