@@ -21,6 +21,10 @@ var config = {
     componentPath: 'components/'
 }
 
+var componentjs = {
+    path: 'example/path/to/js/file'
+}
+
 // Find errors!
 function errorLog(error) {
   console.error.bind(error);
@@ -36,6 +40,7 @@ gulp.task('homepage', function(){
 // Uglify, to compress JS files
 gulp.task('scripts', function(){
     gulp.src('js/*.js')
+    // gulp.src(['js/*.js', 'componentjs.path' + 'file.name'])
     .pipe(plumber())
          .pipe(concat('all.js'))
          .pipe(uglify())
