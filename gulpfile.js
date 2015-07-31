@@ -22,10 +22,6 @@ var config = {
     componentPath: 'components/'
 }
 
-var componentjs = {
-    path: 'example/path/to/js/file'
-}
-
 // Find errors!
 function errorLog(error) {
   console.error.bind(error);
