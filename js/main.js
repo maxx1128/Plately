@@ -1,5 +1,6 @@
 $( document ).ready(function() {
 
-// JS files here
+//=require ../path/to/js/file.js
+//=require app.js
 	
 }); //Doc ready is done!

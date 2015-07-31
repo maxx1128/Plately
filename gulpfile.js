@@ -8,6 +8,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     rename = require('gulp-rename'),
     jade = require('gulp-jade'),
+    include = require('gulp-include'),
     plumber = require('gulp-plumber'),
     notify = require('gulp-notify'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -39,8 +40,9 @@ gulp.task('homepage', function(){
 
 // Uglify, to compress JS files
 gulp.task('scripts', function(){
-    gulp.src('js/*.js')
-    // gulp.src(['js/*.js', 'componentjs.path' + 'file.name'])
+    gulp.src('js/main.js')
+    .pipe(include())
+      .on('error', console.log)
     .pipe(plumber())
          .pipe(concat('all.js'))
          .pipe(uglify())
