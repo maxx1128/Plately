@@ -1,5 +1,6 @@
 node_modules/*
 components/*
 build/sftp-config.json
+build/assets/css/style.min.css
 
 !components/_components.scss
