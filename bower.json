@@ -8,10 +8,11 @@
     "node"
   ],
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "Maxwell-bitters": "maxx1128/Maxwell-bitters"
+  },
   "devDependencies": {
     "bourbon": "~4.2.3",
-    "neat": "~1.7.2",
-    "bitters": "~1.0.0"
+    "neat": "~1.7.2"
   }
 }
