@@ -15,6 +15,8 @@ var gulp = require('gulp'),
     sassdoc = require('sassdoc'),
     notify = require('gulp-notify'),
     scsslint = require('gulp-scss-lint'),
+    jshint = require('gulp-jshint'),
+    stylish = require('jshint-stylish'),
     uncss = require('gulp-uncss');
 
 var config = {
@@ -48,6 +50,21 @@ gulp.task('scripts', function(){
     .pipe(gulp.dest(config.assetsPath + 'js'))
     .pipe(notify('JS Uglified!'))
     .pipe(livereload());
+});
+
+gulp.task('jslint', function() {
+  return gulp.src('js/*.js')
+    .pipe(jslint())
+    .on('error', function (error) {
+        console.error(String(error));
+    });
+});
+
+gulp.task('jshint', function() {
+  return gulp.src('js/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+    .pipe(jshint.reporter('fail'));
 });
 
 // Convert all the SASS to CSS

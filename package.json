@@ -1,5 +1,5 @@
 {
-  "name": "Maxwell Workflow",
+  "name": "maxwell_workflow",
   "version": "1.0.0",
   "description": "A starting workflow for web development projects using Gulp and Node.js",
   "author": "Maxwell Antonucci <maxx1128@gmail.com>",
@@ -39,6 +39,7 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
     "gulp-uncss": "^1.0.1",
+    "jshint-stylish": "^2.0.1",
     "sassdoc": "^2.1.15"
   },
   "licence": "MIT"
