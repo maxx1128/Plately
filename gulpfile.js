@@ -14,6 +14,7 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     sassdoc = require('sassdoc'),
     notify = require('gulp-notify'),
+    scsslint = require('gulp-scss-lint'),
     uncss = require('gulp-uncss');
 
 var config = {
@@ -86,6 +87,11 @@ gulp.task('uncss', function () {
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.assetsPath + 'css'))
     .pipe(notify('CSS Trimmed!'))
+});
+
+gulp.task('scss-lint', function() {
+  gulp.src('sass/**/*.scss')
+    .pipe(scsslint());
 });
 
 // Start building the Sass Docs! Must be run separately!

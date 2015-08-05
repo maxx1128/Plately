@@ -11,12 +11,12 @@
 /// @param {length} $fix-margin - The margin length between the two items
 /// @example 
 ///   @include fix-flex('left', 2em, 10px);
-@mixin fix-flex($fix-direction,$fix-width,$fix-margin) {
+@mixin fix-flex($fix-direction, $fix-width, $fix-margin) {
   display: table;
   width: 100%;
   @if $fix-direction == 'left' {
     & > :first-child {
-      @include fix-cell($fix-direction,$fix-width);
+      @include fix-cell($fix-direction, $fix-width);
       margin-right: $fix-margin;
     }
     & > :last-child {
@@ -27,7 +27,7 @@
       @include flex-cell;
     }
     & > :last-child {
-      @include fix-cell($fix-direction,$fix-width);
+      @include fix-cell($fix-direction, $fix-width);
       margin-left: $fix-margin;
     }
   }
