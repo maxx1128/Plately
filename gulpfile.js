@@ -17,7 +17,14 @@ var gulp = require('gulp'),
     scsslint = require('gulp-scss-lint'),
     jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish'),
-    uncss = require('gulp-uncss');
+    uncss = require('gulp-uncss'),
+    express = require('express');
+
+var express = require('express')
+var app = express()
+app.use('/', express.static(__dirname + '/build'));
+app.listen(3000)
+console.log('Express site on 3000!')
 
 var config = {
     projectPath: 'build/',
