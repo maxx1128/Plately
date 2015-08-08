@@ -59,14 +59,6 @@ gulp.task('scripts', function(){
     .pipe(livereload());
 });
 
-gulp.task('jslint', function() {
-  return gulp.src('js/*.js')
-    .pipe(jslint())
-    .on('error', function (error) {
-        console.error(String(error));
-    });
-});
-
 gulp.task('jshint', function() {
   return gulp.src('js/*.js')
     .pipe(jshint())
@@ -130,7 +122,7 @@ gulp.task('sassdoc', function () {
 
 // Compress all the image things!
 gulp.task('images', function () {
-    return gulp.src('lib/img/*')
+    return gulp.src('jade/img/*')
         .pipe(imagemin({
             progressive: true,
             svgoPlugins: [{removeViewBox: false}],
@@ -146,7 +138,7 @@ gulp.task('images', function () {
 gulp.task('jade', function() {
     var my_locals = {};
 
-    gulp.src('lib/**/**/*.jade')
+    gulp.src('jade/**/**/*.jade')
         .pipe(jade({
             locals: my_locals
         }))
@@ -162,12 +154,9 @@ gulp.task('watch', function(){
   livereload.listen();
     gulp.watch('js/*.js', ['scripts']);
     gulp.watch(['sass/**/*.scss','components/_components.scss'], ['sass']);
-    gulp.watch('lib/**/**/*.jade', ['jade']);
+    gulp.watch('jade/**/**/*.jade', ['jade']);
   gulp.watch('img/*', ['images']);
   gulp.watch('index.html', ['homepage']);
 });
-
-// For watching multiple files
-// gulp.watch(['sass/**/*.scss','other/path/to/file/*.scss'], ['sass']);
 
 gulp.task('default', ['scripts', 'sass', 'jade', 'watch']);
