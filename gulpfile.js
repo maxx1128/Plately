@@ -5,7 +5,6 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     prefix = require('gulp-autoprefixer'),
     imagemin = require('gulp-imagemin'),
-    concat = require('gulp-concat'),
     rename = require('gulp-rename'),
     jade = require('gulp-jade'),
     include = require('gulp-include'),
@@ -50,7 +49,6 @@ gulp.task('scripts', function(){
     .pipe(include())
       .on('error', console.log)
     .pipe(plumber())
-         .pipe(concat('all.js'))
          .pipe(uglify())
     .on("error", notify.onError("Error:" + errorLog))
     .pipe(rename('main.min.js'))
