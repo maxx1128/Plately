@@ -122,9 +122,7 @@ gulp.task('sassdoc', function () {
 gulp.task('images', function () {
     return gulp.src('jade/img/*')
         .pipe(imagemin({
-            progressive: true,
-            svgoPlugins: [{removeViewBox: false}],
-            use: [pngquant()]
+            progressive: true
         }))
         .on("error", notify.onError("Error:" + errorLog))
         .pipe(gulp.dest(config.assetsPath + 'assets/img'))
@@ -153,8 +151,8 @@ gulp.task('watch', function(){
     gulp.watch('js/*.js', ['scripts']);
     gulp.watch(['sass/**/*.scss','components/_components.scss'], ['sass']);
     gulp.watch('jade/**/**/*.jade', ['jade']);
-  gulp.watch('img/*', ['images']);
-  gulp.watch('index.html', ['homepage']);
+    gulp.watch('img/*', ['images']);
+    gulp.watch('index.html', ['homepage']);
 });
 
-gulp.task('default', ['scripts', 'sass', 'jade', 'watch']);
+gulp.task('default', ['scripts', 'sass', 'jade', 'images', 'watch']);
