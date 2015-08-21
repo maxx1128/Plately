@@ -53,7 +53,10 @@ gulp.task('scripts', function(){
     .on("error", notify.onError("Error:" + errorLog))
     .pipe(rename('main.min.js'))
     .pipe(gulp.dest(config.assetsPath + 'js'))
-    .pipe(notify('JS Uglified!'))
+    .pipe(notify({
+        message: 'JS Uglified!',
+        onLast: true
+    }))
     .pipe(livereload());
 });
 
@@ -82,7 +85,10 @@ gulp.task('sass', function () {
     .pipe(sourcemaps.write())
     .pipe(rename("style.min.css"))
     .pipe(gulp.dest(config.assetsPath + 'css'))
-    .pipe(notify('Sass Processed!'))
+    .pipe(notify({
+        message: 'Sass Processed!',
+        onLast: true
+    }))
     .pipe(livereload());
 });
 
@@ -126,7 +132,10 @@ gulp.task('images', function () {
         }))
         .on("error", notify.onError("Error:" + errorLog))
         .pipe(gulp.dest(config.assetsPath + 'assets/img'))
-        .pipe(notify('Images optimized!'))
+        .pipe(notify({
+        message: 'Images Optimized!',
+        onLast: true
+    }))
         .pipe(livereload());
 });
 
@@ -140,7 +149,10 @@ gulp.task('jade', function() {
         }))
         .on("error", notify.onError("Error:" + errorLog))
         .pipe(gulp.dest(config.projectPath))
-        .pipe(notify('HTML Jaded!'))
+        .pipe(notify({
+        message: 'HTML Jaded!',
+        onLast: true
+    }))
         .pipe(livereload());
 });
 
