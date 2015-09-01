@@ -1,5 +1,9 @@
-// Use this helper function to easily get the colors
-// font-color: color(blue);
+/// This is the Functions page
+/// @group Functions
+
+/// Use this helper function to easily get the colors
+/// @name color
+/// @param {string} $color - The color from the Colors map to be used.
 @function color($key) {
   @if map-has-key($colors, $key) {
     @return map-get($colors, $key);
