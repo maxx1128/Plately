@@ -153,7 +153,7 @@ gulp.task('jade', function() {
 gulp.task('watch', function(){
   livereload.listen();
     gulp.watch('js/*.js', ['scripts']);
-    gulp.watch('sass/**/*.scss', ['sass']);
+    gulp.watch('sass/**/**/*.scss', ['sass']);
     gulp.watch('jade/**/**/*.jade', ['jade']);
     gulp.watch('img/*', ['images']);
     gulp.watch('index.html', ['homepage']);
