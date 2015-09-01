@@ -96,7 +96,10 @@ gulp.task('uncss', function () {
     .pipe(minifyCSS())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.assetsPath + 'css'))
-    .pipe(notify('CSS Trimmed!'))
+    .pipe(notify({
+        message: 'CSS Trimmed!',
+        onLast: true
+    }))
 });
 
 
@@ -106,7 +109,10 @@ gulp.task('sassdoc', function () {
     .src('sass/**/**/*.scss')
     .on("error", notify.onError("Error:" + errorLog))
     .pipe(sassdoc(sassdocOptions))
-    .pipe(notify('Sass Documented!'))
+    .pipe(notify({
+        message: 'Sass Documented!',
+        onLast: true
+    }))
     .resume();
 });
 
@@ -136,9 +142,9 @@ gulp.task('jade', function() {
         .on("error", notify.onError("Error:" + errorLog))
         .pipe(gulp.dest(config.projectPath))
         .pipe(notify({
-        message: 'HTML Jaded!',
-        onLast: true
-    }))
+            message: 'HTML Jaded!',
+            onLast: true
+        }))
         .pipe(livereload());
 });
 

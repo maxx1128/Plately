@@ -32,6 +32,8 @@
     }
   }
 }
+
+// These are child mixins for the fix-flex mixin
 @mixin fix-cell($fix-direction,$fix-width) {
   width: $fix-width;
   display: block;
@@ -46,22 +48,6 @@
 /// The animation mixin that's a prerequisite for the keyframes mixin.
 /// Used for creating keyframe animation classes for elements
 /// @name Animation Setup
-@mixin animation($animate...) {
-    $max: length($animate);
-    $animations: '';
-
-    @for $i from 1 through $max {
-        $animations: #{$animations + nth($animate, $i)};
-
-        @if $i < $max {
-            $animations: #{$animations + ", "};
-        }
-    }
-    -webkit-animation: $animations;
-    -moz-animation:    $animations;
-    -o-animation:      $animations;
-    animation:         $animations;
-}
 
 /// This is the main mixin for creating keyframe animations with cross-browser
 /// compatibility automatically set up. It needs the name and also the body with
@@ -89,4 +75,21 @@
     @keyframes #{$animationName} {
         @content;
     }
+}
+// This is the setup for the keyframes mixin
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    -webkit-animation: $animations;
+    -moz-animation:    $animations;
+    -o-animation:      $animations;
+    animation:         $animations;
 }
