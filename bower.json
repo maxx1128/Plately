@@ -9,7 +9,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "Maxwell-bitters": "maxx1128/Maxwell-bitters"
   },
   "devDependencies": {
     "bourbon": "~4.2.4",

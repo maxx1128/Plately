@@ -58,3 +58,20 @@ $z-layers: (
   overlay: 4000,
   modal: 4001
 );
+
+// Neat Grid Breakpoints
+// @import "neat-helpers"; // or "../neat/neat-helpers" when not in Rails
+// @import "../../../../neat/app/assets/stylesheets/neat-helpers";
+
+// Neat Breakpoints
+$mobile-screen: 320px;
+$mobile-h-screen: 480px;
+$tablet-screen: 787px;
+$desktop-screen: 900px;
+$huge-screen: 1200px;
+
+$mobile-screen-up: new-breakpoint(min-width $mobile-screen);
+$mobile-h-screen-up: new-breakpoint(min-width $mobile-h-screen);
+$tablet-screen-up: new-breakpoint(min-width $tablet-screen);
+$desktop-screen-up: new-breakpoint(min-width $desktop-screen);
+$huge-screen-up: new-breakpoint(min-width $huge-screen);

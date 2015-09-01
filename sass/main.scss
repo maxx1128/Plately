@@ -2,7 +2,8 @@
 // ======
 
 @import 
- '../components/bourbon/app/assets/stylesheets/bourbon';
+ '../components/bourbon/app/assets/stylesheets/bourbon',
+ '../components/neat/app/assets/stylesheets/neat';
 
 @import
 	'utils/functions',
@@ -14,15 +15,9 @@
   'base/reset',
   'base/typography';
 
-/* 
+ 
 @import
-  'layout/navigation',
-  'layout/grid',
-  'layout/header',
-  'layout/footer',
-  'layout/sidebar',
-  'layout/forms';
-*/
+  'layout/grid';
 
 @import
   'components/tables',

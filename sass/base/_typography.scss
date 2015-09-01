@@ -27,7 +27,7 @@ $types: (
    #{$type} {
       font-size: $scaled-font-size;
 
-      @media screen and (min-width: 780px) {
+      @media screen and (min-width: $tablet-screen) {
         font-size: $main-font-size;
       }
    }   
