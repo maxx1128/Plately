@@ -13,9 +13,6 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     sassdoc = require('sassdoc'),
     notify = require('gulp-notify'),
-    scsslint = require('gulp-scss-lint'),
-    jshint = require('gulp-jshint'),
-    stylish = require('jshint-stylish'),
     uncss = require('gulp-uncss'),
     express = require('express');
 
@@ -60,15 +57,8 @@ gulp.task('scripts', function(){
     .pipe(livereload());
 });
 
-gulp.task('jshint', function() {
-  return gulp.src('js/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter(stylish))
-    .pipe(jshint.reporter('fail'));
-});
-
 // Convert all the SASS to CSS
-var sassInput = 'sass/style.scss';
+var sassInput = 'sass/main.scss';
 var sassOptions = { 
     outputStyle: 'compressed' 
 };
@@ -109,15 +99,11 @@ gulp.task('uncss', function () {
     .pipe(notify('CSS Trimmed!'))
 });
 
-gulp.task('scss-lint', function() {
-  gulp.src('sass/**/*.scss')
-    .pipe(scsslint());
-});
 
 // Start building the Sass Docs! Must be run separately!
 gulp.task('sassdoc', function () {
   return gulp
-    .src('sass/**/*.scss')
+    .src('sass/**/**/*.scss')
     .on("error", notify.onError("Error:" + errorLog))
     .pipe(sassdoc(sassdocOptions))
     .pipe(notify('Sass Documented!'))
@@ -161,7 +147,7 @@ gulp.task('jade', function() {
 gulp.task('watch', function(){
   livereload.listen();
     gulp.watch('js/*.js', ['scripts']);
-    gulp.watch(['sass/**/*.scss','components/_components.scss','components/Maxwell-bitters/app/assets/stylesheets/*.scss'], ['sass']);
+    gulp.watch('sass/**/*.scss', ['sass']);
     gulp.watch('jade/**/**/*.jade', ['jade']);
     gulp.watch('img/*', ['images']);
     gulp.watch('index.html', ['homepage']);

@@ -1,0 +1,76 @@
+body {
+  color: $base-font-color;
+  font-family: $base-font-family;
+  font-feature-settings: "kern", "liga", "pnum";
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+}
+
+
+// Include and add any elements you want and where they fall from
+// the base font scale.
+$types: (
+   h1: $base-font-scale + 6,
+   h2: $base-font-scale + 5,
+   h3: $base-font-scale + 4,
+   h4: $base-font-scale + 3,
+   h5: $base-font-scale + 2,
+   h6: $base-font-scale + 1,
+   p: $base-font-scale,
+);
+
+// For cycling through all the font sizes
+@each $type, $scale in $types {
+  $main-font-size: modular-scale($scale);
+  $scaled-font-size: $main-font-size * $scaled-font-ratio;
+
+   #{$type} {
+      font-size: $scaled-font-size;
+
+      @media screen and (min-width: 780px) {
+        font-size: $main-font-size;
+      }
+   }   
+}
+// Replace above with grid variable later!
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $heading-font-family;
+  line-height: $heading-line-height;
+  margin: ($small-spacing / 3) 0 $small-spacing;
+}
+
+p {
+  margin: 0 0 $small-spacing;
+}
+
+a {
+  color: $action-color;
+  text-decoration: none;
+  transition: color $base-duration $base-timing;
+
+  &:active,
+  &:focus,
+  &:hover {
+    color: shade($action-color, 25%);
+  }
+}
+
+hr {
+  border-bottom: $base-border;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  margin: $base-spacing 0;
+}
+
+img,
+picture {
+  margin: 0;
+  max-width: 100%;
+}

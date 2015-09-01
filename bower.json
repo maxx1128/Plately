@@ -12,7 +12,7 @@
     "Maxwell-bitters": "maxx1128/Maxwell-bitters"
   },
   "devDependencies": {
-    "bourbon": "~4.2.3",
+    "bourbon": "~4.2.4",
     "neat": "~1.7.2"
   }
 }
