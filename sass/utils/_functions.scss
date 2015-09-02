@@ -1,8 +1,6 @@
 /// This is the Functions page
-/// @group Functions
 
 /// Use this helper function to easily get the colors
-/// @name color
 /// @param {string} $color - The color from the Colors map to be used.
 @function color($key) {
   @if map-has-key($colors, $key) {
@@ -13,9 +11,11 @@
   @return null;
 }
 
-// For using organized z-index values
-// _functions.scss
-@function z($key) {
+/// For using organized z-index values
+/// @param {string} key - The common element connected to each z-value.
+/// @group Layout
+/// @see z-layers
+@function z-index($key) {
   @if map-has-key($z-layers, $key) {
     @return map-get($z-layers, $key);
   }

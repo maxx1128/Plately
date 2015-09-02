@@ -1,10 +1,35 @@
-// Typography
+// ----- Typography Variables ----- //
+
+/// The default font family for all text except headers. Can be a specific font family or a Bourbon font variable.
+/// @type Variable | String(s)
+/// @group Typography
 $base-font-family: $helvetica;
+
+/// The default font family for only headers. Can be a specific font family or a Bourbon font variable. By default, it's the same as the base font.
+/// @type Variable | String(s)
+/// @group Typography
 $heading-font-family: $base-font-family;
 
-// Font Sizes
+/// The font size that all other element font sizes are scaled off of. This is often the size of basic paragraph text, and is scaled up for headers.
+/// @type Unit of Size(em)
+/// @group Typography
+/// @see modular-scale-ratio
 $base-font-size: 1em;
+/// This is the initial scale of the modular scale ration you want your font sizes to begin at. Typically left at zero, which will make your basic text the same of your base font size. Header font sizes will scale up.
+/// @type Integer
+/// @group Typography
+/// @see base-font-size
+/// @see modular-scale-ratio
+/// @see modular-size-map
 $base-font-scale: 0;
+/// This is the modular scale the fonts will use for sizes. It can be a Bourbon variable or an integer with decimals.
+/// @type Integer
+/// @group Typography
+/// @see modular-size-map
+/// @link http://www.modularscale.com/
+$modular-scale-ratio: $minor-third;
+$modular-scale-base: $base-font-size;
+$scaled-font-ratio: .9;
 
 // Line height
 $base-line-height: 1.6;
@@ -26,9 +51,7 @@ $colors: (
 );
  
 // Typography Components
-$modular-scale-ratio: $minor-third;
-$modular-scale-base: $base-font-size;
-$scaled-font-ratio: .9;
+
 
 // Font Colors
 $base-font-color: color(dark-gray);
@@ -50,7 +73,10 @@ $form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $l
 $base-duration: 150ms;
 $base-timing: ease;
 
-// z-index layers
+/// Lays out the different z-index values to help keep them organized. Based off what commom elements they'd be used for.
+/// @type Map
+/// @group Layout
+/// @see z-index
 $z-layers: (
   bottomless-pit: -9999,
   default: 1,
@@ -59,19 +85,16 @@ $z-layers: (
   modal: 4001
 );
 
-// Neat Grid Breakpoints
-// @import "neat-helpers"; // or "../neat/neat-helpers" when not in Rails
-// @import "../../../../neat/app/assets/stylesheets/neat-helpers";
 
 // Neat Breakpoints
-$mobile-screen: 320px;
-$mobile-h-screen: 480px;
-$tablet-screen: 787px;
-$desktop-screen: 900px;
-$huge-screen: 1200px;
+$mobile: 320px;
+$mobile-h: 480px;
+$tablet: 787px;
+$desktop: 900px;
+$huge: 1200px;
 
-$mobile-screen-up: new-breakpoint(min-width $mobile-screen);
-$mobile-h-screen-up: new-breakpoint(min-width $mobile-h-screen);
-$tablet-screen-up: new-breakpoint(min-width $tablet-screen);
-$desktop-screen-up: new-breakpoint(min-width $desktop-screen);
-$huge-screen-up: new-breakpoint(min-width $huge-screen);
+$mobile-screen: new-breakpoint(min-width $mobile);
+$mobile-h-screen: new-breakpoint(min-width $mobile-h);
+$tablet-screen: new-breakpoint(min-width $tablet);
+$desktop-screen: new-breakpoint(min-width $desktop);
+$huge-screen: new-breakpoint(min-width $huge);

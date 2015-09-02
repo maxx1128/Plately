@@ -1,10 +1,8 @@
-/// This is the Mixins page
-/// @group Mixins
-
 /// The fix-cell and flex-cell mixins included components of the fix-flex mixin, which is used for items with a fixed width on one side and flexible on the other.
 /// @name fix-flex
 /// @author Krispin Dolbear, EMA
-/// @param {true or false string} $fix-direction - If the fixed element is on the left or right side
+/// @group Layout
+/// @param {string} $fix-direction - If the fixed element is on the left or right side
 /// @param {length} $fix-width - The width of the fixed element
 /// @param {length} $fix-margin - The margin length between the two items
 /// @example 
@@ -31,12 +29,15 @@
   }
 }
 
-// These are child mixins for the fix-flex mixin
+/// @see {mixin} fix-flex
+/// @group Dependencies
 @mixin fix-cell($fix-direction,$fix-width) {
   width: $fix-width;
   display: block;
   max-width: none;
 }
+/// @see {mixin} fix-flex
+/// @group Dependencies
 @mixin flex-cell {
   display: table-cell;
   width: 100%;
