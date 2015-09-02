@@ -18,7 +18,8 @@ var gulp = require('gulp'),
 
 var express = require('express')
 var app = express()
-app.use('/', express.static(__dirname + '/build'));
+app.use('/', express.static(__dirname + '/build'))
+app.use('/sassdocs', express.static(__dirname + '/public/sassdocs'));
 app.listen(3000)
 console.log('Express site on 3000!')
 
@@ -113,7 +114,7 @@ gulp.task('sassdoc', function () {
         message: 'Sass Documented!',
         onLast: true
     }))
-    .resume();
+    .pipe(livereload());
 });
 
 // Compress all the image things!
@@ -159,4 +160,11 @@ gulp.task('watch', function(){
     gulp.watch('index.html', ['homepage']);
 });
 
+gulp.task('docwatching', function(){
+  livereload.listen();
+    gulp.watch('sass/**/**/*.scss', ['sassdoc']);
+});
+
 gulp.task('default', ['scripts', 'sass', 'jade', 'images', 'watch']);
+gulp.task('docwatch', ['sassdoc', 'docwatching']);
+
