@@ -46,6 +46,7 @@
 
 /// This is the main mixin for creating keyframe animations with cross-browser compatibility automatically set up. It needs the name and also the body with the keyframe locations and properties.
 /// @name keyframes
+/// @group Animation
 /// @param {string} $animationName - The name of the animation to be referenced
 /// @example
 ///   @include keyframes(name-here) {
@@ -69,7 +70,9 @@
         @content;
     }
 }
-// This is the setup for the keyframes mixin
+/// This is the setup for the keyframes mixin
+/// @see keyframes
+/// @group Dependencies
 @mixin animation($animate...) {
     $max: length($animate);
     $animations: '';

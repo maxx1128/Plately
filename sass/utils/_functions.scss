@@ -2,6 +2,7 @@
 
 /// Use this helper function to easily get the colors
 /// @param {string} $color - The color from the Colors map to be used.
+/// @group Colors
 @function color($key) {
   @if map-has-key($colors, $key) {
     @return map-get($colors, $key);
