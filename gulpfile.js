@@ -140,7 +140,7 @@ gulp.task('jade', function() {
         .pipe(jade({
             locals: my_locals
         }))
-        .on("error", notify.onError("Error:" + errorLog))
+        // .on("error", notify.onError("Error:" + errorLog))
         .pipe(gulp.dest(config.projectPath))
         .pipe(notify({
             message: 'HTML Jaded!',
