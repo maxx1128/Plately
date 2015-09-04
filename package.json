@@ -1,6 +1,6 @@
 {
   "name": "Plately",
-  "version": "2.0",
+  "version": "2.0.0",
   "description": "A starting workflow for web development projects using Gulp and Node.js",
   "author": "Maxwell Antonucci <maxx1128@gmail.com>",
   "repository": {
@@ -27,6 +27,7 @@
     "gulp-imagemin": "^2.2.1",
     "gulp-include": "^2.0.2",
     "gulp-jade": "^1.0.1",
+    "gulp-jsdoc": "^0.1.4",
     "gulp-livereload": "^3.8.0",
     "gulp-minify-css": "^1.1.6",
     "gulp-notify": "^2.2.0",

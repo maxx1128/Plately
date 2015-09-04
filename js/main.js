@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+// Components
+
 // Utilities
 //=require utils/variables.js
 //=require utils/functions.js
@@ -15,5 +17,5 @@ $(document).ready(function () {
 
 // Apps
 //=require apps/app.js
-	
+
 }); //Doc ready is done!
