@@ -12,6 +12,7 @@ var gulp = require('gulp'),
     notify = require('gulp-notify'),
     sourcemaps = require('gulp-sourcemaps'),
     sassdoc = require('sassdoc'),
+    jsdoc = require('gulp-jsdoc'),
     notify = require('gulp-notify'),
     uncss = require('gulp-uncss'),
     express = require('express');
@@ -61,7 +62,7 @@ gulp.task('scripts', function(){
 // Convert all the SASS to CSS
 var sassInput = 'sass/main.scss';
 var sassOptions = { 
-    outputStyle: 'compressed' 
+    outputStyle: 'expanded' 
 };
 var autoprefixerOptions = { browsers: ['last 2 versions', '> 5%', 'Firefox ESR'] };
 var sassdocOptions = { dest: 'public/sassdocs' };
@@ -72,7 +73,6 @@ gulp.task('sass', function () {
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on('error', sass.logError))
     .on("error", notify.onError("Error:" + errorLog))
-    .pipe(prefix(autoprefixerOptions))
     .pipe(sourcemaps.write())
     .pipe(rename("style.min.css"))
     .pipe(gulp.dest(config.assetsPath + 'css'))
@@ -117,6 +117,19 @@ gulp.task('sassdoc', function () {
     .pipe(livereload());
 });
 
+// Generate documentation for the JS with JSDoc! Must also be run separately!
+gulp.task('jsdoc', function () {
+  return gulp
+    .src('js/**/**/*.js')
+    .pipe(notify({
+        message: 'JS Documented!',
+        onLast: true
+    }))
+    .on("error", notify.onError("Error:" + errorLog))
+    .pipe(jsdoc('./public/jsdocs'))
+    .pipe(livereload());
+});
+
 // Compress all the image things!
 gulp.task('images', function () {
     return gulp.src('jade/img/*')
@@ -149,6 +162,19 @@ gulp.task('jade', function() {
         .pipe(livereload());
 });
 
+gulp.task('prod', ['uncss', 'sassdoc', 'jsdoc'], function() {
+  return gulp
+    .src(sassInput)
+    .pipe(sass({ outputStyle: 'compressed' }))
+    .on("error", notify.onError("Error:" + errorLog))
+    .pipe(prefix(autoprefixerOptions))
+    .pipe(rename("style.min.css"))
+    .pipe(gulp.dest(config.assetsPath + 'css'))
+    .pipe(notify({
+        message: 'Project is Production Ready!',
+        onLast: true
+    }))
+});
 
 // Task to watch the things!
 gulp.task('watch', function(){
@@ -163,8 +189,9 @@ gulp.task('watch', function(){
 gulp.task('docwatching', function(){
   livereload.listen();
     gulp.watch('sass/**/**/*.scss', ['sassdoc']);
+    gulp.watch('js/**/**/*.js', ['jsdoc']);
 });
 
 gulp.task('default', ['scripts', 'sass', 'jade', 'images', 'watch']);
-gulp.task('docwatch', ['sassdoc', 'docwatching']);
+gulp.task('docwatch', ['sassdoc','jsdoc', 'docwatching']);
 
