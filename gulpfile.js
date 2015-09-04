@@ -86,16 +86,13 @@ gulp.task('sass', function () {
 gulp.task('uncss', function () {
   return gulp
     .src(sassInput)
-    .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on('error', sass.logError))
     .on("error", notify.onError("Error:" + errorLog))
-    .pipe(prefix(autoprefixerOptions))
     .pipe(rename("style.min.css"))
     .pipe(uncss({
         html: ['build/**/**/*.html']
     }))
     .pipe(minifyCSS())
-    .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.assetsPath + 'css'))
     .pipe(notify({
         message: 'CSS Trimmed!',
@@ -114,7 +111,7 @@ gulp.task('sassdoc', function () {
         message: 'Sass Documented!',
         onLast: true
     }))
-    .pipe(livereload());
+    .resume();
 });
 
 // Generate documentation for the JS with JSDoc! Must also be run separately!
@@ -162,7 +159,7 @@ gulp.task('jade', function() {
         .pipe(livereload());
 });
 
-gulp.task('prod', ['uncss', 'sassdoc', 'jsdoc'], function() {
+gulp.task('prod', ['sassdoc', 'jsdoc'], function() {
   return gulp
     .src(sassInput)
     .pipe(sass({ outputStyle: 'compressed' }))
@@ -186,12 +183,10 @@ gulp.task('watch', function(){
     gulp.watch('index.html', ['homepage']);
 });
 
-gulp.task('docwatching', function(){
+gulp.task('docwatch', ['sassdoc','jsdoc'], function(){
   livereload.listen();
     gulp.watch('sass/**/**/*.scss', ['sassdoc']);
     gulp.watch('js/**/**/*.js', ['jsdoc']);
 });
 
 gulp.task('default', ['scripts', 'sass', 'jade', 'images', 'watch']);
-gulp.task('docwatch', ['sassdoc','jsdoc', 'docwatching']);
-
