@@ -3,7 +3,7 @@
 /// The default font family for all text except headers. Can be a specific font family or a Bourbon font variable.
 /// @type Variable | String(s)
 /// @group Typography
-$base-font-family: $helvetica;
+$base-font-family: $helvetica !important;
 
 /// The default font family for only headers. Can be a specific font family or a Bourbon font variable. By default, it's the same as the base font.
 /// @type Variable | String(s)

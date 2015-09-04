@@ -85,10 +85,7 @@ gulp.task('sass', function () {
 
 gulp.task('uncss', function () {
   return gulp
-    .src(sassInput)
-    .pipe(sass(sassOptions).on('error', sass.logError))
-    .on("error", notify.onError("Error:" + errorLog))
-    .pipe(rename("style.min.css"))
+    .src(config.assetsPath + 'css/style.min.css')
     .pipe(uncss({
         html: ['build/**/**/*.html']
     }))
@@ -190,3 +187,4 @@ gulp.task('docwatch', ['sassdoc','jsdoc'], function(){
 });
 
 gulp.task('default', ['scripts', 'sass', 'jade', 'images', 'watch']);
+gulp.task('prod-all', ['sassdoc', 'jsdoc', 'prod', 'uncss']);

@@ -1,6 +1,0 @@
-body {
-  @include media($tablet-screen) {
-    @include span-columns(8 of 12);
-    @include shift(2);
-  }
-}
