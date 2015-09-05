@@ -156,7 +156,7 @@ gulp.task('jade', function() {
         .pipe(livereload());
 });
 
-gulp.task('prod', ['sassdoc', 'jsdoc'], function() {
+gulp.task('prod-init', ['sassdoc', 'jsdoc'], function() {
   return gulp
     .src(sassInput)
     .pipe(sass({ outputStyle: 'compressed' }))
@@ -187,4 +187,4 @@ gulp.task('docwatch', ['sassdoc','jsdoc'], function(){
 });
 
 gulp.task('default', ['scripts', 'sass', 'jade', 'images', 'watch']);
-gulp.task('prod-all', ['sassdoc', 'jsdoc', 'prod', 'uncss']);
+gulp.task('prod', ['sassdoc', 'jsdoc', 'prod-init', 'uncss']);
