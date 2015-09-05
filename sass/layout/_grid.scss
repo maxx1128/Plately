@@ -1,0 +1,9 @@
+body {
+	@include outer-container;
+	padding: $base-spacing $small-spacing;
+
+	@include media(breakpoint(tablet)) {
+		@include span-columns(10);
+		@include shift(1);
+	}
+}
