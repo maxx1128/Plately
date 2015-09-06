@@ -8,10 +8,10 @@
     "node"
   ],
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "bourbon": "~4.2.4",
+    "jquery": "~2.1.4",
     "neat": "~1.7.2"
   }
 }
