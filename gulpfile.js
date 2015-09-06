@@ -156,20 +156,6 @@ gulp.task('jade', function() {
         .pipe(livereload());
 });
 
-gulp.task('prod-init', ['sassdoc', 'jsdoc'], function() {
-  return gulp
-    .src(sassInput)
-    .pipe(sass({ outputStyle: 'compressed' }))
-    .on("error", notify.onError("Error:" + errorLog))
-    .pipe(prefix(autoprefixerOptions))
-    .pipe(rename("style.min.css"))
-    .pipe(gulp.dest(config.assetsPath + 'css'))
-    .pipe(notify({
-        message: 'Project is Production Ready!',
-        onLast: true
-    }))
-});
-
 // Task to watch the things!
 gulp.task('watch', function(){
   livereload.listen();
