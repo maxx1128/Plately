@@ -1,7 +1,6 @@
 var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     sass = require('gulp-sass'),
-    minifyCSS = require('gulp-minify-css'),
     livereload = require('gulp-livereload'),
     prefix = require('gulp-autoprefixer'),
     imagemin = require('gulp-imagemin'),
@@ -13,7 +12,6 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     sassdoc = require('sassdoc'),
     jsdoc = require('gulp-jsdoc'),
-    notify = require('gulp-notify'),
     uncss = require('gulp-uncss'),
     express = require('express');
 
