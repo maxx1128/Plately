@@ -3,181 +3,212 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-    <title>Maxwell workflow by maxx1128</title>
+    <title>Plately by maxx1128</title>
   </head>
 
   <body>
-    <header>
+    <div id="container">
       <div class="inner">
-        <h1>Maxwell workflow</h1>
-        <h2>My personal Gulp workflow for development projects</h2>
-        <a href="https://github.com/maxx1128/Maxwell_Workflow" class="button"><small>View project on</small> GitHub</a>
-      </div>
-    </header>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
+        <header>
+          <h1>Plately</h1>
+          <h2>A simple starting template for front-end web development projects.</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/maxx1128/Plately/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/maxx1128/Plately/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/maxx1128/Plately" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
           <h1>
-<a id="maxwell-workflow" class="anchor" href="#maxwell-workflow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Maxwell Workflow</h1>
+<a id="plately---v-200" class="anchor" href="#plately---v-200" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plately - v 2.0.0</h1>
 
-<blockquote>
-<p>This is a workflow for personal and professional web development projects, 
-with standard components included and set up to include other ones as needed. 
-It has no content already set up with it and is a blank slate.</p>
-</blockquote>
+<p>Plately is a simple starting template I use for front-end web development projects. It's set up to quickly let developers start creating with Jade, Sass, jQuery, and any other dependencies they need to add.</p>
 
 <h2>
-<a id="system-and-user-requirements" class="anchor" href="#system-and-user-requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>System and User Requirements</h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<p>This project has a few basic global dependencies to make it.</p>
 
 <ul>
 <li>Node.js</li>
-<li>Gulp</li>
-<li>Terminal</li>
-<li>Understanding of JS, Sass, Jade, and basic front-end workflow</li>
+<li>Gulp.js, a node task runner for automating common tasks</li>
+<li>NPM (node package manager)</li>
+<li>Bower</li>
+<li>Basic understanding of Jade, Sass, jQuery, etc.</li>
 </ul>
 
 <h2>
-<a id="workflow-dependencies-and-common-commands" class="anchor" href="#workflow-dependencies-and-common-commands" aria-hidden="true"><span class="octicon octicon-link"></span></a>Workflow Dependencies and common commands:</h2>
+<a id="folder-structure" class="anchor" href="#folder-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Folder Structure</h2>
+
+<h4>
+<a id="folders-that-are-already-there" class="anchor" href="#folders-that-are-already-there" aria-hidden="true"><span class="octicon octicon-link"></span></a>Folders that are already there:</h4>
 
 <ul>
-<li>
-<a href="https://nodejs.org/">Node.JS</a> - For running the serv-erside javascript</li>
-<li>
-<a href="http://gulpjs.com/">Gulp</a> - For organizing and creating the specific workflow</li>
+<li>Jade: Where all the Jade files are stored, which are converted into HTML for the project.</li>
+<li>Img: This is in the Jade folder, and is where all your images go.</li>
+<li>JS: Where your jQuery and Javacript files go, which is the interactivity and logic for the project. Structured to better organize the different files.</li>
+<li>Public: Static pages that contain the Sass and JS documentation that makes it easy to read through and understand what makes up the project.</li>
+<li>Sass: Where all the Sass files go, separated by a folder structure for better organization.</li>
 </ul>
 
-<div class="highlight highlight-sh"><pre>$ gulp   //run + watch scripts, sass, jade, images <span class="pl-k">for</span> <span class="pl-smi">changes</span>
-$ gulp watch   //Watch the above without running them
-$ gulp scripts   //only process JS files
-$ gulp sass   //only process Sass files to CSS
-$ gulp jade   //only process Jade files to HTML
-$ gulp images   //optimize image files
-$ gulp sassdoc   //Create documentation <span class="pl-k">for</span> <span class="pl-smi">Sass</span> code, is not watched
-$ gulp uncss   //Removes any CSS not being used <span class="pl-k">in</span> the project, is not watched
-$ ^C   //stop run + watch</pre></div>
-
-<ul>
-<li>
-<a href="https://www.npmjs.com/">NPM</a> - Node package management</li>
-</ul>
-
-<div class="highlight highlight-sh"><pre>$ npm install   //install dependencies (deps)
-$ npm install [component] --save-dev  //Install + save deps
-$ npm uninstall [component]   //Remove a dep
-$ npm search [component]   //Search Github <span class="pl-k">for</span> <span class="pl-smi">new</span> deps</pre></div>
-
-<ul>
-<li>
-<a href="http://bower.io/">Bower</a> - Component package management</li>
-</ul>
-
-<div class="highlight highlight-sh"><pre>$ bower install   //Install all Bower components from Bower.json
-$ bower install [component] --save-dev   //Install a single Bower component
-$ bower install [component] --save-dev   //Install a single Bower component and save it to Bower.json (<span class="pl-k">if</span> not already there)
-$ bower uninstall [component]   //Uninstall a component from the workflow and Bower components list
-$ bower search [component]   //Search <span class="pl-k">for</span> <span class="pl-smi">new</span> Bower components to install</pre></div>
-
-<h2>
-<a id="organization" class="anchor" href="#organization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Organization:</h2>
-
-<ul>
-<li>Bower.json: Bower file that organizes and saves Bower dependencies. Can be seen and manually removed here. When installed, are saved to the components folder.</li>
-<li>Build: Where the project output is. Jade files are processed and output here at HTML files, and the CSS, JS, and image files are minified/optimized before going to the Assets folder for local reference.</li>
-<li>Components: Bower files and dependencies are all saved here. Any relevant CSS or JS files can be referenced here without weighing down the Build folder.</li>
-<li>Gulpfile.js: Code that controls the basic Gulp workflow and preprocessing of all files. Outputs files to the Build folders and notifies of the processes or the errors.</li>
-<li>JS: All Javascript and jQuery files are placed. Are processed, minified, and output to the Build’s Assets folder.</li>
-<li>Lib: All Jade files are written here, and are then processed and output into the Build folder. Also where image files are placed, which are optimized for Build as well.</li>
-<li>Node_modules: All node dependencies, essential to running the Gulp workflow. Is empty at first, see NPM above for how to install dependencies.</li>
-<li>NPM-debug.log: Debug log of all NPM mistakes and entries with the NPM dependency manager.</li>
-<li>Package.json: List of all NPM dependencies that will be installed, essential to quickly setting up the Gulp workflow.</li>
-<li>Public: All public documentation for the project, such as the SASS documentation.</li>
-<li>Sass: All sass files are gathered and compiled here. And Sass partials must be accurately referenced in the main style.css file.</li>
-</ul>
-
-<h2>
-<a id="module-dependencies" class="anchor" href="#module-dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Module Dependencies:</h2>
-
-<ul>
-<li>gulp: Basic Gulp module for running the workflow</li>
-<li>gulp-autoprefixer: Automatically adds browser prefixes to certain CSS styles to ensure cross-compatibility</li>
-<li>gulp-bower: Allows use of Bower in the Gulp workflow if needed</li>
-<li>gulp-concat: For merging different JS files together from the JS folder into a single one for the Assets folder</li>
-<li>gulp-imagemin: For optimizing images in the images placed in the Lib/Img folder and sent to Build</li>
-<li>gulp-jade: For converting Jade files to HTML</li>
-<li>gulp-livereload: For using the Chrome LiveReload extension so pages refresh automatically with changes</li>
-<li>gulp-minify-css: Minifying CSS files</li>
-<li>gulp-notify: Notifying of completed processes or errors</li>
-<li>gulp-plumber: So any mistakes send a message without halting the workflow</li>
-<li>gulp-rename: Renaming any files before sending them to the Build folder</li>
-<li>gulp-sass: For converting Sass to CSS</li>
-<li>gulp-sourcemaps: Adding sourcemaps to CSS and JS files to speed up debugging</li>
-<li>gulp-uglify: For compressing JS files</li>
-<li>sassdoc: For automated documentation of Sass functions, mixins, variables, etc</li>
-<li>gulp-uncss: Removes any CSS element selectors that aren't being used in the Build folder</li>
-</ul>
+<h4>
+<a id="folders-that-are-created" class="anchor" href="#folders-that-are-created" aria-hidden="true"><span class="octicon octicon-link"></span></a>Folders that are created:</h4>
 
 <blockquote>
-<p>NOTE: These are not downloaded, but are only already part of Package.json. They need the NPM command to install all dependencies and use them in the workflow.</p>
+<p>These are created with the commands in the "How to Set Up" section below.</p>
 </blockquote>
+
+<ul>
+<li>Build: The folder that ultimately contains all your final project files - HTML, CSS, Javascript, images, the whole thing.</li>
+<li>Components: All the external dependencies for the project, such as libraries and frameworks. Can be installed and managed with Bower.</li>
+<li>node_modules: All the npm dependencies that put the project together. Take a long time to install but are vital to creating anything at all with Plately.</li>
+</ul>
+
+<h2>
+<a id="npm-dependencies" class="anchor" href="#npm-dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>NPM Dependencies</h2>
+
+<ul>
+<li>express: A web application framework that currently just puts the site on localhost:3000 while gulp is running.</li>
+<li>gulp: Basic Gulp module for running the workflow.</li>
+<li>gulp-autoprefixer: Automatically adds browser prefixes to certain CSS styles to ensure cross-compatibility.</li>
+<li>gulp-concat: For merging different JS files together from the JS folder into a single one for the Assets folder.</li>
+<li>gulp-imagemin: For optimizing images in the images placed in the Jade/Img folder and sent to Build.</li>
+<li>gulp-include: for combining and minifying JS files.</li>
+<li>gulp-jade: For converting Jade files to HTML.</li>
+<li>gulp-livereload: For using the Chrome LiveReload extension so pages refresh automatically with changes.</li>
+<li>gulp-notify: Notifying of completed processes or errors.</li>
+<li>gulp-plumber: So any mistakes send a message without halting the workflow.</li>
+<li>gulp-rename: Renaming any files before sending them to the Build folder.</li>
+<li>gulp-sass: For converting Sass to CSS.</li>
+<li>gulp-sourcemaps: Adding sourcemaps to CSS and JS files to speed up debugging.</li>
+<li>gulp-uglify: For compressing JS files.</li>
+<li>gulp-uncss: Removes any CSS element selectors that aren't being used in the Build folder.</li>
+<li>jsdoc: For automated documentation of JS code, such as functions.</li>
+<li>sassdoc: For automated documentation of Sass functions, mixins, variables, etc.</li>
+</ul>
 
 <h2>
 <a id="bower-dependencies" class="anchor" href="#bower-dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bower Dependencies</h2>
 
 <ul>
 <li>
-<a href="http://bourbon.io/">Bourbon</a>: A lightweight Sass mixin library</li>
+<a href="http://bourbon.io/">Bourbon</a>: A lightweight library of Sass mixins for extra functionality.</li>
 <li>
-<a href="http://neat.bourbon.io/">Neat</a>: Lightweight, semantic grid that pairs with Bourbon</li>
+<a href="http://neat.bourbon.io/">Neat</a>: A grid system for responsive layouts using Bourbon and with solid range of layout functionality.</li>
 <li>
-<a href="http://bitters.bourbon.io/">Bitters</a>: Scaffold styles, variables and structure for Bourbon and Neat projects.</li>
+<a href="https://jquery.com/">jQuery</a>: A Javascript library that makes writing it and using it a couple hundred times easier.</li>
 </ul>
 
-<blockquote>
-<p>NOTE: Similar to the NPM dependencies, these are not downloaded, but are only already part of Bower.json. They need the Bower command to install and use in the workflow. Paths to reference them are already in the main Style.css file</p>
-</blockquote>
+<h2>
+<a id="how-to-set-up" class="anchor" href="#how-to-set-up" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to Set Up</h2>
+
+<p>There are several commands to get all the needed dependencies installed and ready to view.</p>
+
+<div class="highlight highlight-sh"><pre>npm install</pre></div>
+
+<ul>
+<li>This install all the node dependencies in the newly created node_modules folder.</li>
+</ul>
+
+<div class="highlight highlight-sh"><pre>bower install</pre></div>
+
+<ul>
+<li>This creates the "components" folder and installs all the components controlled with Bower.</li>
+</ul>
+
+<div class="highlight highlight-sh"><pre>gulp</pre></div>
+
+<ul>
+<li>This is the basic command that constructs the Build folder. It turns the Jade into HTML, the Sass into CSS, optimizes the images, and puts together all the Javascript and jQuery files. This also runs in the background and updates the Build folder any time there's a saved change to any of these files.</li>
+<li>While this is running, you can also view the project on a browser on localhost:3000.</li>
+</ul>
 
 <h2>
-<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use:</h2>
+<a id="gulp-commands" class="anchor" href="#gulp-commands" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gulp Commands</h2>
 
-<ol>
-<li>Download the workflow and place files in accessible location.</li>
-<li>Execute commands to install NPM dependencies and Bower components (second optional).</li>
-<li>Locate folder in terminal with the CD command.</li>
-<li>Execute Gulp command to run all or one of the processes.</li>
-<li>If Gulp is watching the files, then any changes made to the Sass, JS, Jade or images will happen automatically on any save.</li>
-<li>All changes made will be output in the Build folder.</li>
-<li>Serve and enjoy.</li>
-</ol>
+<blockquote>
+<p>These are other gulp commands to run from the terminal for building the project. Most of them are the individual commands run as part of the default "gulp" command, in case you don't need to run all at once.</p>
+</blockquote>
+
+<div class="highlight highlight-sh"><pre>gulp scripts</pre></div>
+
+<ul>
+<li>This only merges and minifies your JS files.</li>
+</ul>
+
+<div class="highlight highlight-sh"><pre>gulp sass</pre></div>
+
+<ul>
+<li>This only processes and converts your Sass files.</li>
+</ul>
+
+<div class="highlight highlight-sh"><pre>gulp uncss</pre></div>
+
+<ul>
+<li>This runs through all your Build's CSS, compares it to your HTML, and removes any CSS that's not being used.</li>
+</ul>
+
+<div class="highlight highlight-sh"><pre>gulp sassdoc</pre></div>
+
+<ul>
+<li>This creates any documentation from inline Sass comments and updates it in the Public folder.</li>
+</ul>
+
+<div class="highlight highlight-sh"><pre>gulp jsdoc</pre></div>
+
+<ul>
+<li>This does the same as Sassdoc, except for the JS files and their inline comments.</li>
+</ul>
+
+<div class="highlight highlight-sh"><pre>gulp images</pre></div>
+
+<ul>
+<li>This goes through all the images in the Img folder, optimizes them to reduce size, and sends them to the build folder.</li>
+</ul>
+
+<div class="highlight highlight-sh"><pre>gulp jade</pre></div>
+
+<ul>
+<li>This converts all your Jade files to HTML and sends them to the build folder.</li>
+</ul>
+
+<div class="highlight highlight-sh"><pre>gulp docwatch</pre></div>
+
+<ul>
+<li>This creates the documentation for your Sass and JS files, and allows for live updating of the documentation as you write and save more inline comments to the files.</li>
+</ul>
+
+<div class="highlight highlight-sh"><pre>gulp prod</pre></div>
+
+<ul>
+<li>This is for when your project is ready to be launched. It updates your Sass and JS documentation and optimizes your CSS through minifying it, removing sourcemaps, and adding vendor prefixes.</li>
+</ul>
+
+<h2>
+<a id="special-thanks-to" class="anchor" href="#special-thanks-to" aria-hidden="true"><span class="octicon octicon-link"></span></a>Special Thanks to</h2>
+
+<p><a href="https://github.com/thoughtbot">Thoughtbot</a> for their wonderful open source tools for front end development. Especially for <a href="http://bitters.bourbon.io/">Bitters</a>, which was the starting point for much of this project's initial CSS scaling styles and variables. I did play with it and add some extra functions, but much of the original Sass is there.</p>
         </section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/maxx1128/Maxwell_Workflow/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/maxx1128/Maxwell_Workflow/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+        <footer>
+          Plately is maintained by <a href="https://github.com/maxx1128">maxx1128</a><br>
+          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
 
-          <p class="repo-owner"><a href="https://github.com/maxx1128/Maxwell_Workflow"></a> is maintained by <a href="https://github.com/maxx1128">maxx1128</a>.</p>
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
+        
       </div>
     </div>
-
-  
   </body>
 </html>
