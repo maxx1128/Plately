@@ -1,4 +1,4 @@
-# Maxwell Workflow
+# Plately
 
 This is the starting foundation for all my front-end development projects. It gives the basic architecture for using Jade, Sass, jQuery, and using Gulp to efficiently automate most of these tasks.
 
