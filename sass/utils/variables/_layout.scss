@@ -1,0 +1,28 @@
+// ----- Layout Variables ----- //
+
+/// For any elements that need a border radius property, this is the standard measure.
+/// @type Integer
+/// @group Layout
+$base-border-radius: 5px;
+
+/// Mainly for padding elements, this is based off the line height for a standard measure of padding
+/// @type Integer
+/// @group Layout
+$base-spacing: $base-line-height * 1em;
+
+/// Another standard unit for spacing, this one half of the base spacing for more precise layout areas.
+/// @type Integer
+/// @group Layout
+$small-spacing: $base-spacing / 2;
+
+/// Lays out the different z-index values to help keep them organized. Based off what commom elements they'd be used for.
+/// @type Map
+/// @group Layout
+/// @see z-index
+$z-layers: (
+  bottomless-pit: -9999,
+  default: 1,
+  dropdown: 3000,
+  overlay: 4000,
+  modal: 4001
+);

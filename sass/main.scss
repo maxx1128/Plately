@@ -6,10 +6,19 @@
  '../components/neat/app/assets/stylesheets/neat';
 
 @import
-  'utils/functions',
-  'utils/variables',
-	'utils/mixins',
-	'utils/placeholders';
+  'utils/functions';
+
+@import
+  'utils/variables/breakpoints',
+  'utils/variables/typography',
+  'utils/variables/layout',
+  'utils/variables/colors',
+  'utils/variables/forms',
+  'utils/variables/animation';
+
+@import
+  'utils/mixins',
+  'utils/placeholders';
 
 @import
   'base/typography';

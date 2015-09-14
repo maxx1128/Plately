@@ -1,0 +1,20 @@
+// ----- Grid Variables ----- //
+
+/// These are the core breakpoints for the grid. They use the values in the breakpoint lengths map to determine the breakpoints. This, along with other grid functionality, uses the Neat dependency.
+/// @type Map
+/// @group Grid
+/// @example
+///   body {
+///     @include media(breakpoint(tablet)) {
+///       @include span-columns(10);
+///       @include shift(1);
+///     }
+///   }
+/// @link http://neat.bourbon.io/
+$breakpoints: (
+  mobile: new-breakpoint(min-width 320px),
+  mobile-h: new-breakpoint(min-width 480px),
+  tablet: new-breakpoint(min-width 787px),
+  desktop: new-breakpoint(min-width 900px),
+  huge: new-breakpoint(min-width 1200px),
+);
