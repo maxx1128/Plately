@@ -64,7 +64,9 @@ var sassInput = 'sass/main.scss';
 var sassOptions = { 
     outputStyle: 'expanded' 
 };
-var autoprefixerOptions = { browsers: ['last 2 versions', '> 5%', 'Firefox ESR'] };
+var autoprefixerOptions = {
+  browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
+};
 var sassdocOptions = { dest: 'public/sassdocs' };
 
 gulp.task('sass', function () {
