@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     sass = require('gulp-sass'),
-    minifyCSS = require('gulp-minify-css')
+    minifyCSS = require('gulp-minify-css'),
     livereload = require('gulp-livereload'),
     autoprefixer = require('gulp-autoprefixer'),
     imagemin = require('gulp-imagemin'),
@@ -167,8 +167,6 @@ gulp.task('prod-init', function () {
     .pipe(rename("style.min.css"))
     .pipe(gulp.dest(config.assetsPath + 'css'));
 });
-
-
 
 gulp.task('clean', function () {
     return del([
