@@ -6,29 +6,29 @@
 /// @see color
 $colors: (
   white: #fff,
-  blue: #477dca,
-  dark-gray: #333,
-  medium-gray: #999,
-  light-gray: #ddd
+  action: #477dca,
+  dark: #333,
+  medium: #999,
+  light: #ddd
 );
 
 /// This is the base color for all fonts, including headers. The color value is pulled through the color function.
 /// @type Color
 /// @group Colors
 /// @see colors
-$base-font-color: color(dark-gray);
+$base-font-color: color(dark);
 
 /// This is the base color any text that is interactive and will create a change somehow, like clicking on a link. Color is pulled from a map.
 /// @type Color
 /// @group Colors
 /// @see colors
-$action-color: color(blue);
+$action-color: color(action);
 
 /// For any elements requiring borders, such as panels, this will be the standard border color.
 /// @type Color
 /// @group Colors
 /// @see colors
-$base-border-color: color(light-gray);
+$base-border-color: color(light);
 
 /// This is the base border style, including its color and thickness.
 /// @type Values
