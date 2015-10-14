@@ -1,9 +1,11 @@
-body {
-	@include outer-container;
-	padding: $base-spacing $small-spacing;
+$susy: (
+  columns: 12,
+  gutters: 1/2,
+  math: fluid,
+  gutter-position: split,
+);
 
-	@include media($tablet-screen) {
-		@include span-columns(10);
-		@include shift(1);
-	}
+body {
+	@include container(90%);
+	padding: $small-spacing $base-spacing;
 }
