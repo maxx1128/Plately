@@ -20,7 +20,6 @@ var gulp = require('gulp'),
 var express = require('express')
 var app = express()
 app.use('/', express.static(__dirname + '/build'))
-app.use('/sassdocs', express.static(__dirname + '/public/sassdocs'));
 app.listen(3000)
 console.log('Express site on 3000!')
 
@@ -67,7 +66,6 @@ var sassOptions = {
 var autoprefixerOptions = {
   browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
 };
-var sassdocOptions = { dest: 'public/sassdocs' };
 
 gulp.task('sass', function () {
   return gulp
@@ -97,33 +95,6 @@ gulp.task('uncss', function () {
         message: 'CSS Trimmed!',
         onLast: true
     }))
-});
-
-
-// Start building the Sass Docs! Must be run separately!
-gulp.task('sassdoc', function () {
-  return gulp
-    .src('sass/**/**/*.scss')
-    .on("error", notify.onError("Error:" + errorLog))
-    .pipe(sassdoc(sassdocOptions))
-    .pipe(notify({
-        message: 'Sass Documented!',
-        onLast: true
-    }))
-    .resume();
-});
-
-// Generate documentation for the JS with JSDoc! Must also be run separately!
-gulp.task('jsdoc', function () {
-  return gulp
-    .src('js/**/**/*.js')
-    .pipe(notify({
-        message: 'JS Documented!',
-        onLast: true
-    }))
-    .on("error", notify.onError("Error:" + errorLog))
-    .pipe(jsdoc('./public/jsdocs'))
-    .pipe(livereload());
 });
 
 // Compress all the image things!
@@ -186,11 +157,5 @@ gulp.task('watch', function(){
     gulp.watch('index.html', ['homepage']);
 });
 
-gulp.task('docwatch', ['sassdoc','jsdoc'], function(){
-  livereload.listen();
-    gulp.watch('sass/**/**/*.scss', ['sassdoc']);
-    gulp.watch('js/**/**/*.js', ['jsdoc']);
-});
-
 gulp.task('default', ['scripts', 'sass', 'jade', 'images', 'watch']);
-gulp.task('prod', ['sassdoc', 'jsdoc', 'clean', 'prod-init', 'uncss']);
+gulp.task('prod', ['clean', 'prod-init', 'uncss']);

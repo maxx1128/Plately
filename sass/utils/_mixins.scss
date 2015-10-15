@@ -1,12 +1,8 @@
-/// The fix-cell and flex-cell mixins included components of the fix-flex mixin, which is used for items with a fixed width on one side and flexible on the other.
-/// @name fix-flex
-/// @author Krispin Dolbear, EMA
-/// @group Layout
-/// @param {string} $fix-direction - If the fixed element is on the left or right side
-/// @param {length} $fix-width - The width of the fixed element
-/// @param {length} $fix-margin - The margin length between the two items
-/// @example 
-///   @include fix-flex('left', 2em, 10px);
+// The fix-cell and flex-cell mixins included components of the fix-flex mixin, which is used for items with a fixed width on one side and flexible on the other.
+// $fix-direction - If the fixed element is on the left or right side
+// $fix-width - The width of the fixed element
+// $fix-margin - The margin length between the two items
+// EX: @include fix-flex('left', 2em, 10px);
 @mixin fix-flex($fix-direction, $fix-width, $fix-margin) {
   display: table;
   width: 100%;
@@ -29,33 +25,29 @@
   }
 }
 
-/// @see {mixin} fix-flex
-/// @group Dependencies
+// Mixin dependency for Fix-Flex
 @mixin fix-cell($fix-direction,$fix-width) {
   width: $fix-width;
   display: block;
   max-width: none;
 }
-/// @see {mixin} fix-flex
-/// @group Dependencies
+// Mixin dependency for Fix-Fle
 @mixin flex-cell {
   display: table-cell;
   width: 100%;
   vertical-align: middle;
 }
 
-/// This is the main mixin for creating keyframe animations with cross-browser compatibility automatically set up. It needs the name and also the body with the keyframe locations and properties.
-/// @name keyframes
-/// @group Animation
-/// @param {string} $animationName - The name of the animation to be referenced
-/// @example
-///   @include keyframes(name-here) {
-///      0%   { color: black; }
-///      50%   { color: white; }
-///      100% { color: black; }
-///   }
-///
-///   @include animation('name-here 1s linear 0s infinite');
+// This is the main mixin for creating keyframe animations with cross-browser compatibility automatically set up. It needs the name and also the body with the keyframe locations and properties.
+
+// @example
+//   @include keyframes(name-here) {
+//      0%   { color: black; }
+//      50%   { color: white; }
+//      100% { color: black; }
+//   }
+//
+//   @include animation('name-here 1s linear 0s infinite');
 @mixin keyframes($animationName) {
     @-webkit-keyframes #{$animationName} {
         @content;

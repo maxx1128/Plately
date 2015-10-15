@@ -1,24 +1,23 @@
 // ----- Layout Variables ----- //
 
-/// For any elements that need a border radius property, this is the standard measure.
-/// @type Integer
-/// @group Layout
+// For any elements that need a border radius property, this is the standard measure.
 $base-border-radius: 5px;
 
-/// Mainly for padding elements, this is based off the line height for a standard measure of padding
-/// @type Integer
-/// @group Layout
+// Mainly for padding elements, this is based off the line height for a standard measure of padding
 $base-spacing: $base-line-height * 1em;
 
-/// Another standard unit for spacing, this one half of the base spacing for more precise layout areas.
-/// @type Integer
-/// @group Layout
+// Another standard unit for spacing, this one half of the base spacing for more precise layout areas.
 $small-spacing: $base-spacing / 2;
 
-/// Lays out the different z-index values to help keep them organized. Based off what commom elements they'd be used for.
-/// @type Map
-/// @group Layout
-/// @see z-index
+
+// -- Borders -- //
+// For any elements requiring borders, such as panels, this will be the standard border color.
+$base-border-color: color(light);
+
+// This is the base border style, including its color and thickness.
+$base-border: 1px solid $base-border-color;
+
+// Lays out the different z-index values to help keep them organized. Based off what commom elements they'd be used for.
 $z-layers: (
   bottomless-pit: -9999,
   default: 1,
@@ -26,3 +25,13 @@ $z-layers: (
   overlay: 4000,
   modal: 4001
 );
+
+// For using organized z-index values
+@function z-index($key) {
+  @if map-has-key($z-layers, $key) {
+    @return map-get($z-layers, $key);
+  }
+ 
+  @warn "Unknown `#{$key}` in $z-layers.";
+  @return null;
+}

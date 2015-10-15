@@ -7,9 +7,6 @@
  '../components/susy/sass/susy';
 
 @import
-  'utils/functions';
-
-@import
   'utils/variables/breakpoints',
   'utils/variables/typography',
   'utils/variables/layout',
@@ -18,13 +15,13 @@
   'utils/variables/animation';
 
 @import
+  'utils/functions',
   'utils/mixins',
   'utils/placeholders';
 
 @import
   'base/typography';
 
- 
 @import
   'layout/grid';
 

@@ -1,7 +1,6 @@
 // ----- Grid Variables ----- //
 
-/// These are the core breakpoints for the grid. They use the values in the breakpoint lengths map to determine the breakpoints. This, along with other grid functionality, uses the Neat dependency.
-/// @group Grid
+// These are the core breakpoints for the grid. They use the values in the breakpoint lengths map to determine the breakpoints.
 $mobile-screen: new-breakpoint(min-width 320px);
 $mobile-h-screen: new-breakpoint(min-width 480px);
 $tablet-screen: new-breakpoint(min-width 787px);
