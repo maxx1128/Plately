@@ -3,14 +3,13 @@
 
 @import 
  '../components/bourbon/app/assets/stylesheets/bourbon',
- '../components/neat/app/assets/stylesheets/neat',
  '../components/susy/sass/susy';
 
 @import
   'utils/variables/breakpoints',
+  'utils/variables/colors',
   'utils/variables/typography',
   'utils/variables/layout',
-  'utils/variables/colors',
   'utils/variables/forms',
   'utils/variables/animation';
 

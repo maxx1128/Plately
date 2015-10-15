@@ -9,14 +9,6 @@ $base-spacing: $base-line-height * 1em;
 // Another standard unit for spacing, this one half of the base spacing for more precise layout areas.
 $small-spacing: $base-spacing / 2;
 
-
-// -- Borders -- //
-// For any elements requiring borders, such as panels, this will be the standard border color.
-$base-border-color: color(light);
-
-// This is the base border style, including its color and thickness.
-$base-border: 1px solid $base-border-color;
-
 // Lays out the different z-index values to help keep them organized. Based off what commom elements they'd be used for.
 $z-layers: (
   bottomless-pit: -9999,

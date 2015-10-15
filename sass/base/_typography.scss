@@ -6,7 +6,7 @@
    #{$key} {
       font-size: $scaled-font-size;
 
-      @include media(breakpoint(tablet)) {
+      @include susy-media($tablet-screen) {
         font-size: $main-font-size;
       }
    }   

@@ -1,11 +1,17 @@
 $susy: (
   columns: 12,
-  gutters: 1/2,
+  gutters: 1/4,
   math: fluid,
   gutter-position: split,
 );
 
+html {
+	@include container(95%);
+}
+
 body {
-	@include container(90%);
-	padding: $small-spacing $base-spacing;
+	@include susy-media($tablet-screen) {
+		@include span(11);
+		@include push(1)
+	}
 }
