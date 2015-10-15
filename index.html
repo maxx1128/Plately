@@ -106,7 +106,7 @@
 <li>
 <a href="http://bourbon.io/">Bourbon</a>: A lightweight library of Sass mixins for extra functionality.</li>
 <li>
-<a href="http://neat.bourbon.io/">Neat</a>: A grid system for responsive layouts using Bourbon and with solid range of layout functionality.</li>
+<a href="http://susy.oddbird.net/">Susy</a>: A flexible grid tool for responsive layouts</li>
 <li>
 <a href="https://jquery.com/">jQuery</a>: A Javascript library that makes writing it and using it a couple hundred times easier.</li>
 </ul>
@@ -116,19 +116,19 @@
 
 <p>There are several commands to get all the needed dependencies installed and ready to view.</p>
 
-<div class="highlight highlight-sh"><pre>npm install</pre></div>
+<div class="highlight highlight-source-shell"><pre>npm install</pre></div>
 
 <ul>
 <li>This install all the node dependencies in the newly created node_modules folder.</li>
 </ul>
 
-<div class="highlight highlight-sh"><pre>bower install</pre></div>
+<div class="highlight highlight-source-shell"><pre>bower install</pre></div>
 
 <ul>
 <li>This creates the "components" folder and installs all the components controlled with Bower.</li>
 </ul>
 
-<div class="highlight highlight-sh"><pre>gulp</pre></div>
+<div class="highlight highlight-source-shell"><pre>gulp</pre></div>
 
 <ul>
 <li>This is the basic command that constructs the Build folder. It turns the Jade into HTML, the Sass into CSS, optimizes the images, and puts together all the Javascript and jQuery files. This also runs in the background and updates the Build folder any time there's a saved change to any of these files.</li>
@@ -142,55 +142,55 @@
 <p>These are other gulp commands to run from the terminal for building the project. Most of them are the individual commands run as part of the default "gulp" command, in case you don't need to run all at once.</p>
 </blockquote>
 
-<div class="highlight highlight-sh"><pre>gulp scripts</pre></div>
+<div class="highlight highlight-source-shell"><pre>gulp scripts</pre></div>
 
 <ul>
 <li>This only merges and minifies your JS files.</li>
 </ul>
 
-<div class="highlight highlight-sh"><pre>gulp sass</pre></div>
+<div class="highlight highlight-source-shell"><pre>gulp sass</pre></div>
 
 <ul>
 <li>This only processes and converts your Sass files.</li>
 </ul>
 
-<div class="highlight highlight-sh"><pre>gulp uncss</pre></div>
+<div class="highlight highlight-source-shell"><pre>gulp uncss</pre></div>
 
 <ul>
 <li>This runs through all your Build's CSS, compares it to your HTML, and removes any CSS that's not being used.</li>
 </ul>
 
-<div class="highlight highlight-sh"><pre>gulp sassdoc</pre></div>
+<div class="highlight highlight-source-shell"><pre>gulp sassdoc</pre></div>
 
 <ul>
 <li>This creates any documentation from inline Sass comments and updates it in the Public folder.</li>
 </ul>
 
-<div class="highlight highlight-sh"><pre>gulp jsdoc</pre></div>
+<div class="highlight highlight-source-shell"><pre>gulp jsdoc</pre></div>
 
 <ul>
 <li>This does the same as Sassdoc, except for the JS files and their inline comments.</li>
 </ul>
 
-<div class="highlight highlight-sh"><pre>gulp images</pre></div>
+<div class="highlight highlight-source-shell"><pre>gulp images</pre></div>
 
 <ul>
 <li>This goes through all the images in the Img folder, optimizes them to reduce size, and sends them to the build folder.</li>
 </ul>
 
-<div class="highlight highlight-sh"><pre>gulp jade</pre></div>
+<div class="highlight highlight-source-shell"><pre>gulp jade</pre></div>
 
 <ul>
 <li>This converts all your Jade files to HTML and sends them to the build folder.</li>
 </ul>
 
-<div class="highlight highlight-sh"><pre>gulp docwatch</pre></div>
+<div class="highlight highlight-source-shell"><pre>gulp docwatch</pre></div>
 
 <ul>
 <li>This creates the documentation for your Sass and JS files, and allows for live updating of the documentation as you write and save more inline comments to the files.</li>
 </ul>
 
-<div class="highlight highlight-sh"><pre>gulp prod</pre></div>
+<div class="highlight highlight-source-shell"><pre>gulp prod</pre></div>
 
 <ul>
 <li>This is for when your project is ready to be launched. It updates your Sass and JS documentation and optimizes your CSS through minifying it, removing sourcemaps, and adding vendor prefixes.</li>
