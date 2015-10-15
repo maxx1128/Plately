@@ -11,7 +11,7 @@ html {
 
 body {
 	@include susy-media($tablet-screen) {
-		@include span(11);
+		@include span(10);
 		@include push(1)
 	}
 }
