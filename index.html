@@ -1,37 +1,25 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Plately : A simple starting template for front-end web development projects.">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Plately</title>
+    <meta charset="UTF-8">
+    <title>Plately by maxx1128</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">Plately</h1>
+      <h2 class="project-tagline">A simple starting template for front-end web development projects.</h2>
+      <a href="https://github.com/maxx1128/Plately" class="btn">View on GitHub</a>
+      <a href="https://github.com/maxx1128/Plately/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/maxx1128/Plately/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/maxx1128/Plately">View on GitHub</a>
-
-          <h1 id="project_title">Plately</h1>
-          <h2 id="project_tagline">A simple starting template for front-end web development projects.</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/maxx1128/Plately/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/maxx1128/Plately/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
+    <section class="main-content">
+      <h1>
 <a id="plately---v-200" class="anchor" href="#plately---v-200" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plately - v 2.0.0</h1>
 
 <p>Plately is a simple starting template I use for front-end web development projects. It's set up to quickly let developers start creating with Jade, Sass, jQuery, and any other dependencies they need to add.</p>
@@ -59,7 +47,6 @@
 <li>Jade: Where all the Jade files are stored, which are converted into HTML for the project.</li>
 <li>Img: This is in the Jade folder, and is where all your images go.</li>
 <li>JS: Where your jQuery and Javacript files go, which is the interactivity and logic for the project. Structured to better organize the different files.</li>
-<li>Public: Static pages that contain the Sass and JS documentation that makes it easy to read through and understand what makes up the project.</li>
 <li>Sass: Where all the Sass files go, separated by a folder structure for better organization.</li>
 </ul>
 
@@ -95,8 +82,6 @@
 <li>gulp-sourcemaps: Adding sourcemaps to CSS and JS files to speed up debugging.</li>
 <li>gulp-uglify: For compressing JS files.</li>
 <li>gulp-uncss: Removes any CSS element selectors that aren't being used in the Build folder.</li>
-<li>jsdoc: For automated documentation of JS code, such as functions.</li>
-<li>sassdoc: For automated documentation of Sass functions, mixins, variables, etc.</li>
 </ul>
 
 <h2>
@@ -160,18 +145,6 @@
 <li>This runs through all your Build's CSS, compares it to your HTML, and removes any CSS that's not being used.</li>
 </ul>
 
-<div class="highlight highlight-source-shell"><pre>gulp sassdoc</pre></div>
-
-<ul>
-<li>This creates any documentation from inline Sass comments and updates it in the Public folder.</li>
-</ul>
-
-<div class="highlight highlight-source-shell"><pre>gulp jsdoc</pre></div>
-
-<ul>
-<li>This does the same as Sassdoc, except for the JS files and their inline comments.</li>
-</ul>
-
 <div class="highlight highlight-source-shell"><pre>gulp images</pre></div>
 
 <ul>
@@ -184,34 +157,25 @@
 <li>This converts all your Jade files to HTML and sends them to the build folder.</li>
 </ul>
 
-<div class="highlight highlight-source-shell"><pre>gulp docwatch</pre></div>
-
-<ul>
-<li>This creates the documentation for your Sass and JS files, and allows for live updating of the documentation as you write and save more inline comments to the files.</li>
-</ul>
-
 <div class="highlight highlight-source-shell"><pre>gulp prod</pre></div>
 
 <ul>
-<li>This is for when your project is ready to be launched. It updates your Sass and JS documentation and optimizes your CSS through minifying it, removing sourcemaps, and adding vendor prefixes.</li>
+<li>This is for when your project is ready to be launched. It updates your Sass and JS documentation and optimizes your CSS through minifying it, removing sourcemaps, and adding vendor prefixes. It also runs UnCSS to remove unused CSS, which will need to be removed for dynamic sites such as one-page apps.</li>
 </ul>
 
 <h2>
 <a id="special-thanks-to" class="anchor" href="#special-thanks-to" aria-hidden="true"><span class="octicon octicon-link"></span></a>Special Thanks to</h2>
 
 <p><a href="https://github.com/thoughtbot">Thoughtbot</a> for their wonderful open source tools for front end development. Especially for <a href="http://bitters.bourbon.io/">Bitters</a>, which was the starting point for much of this project's initial CSS scaling styles and variables. I did play with it and add some extra functions, but much of the original Sass is there.</p>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Plately maintained by <a href="https://github.com/maxx1128">maxx1128</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/maxx1128/Plately">Plately</a> is maintained by <a href="https://github.com/maxx1128">maxx1128</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
 
-    
+    </section>
 
+  
   </body>
 </html>
