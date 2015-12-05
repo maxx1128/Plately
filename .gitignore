@@ -1,6 +1,7 @@
 node_modules/*
 components/*
-build/*
+app/*
+dist/*
 .sass-cache/*
 
 npm-debug.log
