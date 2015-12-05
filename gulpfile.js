@@ -4,16 +4,41 @@ var p = require('gulp-load-plugins')();
 var express = require('express'),
     del = require('del');
 
+// Important variables used throughout the gulp file //
+
+
+
+// Configurations for different file paths
+var config = {
+    projectPath: 'app/',
+    pAssetsPath: 'app/assets/',
+    distPath: 'dist/',
+    dAssetsPath: 'dist/assets/'
+    componentPath: 'components/'
+}
+
+var prod === true;
+
+// Sass and styling variables
+var sassInput = 'sass/main.scss';
+var sassOptions = { 
+    outputStyle: 'expanded' 
+};
+
+// Sass variables for the dist folder
+var sassDistOptions = { 
+    outputStyle: 'compressed' 
+};
+
+var autoprefixerOptions = {
+  browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
+};
+
+
 var app = express()
 app.use('/', express.static(__dirname + '/build'))
 app.listen(3000)
 console.log('Express site on 3000!')
-
-var config = {
-    projectPath: 'build/',
-    assetsPath: 'build/assets/',
-    componentPath: 'components/'
-}
 
 // Find errors!
 function errorLog(error) {
@@ -36,22 +61,13 @@ gulp.task('scripts', function(){
          .pipe(p.uglify())
     .on("error", p.notify.onError("Error:" + errorLog))
     .pipe(p.rename('main.min.js'))
-    .pipe(gulp.dest(config.assetsPath + 'js'))
+    .pipe(gulp.dest(config.pAssetsPath + 'js'))
     .pipe(p.notify({
         message: 'JS Uglified!',
         onLast: true
     }))
     .pipe(p.livereload());
 });
-
-// Convert all the SASS to CSS
-var sassInput = 'sass/main.scss';
-var sassOptions = { 
-    outputStyle: 'expanded' 
-};
-var autoprefixerOptions = {
-  browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
-};
 
 gulp.task('sass', function () {
   return gulp
@@ -61,7 +77,7 @@ gulp.task('sass', function () {
     .on("error", p.notify.onError("Error:" + errorLog))
     .pipe(p.sourcemaps.write())
     .pipe(p.rename("style.min.css"))
-    .pipe(gulp.dest(config.assetsPath + 'css'))
+    .pipe(gulp.dest(config.pAssetsPath + 'css'))
     .pipe(p.notify({
         message: 'Sass Processed!',
         onLast: true
@@ -71,12 +87,12 @@ gulp.task('sass', function () {
 
 gulp.task('uncss', function () {
   return gulp
-    .src(config.assetsPath + 'css/style.min.css')
+    .src(config.pAssetsPath + 'css/style.min.css')
     .pipe(p.uncss({
         html: ['build/**/**/*.html']
     }))
     .pipe(p.minifyCSS())
-    .pipe(gulp.dest(config.assetsPath + 'css'))
+    .pipe(gulp.dest(config.pAssetsPath + 'css'))
     .pipe(p.notify({
         message: 'CSS Trimmed!',
         onLast: true
@@ -90,7 +106,7 @@ gulp.task('images', function () {
             progressive: true
         }))
         .on("error", p.notify.onError("Error:" + errorLog))
-        .pipe(gulp.dest(config.assetsPath + '/img'))
+        .pipe(gulp.dest(config.pAssetsPath + '/img'))
         .pipe(p.notify({
         message: 'Images Optimized!',
         onLast: true
@@ -118,11 +134,11 @@ gulp.task('jade', function() {
 gulp.task('prod-init', function () {
   return gulp
     .src(sassInput)
-    .pipe(p.sass({ outputStyle: 'compressed' }).on('error', p.sass.logError))
+    .pipe(p.sass(sassDistOptions).on('error', p.sass.logError))
     .on("error", p.notify.onError("Error:" + errorLog))
     .pipe(p.autoprefixer(autoprefixerOptions))
     .pipe(p.rename("style.min.css"))
-    .pipe(gulp.dest(config.assetsPath + 'css'));
+    .pipe(gulp.dest(config.pAssetsPath + 'css'));
 });
 
 gulp.task('clean', function () {
@@ -130,8 +146,6 @@ gulp.task('clean', function () {
         'build/extends'
     ]);
 });
-
-
 
 // Task to watch the things!
 gulp.task('watch', function(){
