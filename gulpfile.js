@@ -1,21 +1,9 @@
-var gulp = require('gulp'),
-    uglify = require('gulp-uglify'),
-    sass = require('gulp-sass'),
-    minifyCSS = require('gulp-minify-css'),
-    livereload = require('gulp-livereload'),
-    autoprefixer = require('gulp-autoprefixer'),
-    imagemin = require('gulp-imagemin'),
-    rename = require('gulp-rename'),
-    jade = require('gulp-jade'),
-    include = require('gulp-include'),
-    plumber = require('gulp-plumber'),
-    notify = require('gulp-notify'),
-    sourcemaps = require('gulp-sourcemaps'),
-    uncss = require('gulp-uncss'),
-    express = require('express'),
+var gulp = require('gulp');  
+var p = require('gulp-load-plugins')();
+
+var express = require('express'),
     del = require('del');
 
-var express = require('express')
 var app = express()
 app.use('/', express.static(__dirname + '/build'))
 app.listen(3000)
@@ -36,24 +24,24 @@ function errorLog(error) {
 // Watch the homepage!
 gulp.task('homepage', function(){
     gulp.src('index.html')
-    .pipe(livereload());
+    .pipe(p.livereload());
 });
 
 // Uglify, to compress JS files
 gulp.task('scripts', function(){
     gulp.src('js/main.js')
-    .pipe(include())
+    .pipe(p.include())
       .on('error', console.log)
-    .pipe(plumber())
-         .pipe(uglify())
-    .on("error", notify.onError("Error:" + errorLog))
-    .pipe(rename('main.min.js'))
+    .pipe(p.plumber())
+         .pipe(p.uglify())
+    .on("error", p.notify.onError("Error:" + errorLog))
+    .pipe(p.rename('main.min.js'))
     .pipe(gulp.dest(config.assetsPath + 'js'))
-    .pipe(notify({
+    .pipe(p.notify({
         message: 'JS Uglified!',
         onLast: true
     }))
-    .pipe(livereload());
+    .pipe(p.livereload());
 });
 
 // Convert all the SASS to CSS
@@ -68,28 +56,28 @@ var autoprefixerOptions = {
 gulp.task('sass', function () {
   return gulp
     .src(sassInput)
-    .pipe(sourcemaps.init())
-    .pipe(sass(sassOptions).on('error', sass.logError))
-    .on("error", notify.onError("Error:" + errorLog))
-    .pipe(sourcemaps.write())
-    .pipe(rename("style.min.css"))
+    .pipe(p.sourcemaps.init())
+    .pipe(p.sass(sassOptions).on('error', p.sass.logError))
+    .on("error", p.notify.onError("Error:" + errorLog))
+    .pipe(p.sourcemaps.write())
+    .pipe(p.rename("style.min.css"))
     .pipe(gulp.dest(config.assetsPath + 'css'))
-    .pipe(notify({
+    .pipe(p.notify({
         message: 'Sass Processed!',
         onLast: true
     }))
-    .pipe(livereload());
+    .pipe(p.livereload());
 });
 
 gulp.task('uncss', function () {
   return gulp
     .src(config.assetsPath + 'css/style.min.css')
-    .pipe(uncss({
+    .pipe(p.uncss({
         html: ['build/**/**/*.html']
     }))
-    .pipe(minifyCSS())
+    .pipe(p.minifyCSS())
     .pipe(gulp.dest(config.assetsPath + 'css'))
-    .pipe(notify({
+    .pipe(p.notify({
         message: 'CSS Trimmed!',
         onLast: true
     }))
@@ -98,16 +86,16 @@ gulp.task('uncss', function () {
 // Compress all the image things!
 gulp.task('images', function () {
     return gulp.src('jade/img/*')
-        .pipe(imagemin({
+        .pipe(p.imagemin({
             progressive: true
         }))
-        .on("error", notify.onError("Error:" + errorLog))
+        .on("error", p.notify.onError("Error:" + errorLog))
         .pipe(gulp.dest(config.assetsPath + '/img'))
-        .pipe(notify({
+        .pipe(p.notify({
         message: 'Images Optimized!',
         onLast: true
     }))
-        .pipe(livereload());
+        .pipe(p.livereload());
 });
 
 // Get all the Jade things!
@@ -115,25 +103,25 @@ gulp.task('jade', function() {
     var my_locals = {};
 
     gulp.src('jade/**/**/*.jade')
-        .pipe(jade({
+        .pipe(p.jade({
             locals: my_locals
         }))
-        // .on("error", notify.onError("Error:" + errorLog))
+        // .on("error", p.notify.onError("Error:" + errorLog))
         .pipe(gulp.dest(config.projectPath))
-        .pipe(notify({
+        .pipe(p.notify({
             message: 'HTML Jaded!',
             onLast: true
         }))
-        .pipe(livereload());
+        .pipe(p.livereload());
 });
 
 gulp.task('prod-init', function () {
   return gulp
     .src(sassInput)
-    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
-    .on("error", notify.onError("Error:" + errorLog))
-    .pipe(autoprefixer(autoprefixerOptions))
-    .pipe(rename("style.min.css"))
+    .pipe(p.sass({ outputStyle: 'compressed' }).on('error', p.sass.logError))
+    .on("error", p.notify.onError("Error:" + errorLog))
+    .pipe(p.autoprefixer(autoprefixerOptions))
+    .pipe(p.rename("style.min.css"))
     .pipe(gulp.dest(config.assetsPath + 'css'));
 });
 
@@ -147,7 +135,7 @@ gulp.task('clean', function () {
 
 // Task to watch the things!
 gulp.task('watch', function(){
-  livereload.listen();
+  p.livereload.listen();
     gulp.watch('js/**/**/*.js', ['scripts']);
     gulp.watch('sass/**/**/*.scss', ['sass']);
     gulp.watch('jade/**/**/*.jade', ['jade']);
