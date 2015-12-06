@@ -46,6 +46,21 @@ function errorLog(error) {
   this.emit('end');
 }
 
+
+
+function customPlumber(errTitle) {
+    return p.plumber({
+        errorHandler: p.notify.onError({
+            // Custom error titles go here
+            title: errTitle || 'Error running Gulp',
+            message: "<%= error.message %>",
+        })
+    });
+}
+
+
+
+
 // Watch the homepage!
 gulp.task('homepage', function(){
     gulp.src('index.html')
@@ -55,11 +70,8 @@ gulp.task('homepage', function(){
 // Uglify, to compress JS files
 gulp.task('scripts', function(){
     gulp.src('js/main.js')
+    .pipe(customPlumber('Error running Scripts'))
     .pipe(p.include())
-      .on('error', console.log)
-    .pipe(p.plumber())
-         .pipe(p.uglify())
-    .on("error", p.notify.onError("Error:" + errorLog))
     .pipe(p.rename('main.min.js'))
     .pipe(gulp.dest(config.pAssetsPath + 'js'))
     .pipe(p.notify({
@@ -72,9 +84,9 @@ gulp.task('scripts', function(){
 gulp.task('sass', function () {
   return gulp
     .src(sassInput)
+    .pipe(customPlumber('Error running Sass'))
     .pipe(p.sourcemaps.init())
     .pipe(p.sass(sassOptions).on('error', p.sass.logError))
-    .on("error", p.notify.onError("Error:" + errorLog))
     .pipe(p.sourcemaps.write())
     .pipe(p.rename("style.min.css"))
     .pipe(gulp.dest(config.pAssetsPath + 'css'))
@@ -88,6 +100,7 @@ gulp.task('sass', function () {
 gulp.task('uncss', function () {
   return gulp
     .src(config.pAssetsPath + 'css/style.min.css')
+    .pipe(customPlumber('Error running UnCSS'))
     .pipe(p.uncss({
         html: ['build/**/**/*.html']
     }))
@@ -102,15 +115,15 @@ gulp.task('uncss', function () {
 // Compress all the image things!
 gulp.task('images', function () {
     return gulp.src('jade/img/*')
+        .pipe(customPlumber('Error running Images'))
         .pipe(p.imagemin({
             progressive: true
         }))
-        .on("error", p.notify.onError("Error:" + errorLog))
         .pipe(gulp.dest(config.pAssetsPath + '/img'))
         .pipe(p.notify({
-        message: 'Images Optimized!',
-        onLast: true
-    }))
+            message: 'Images Optimized!',
+            onLast: true
+        }))
         .pipe(p.livereload());
 });
 
@@ -122,7 +135,7 @@ gulp.task('jade', function() {
         .pipe(p.jade({
             locals: my_locals
         }))
-        // .on("error", p.notify.onError("Error:" + errorLog))
+        .pipe(customPlumber('Error running Jade'))
         .pipe(gulp.dest(config.projectPath))
         .pipe(p.notify({
             message: 'HTML Jaded!',
