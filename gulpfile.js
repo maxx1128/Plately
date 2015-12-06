@@ -13,11 +13,13 @@ var config = {
     projectPath: 'app/',
     pAssetsPath: 'app/assets/',
     distPath: 'dist/',
-    dAssetsPath: 'dist/assets/'
+    dAssetsPath: 'dist/assets/',
     componentPath: 'components/'
 }
 
-var prod === true;
+// Set to true if in production. Files will go to the 'app' folder.
+// Set to false if launching. Files will go to the 'dist' folder, clean and ready
+var prod = true;
 
 // Sass and styling variables
 var sassInput = 'sass/main.scss';
@@ -54,6 +56,7 @@ function customPlumber(errTitle) {
             // Custom error titles go here
             title: errTitle || 'Error running Gulp',
             message: "<%= error.message %>",
+            sound: 'Submarine',
         })
     });
 }
@@ -73,7 +76,7 @@ gulp.task('scripts', function(){
     .pipe(customPlumber('Error running Scripts'))
     .pipe(p.include())
     .pipe(p.rename('main.min.js'))
-    .pipe(gulp.dest(config.pAssetsPath + 'js'))
+    .pipe(p.if(prod, gulp.dest(config.pAssetsPath + 'js'), gulp.dest(config.dAssetsPath + 'js')))
     .pipe(p.notify({
         message: 'JS Uglified!',
         onLast: true
@@ -85,11 +88,14 @@ gulp.task('sass', function () {
   return gulp
     .src(sassInput)
     .pipe(customPlumber('Error running Sass'))
-    .pipe(p.sourcemaps.init())
-    .pipe(p.sass(sassOptions).on('error', p.sass.logError))
-    .pipe(p.sourcemaps.write())
+    // If in prod, will add sourcemaps to Sass
+    .pipe(p.if(prod, p.sourcemaps.init()))
+    // Write Sass for either dev or prod
+    .pipe(p.if(prod, p.sass(sassOptions), p.sass(sassDistOptions)))
+    .pipe(p.if(prod, p.sourcemaps.write()))
     .pipe(p.rename("style.min.css"))
-    .pipe(gulp.dest(config.pAssetsPath + 'css'))
+    // Sends the Sass file to either the app or dist folder
+    .pipe(p.if(prod, gulp.dest(config.pAssetsPath + 'css'), gulp.dest(config.dAssetsPath + 'css')))
     .pipe(p.notify({
         message: 'Sass Processed!',
         onLast: true
@@ -102,10 +108,10 @@ gulp.task('uncss', function () {
     .src(config.pAssetsPath + 'css/style.min.css')
     .pipe(customPlumber('Error running UnCSS'))
     .pipe(p.uncss({
-        html: ['build/**/**/*.html']
+        html: ['app/**/**/*.html']
     }))
     .pipe(p.minifyCSS())
-    .pipe(gulp.dest(config.pAssetsPath + 'css'))
+    .pipe(p.if(prod, gulp.dest(config.pAssetsPath + 'css'), gulp.dest(config.dAssetsPath + 'css')))
     .pipe(p.notify({
         message: 'CSS Trimmed!',
         onLast: true
@@ -119,7 +125,8 @@ gulp.task('images', function () {
         .pipe(p.imagemin({
             progressive: true
         }))
-        .pipe(gulp.dest(config.pAssetsPath + '/img'))
+        
+        .pipe(p.if(prod, gulp.dest(config.pAssetsPath + '/img'), gulp.dest(config.dAssetsPath + '/img')))
         .pipe(p.notify({
             message: 'Images Optimized!',
             onLast: true
@@ -136,7 +143,7 @@ gulp.task('jade', function() {
             locals: my_locals
         }))
         .pipe(customPlumber('Error running Jade'))
-        .pipe(gulp.dest(config.projectPath))
+        .pipe(p.if(prod, gulp.dest(config.projectPath), gulp.dest(config.distPath)))
         .pipe(p.notify({
             message: 'HTML Jaded!',
             onLast: true
@@ -154,11 +161,13 @@ gulp.task('prod-init', function () {
     .pipe(gulp.dest(config.pAssetsPath + 'css'));
 });
 
+// How to make this a conditional in the Jade task???
 gulp.task('clean', function () {
     return del([
         'build/extends'
     ]);
 });
+
 
 // Task to watch the things!
 gulp.task('watch', function(){
