@@ -2,7 +2,8 @@ var gulp = require('gulp');
 var p = require('gulp-load-plugins')();
 
 var express = require('express'),
-    del = require('del');
+    del = require('del'),
+    browserSync = require('browser-sync');
 
 // Important variables used throughout the gulp file //
 
@@ -36,6 +37,23 @@ var autoprefixerOptions = {
   browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
 };
 
+// Browser Sync settings
+gulp.task('browserSync', function() {
+    browserSync({
+        server: {
+            baseDir: 'app'
+        },
+        reload: ({
+            stream: true
+        }),
+        notify: false,
+    })
+})
+
+var bs_reload = {
+    stream: true
+};
+
 
 var app = express()
 app.use('/', express.static(__dirname + '/build'))
@@ -67,7 +85,7 @@ function customPlumber(errTitle) {
 // Watch the homepage!
 gulp.task('homepage', function(){
     gulp.src('index.html')
-    .pipe(p.livereload());
+    .pipe(browserSync.reload(bs_reload))
 });
 
 // Uglify, to compress JS files
@@ -81,7 +99,7 @@ gulp.task('scripts', function(){
         message: 'JS Uglified!',
         onLast: true
     }))
-    .pipe(p.livereload());
+    .pipe(browserSync.reload(bs_reload))
 });
 
 gulp.task('sass', function () {
@@ -100,7 +118,7 @@ gulp.task('sass', function () {
         message: 'Sass Processed!',
         onLast: true
     }))
-    .pipe(p.livereload());
+    .pipe(browserSync.reload(bs_reload))
 });
 
 gulp.task('uncss', function () {
@@ -131,7 +149,7 @@ gulp.task('images', function () {
             message: 'Images Optimized!',
             onLast: true
         }))
-        .pipe(p.livereload());
+        .pipe(browserSync.reload(bs_reload))
 });
 
 // Get all the Jade things!
@@ -148,7 +166,7 @@ gulp.task('jade', function() {
             message: 'HTML Jaded!',
             onLast: true
         }))
-        .pipe(p.livereload());
+        .pipe(browserSync.reload(bs_reload))
 });
 
 gulp.task('prod-init', function () {
@@ -171,7 +189,6 @@ gulp.task('clean', function () {
 
 // Task to watch the things!
 gulp.task('watch', function(){
-  p.livereload.listen();
     gulp.watch('js/**/**/*.js', ['scripts']);
     gulp.watch('sass/**/**/*.scss', ['sass']);
     gulp.watch('jade/**/**/*.jade', ['jade']);
@@ -179,5 +196,5 @@ gulp.task('watch', function(){
     gulp.watch('index.html', ['homepage']);
 });
 
-gulp.task('default', ['scripts', 'sass', 'jade', 'images', 'watch']);
+gulp.task('default', ['browserSync', 'scripts', 'sass', 'jade', 'images', 'watch']);
 gulp.task('prod', ['clean', 'prod-init', 'uncss']);
