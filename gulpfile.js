@@ -1,12 +1,9 @@
 var gulp = require('gulp');  
 var p = require('gulp-load-plugins')();
 
-var del = require('del'),
-    browserSync = require('browser-sync');
+var browserSync = require('browser-sync');
 
 // Important variables used throughout the gulp file //
-
-
 
 // Configurations for different file paths
 var config = {
@@ -170,16 +167,10 @@ gulp.task('jade', function() {
             message: 'HTML Jaded!',
             onLast: true
         }))
+
         .pipe(browserSync.reload(bs_reload))
 });
 
-
-// How to make this a conditional in the Jade task???
-gulp.task('clean', function () {
-    return del([
-        'build/extends'
-    ]);
-});
 
 
 // Task to watch the things!

@@ -38,7 +38,6 @@
   },
   "devDependencies": {
     "browser-sync": "^2.10.0",
-    "del": "^2.0.2",
     "gulp": "^3.9.0",
     "gulp-load-plugins": "^1.1.0"
   },
