@@ -1,8 +1,7 @@
 var gulp = require('gulp');  
 var p = require('gulp-load-plugins')();
 
-var express = require('express'),
-    del = require('del'),
+var del = require('del'),
     browserSync = require('browser-sync');
 
 // Important variables used throughout the gulp file //
@@ -22,52 +21,13 @@ var config = {
 // Set to false if launching. Files will go to the 'dist' folder, clean and ready
 var prod = true;
 
-// Sass and styling variables
-var sassInput = 'sass/main.scss';
-var sassOptions = { 
-    outputStyle: 'expanded' 
-};
-
-// Sass variables for the dist folder
-var sassDistOptions = { 
-    outputStyle: 'compressed' 
-};
-
-var autoprefixerOptions = {
-  browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
-};
-
-// Browser Sync settings
-gulp.task('browserSync', function() {
-    browserSync({
-        server: {
-            baseDir: 'app'
-        },
-        reload: ({
-            stream: true
-        }),
-        notify: false,
-    })
-})
-
-var bs_reload = {
-    stream: true
-};
-
-
-var app = express()
-app.use('/', express.static(__dirname + '/build'))
-app.listen(3000)
-console.log('Express site on 3000!')
-
 // Find errors!
 function errorLog(error) {
   console.error.bind(error);
   this.emit('end');
 }
 
-
-
+// Function for plumber to handle errors
 function customPlumber(errTitle) {
     return p.plumber({
         errorHandler: p.notify.onError({
@@ -80,7 +40,40 @@ function customPlumber(errTitle) {
 }
 
 
+// Browser Sync settings and config
+var bs_reload = {
+    stream: true
+};
 
+gulp.task('browserSync', function() {
+    var appSettings = {
+        server: {
+            baseDir: 'app'
+        },
+        reload: ({
+            stream: true
+        }),
+        
+        notify: false,
+    };
+
+    var distSettings = {
+        server: {
+            baseDir: 'dist'
+        },
+        reload: ({
+            stream: true
+        }),
+        
+        notify: false,
+    };
+
+    if (prod == true) {
+        browserSync(appSettings)
+    } else {
+        browserSync(distSettings)
+    }
+})
 
 // Watch the homepage!
 gulp.task('homepage', function(){
@@ -103,6 +96,24 @@ gulp.task('scripts', function(){
 });
 
 gulp.task('sass', function () {
+    
+    // Sass and styling variables
+    var sassInput = 'sass/main.scss';
+    var sassOptions = { 
+        outputStyle: 'expanded' 
+    };
+
+    // Sass variables for the dist folder
+    var sassDistOptions = { 
+        outputStyle: 'compressed' 
+    };
+
+    var autoprefixerOptions = {
+      browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
+    };
+
+
+
   return gulp
     .src(sassInput)
     .pipe(customPlumber('Error running Sass'))
@@ -110,6 +121,7 @@ gulp.task('sass', function () {
     .pipe(p.if(prod, p.sourcemaps.init()))
     // Write Sass for either dev or prod
     .pipe(p.if(prod, p.sass(sassOptions), p.sass(sassDistOptions)))
+    .pipe(p.if(!prod, p.autoprefixer(autoprefixerOptions)))
     .pipe(p.if(prod, p.sourcemaps.write()))
     .pipe(p.rename("style.min.css"))
     // Sends the Sass file to either the app or dist folder
@@ -119,21 +131,6 @@ gulp.task('sass', function () {
         onLast: true
     }))
     .pipe(browserSync.reload(bs_reload))
-});
-
-gulp.task('uncss', function () {
-  return gulp
-    .src(config.pAssetsPath + 'css/style.min.css')
-    .pipe(customPlumber('Error running UnCSS'))
-    .pipe(p.uncss({
-        html: ['app/**/**/*.html']
-    }))
-    .pipe(p.minifyCSS())
-    .pipe(p.if(prod, gulp.dest(config.pAssetsPath + 'css'), gulp.dest(config.dAssetsPath + 'css')))
-    .pipe(p.notify({
-        message: 'CSS Trimmed!',
-        onLast: true
-    }))
 });
 
 // Compress all the image things!
@@ -156,10 +153,17 @@ gulp.task('images', function () {
 gulp.task('jade', function() {
     var my_locals = {};
 
+    var appJadeSettings = {
+        locals: my_locals,
+        pretty: ' '
+    };
+
+    var distJadeSettings = {
+        locals: my_locals
+    };
+
     gulp.src('jade/**/**/*.jade')
-        .pipe(p.jade({
-            locals: my_locals
-        }))
+        .pipe(p.if(prod, p.jade(appJadeSettings), p.jade(distJadeSettings)))
         .pipe(customPlumber('Error running Jade'))
         .pipe(p.if(prod, gulp.dest(config.projectPath), gulp.dest(config.distPath)))
         .pipe(p.notify({
@@ -169,15 +173,6 @@ gulp.task('jade', function() {
         .pipe(browserSync.reload(bs_reload))
 });
 
-gulp.task('prod-init', function () {
-  return gulp
-    .src(sassInput)
-    .pipe(p.sass(sassDistOptions).on('error', p.sass.logError))
-    .on("error", p.notify.onError("Error:" + errorLog))
-    .pipe(p.autoprefixer(autoprefixerOptions))
-    .pipe(p.rename("style.min.css"))
-    .pipe(gulp.dest(config.pAssetsPath + 'css'));
-});
 
 // How to make this a conditional in the Jade task???
 gulp.task('clean', function () {
@@ -197,4 +192,3 @@ gulp.task('watch', function(){
 });
 
 gulp.task('default', ['browserSync', 'scripts', 'sass', 'jade', 'images', 'watch']);
-gulp.task('prod', ['clean', 'prod-init', 'uncss']);
