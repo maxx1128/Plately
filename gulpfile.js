@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var p = require('gulp-load-plugins')();
 
 var browserSync = require('browser-sync');
+    // spritesmith = require('gulp.spritesmith');
 
 // Important variables used throughout the gulp file //
 
@@ -51,7 +52,7 @@ gulp.task('browserSync', function() {
             stream: true
         }),
         
-        notify: false,
+        notify: false
     };
 
     var distSettings = {
@@ -82,7 +83,9 @@ gulp.task('homepage', function(){
 gulp.task('scripts', function(){
     gulp.src('js/main.js')
     .pipe(customPlumber('Error running Scripts'))
+    .pipe(p.if(prod, p.sourcemaps.init()))
     .pipe(p.include())
+    .pipe(p.if(prod, p.sourcemaps.write()))
     .pipe(p.rename('main.min.js'))
     .pipe(p.if(prod, gulp.dest(config.pAssetsPath + 'js'), gulp.dest(config.dAssetsPath + 'js')))
     .pipe(p.notify({
@@ -131,8 +134,8 @@ gulp.task('sass', function () {
 });
 
 // Compress all the image things!
-gulp.task('images', function () {
-    return gulp.src('jade/img/*')
+gulp.task('img', function () {
+    return gulp.src('img/**/*')
         .pipe(customPlumber('Error running Images'))
         .pipe(p.imagemin({
             progressive: true
@@ -145,6 +148,19 @@ gulp.task('images', function () {
         }))
         .pipe(browserSync.reload(bs_reload))
 });
+
+gulp.task('sprites', function () {
+    gulp.src('img/**/*')
+    .pipe(p.spritesmith({
+        cssName: '_sprites.scss', // CSS file 
+        imgName: 'sprites.png',
+        imgPath: '../img/sprites.png' // Image file
+    }))
+    .pipe(p.if('*.png', gulp.dest('img')))
+    .pipe(p.if('*.scss', gulp.dest('sass/components')))
+});
+
+
 
 // Get all the Jade things!
 gulp.task('jade', function() {
@@ -182,4 +198,5 @@ gulp.task('watch', function(){
     gulp.watch('index.html', ['homepage']);
 });
 
-gulp.task('default', ['browserSync', 'scripts', 'sass', 'jade', 'images', 'watch']);
+gulp.task('default', ['browserSync', 'scripts', 'sass', 'jade', 'watch']);
+gulp.task('images', ['sprites', 'img']);

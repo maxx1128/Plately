@@ -29,7 +29,10 @@
   'components/forms',
   'components/lists',
   'components/pre',
-  'components/buttons';
+  'components/buttons',
+  'components/sprites';
+
+@include sprites($spritesheet-sprites);
 
 @import
   'pages/home';
