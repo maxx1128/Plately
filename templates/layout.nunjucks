@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plately</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="assets/css/style.min.css">
+</head>
+<body>
+  
+  {% block content %} {% endblock %}
+
+  <script src="assets/js/main.min.js"></script>
+</body>
+</html>

@@ -20,6 +20,4 @@ $(document).ready(function () {
 // Apps
 //=require apps/app.js
 
-console.log('test!');
-
 }); //Doc ready is done!

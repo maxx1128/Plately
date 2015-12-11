@@ -1,8 +1,11 @@
 var gulp = require('gulp');  
-var p = require('gulp-load-plugins')();
+var p = require('gulp-load-plugins')(),
+    nunjucksRender = require('gulp-nunjucks-render');
 
-var browserSync = require('browser-sync');
-    // spritesmith = require('gulp.spritesmith');
+var browserSync = require('browser-sync'),
+    fs = require('fs'),
+    del = require('del'),
+    runSequence = require('run-sequence');
 
 // Important variables used throughout the gulp file //
 
@@ -45,33 +48,25 @@ var bs_reload = {
 
 gulp.task('browserSync', function() {
     var appSettings = {
-        server: {
-            baseDir: 'app'
-        },
-        reload: ({
-            stream: true
-        }),
-        
+        server: { baseDir: 'app' },
+        reload: ({ stream: true}),
         notify: false
     };
 
-    var distSettings = {
-        server: {
-            baseDir: 'dist'
-        },
-        reload: ({
-            stream: true
-        }),
-        
+    var distSettings = { 
+        server: { baseDir: 'dist' },
+        reload: ({ stream: true }),
         notify: false,
     };
 
-    if (prod == true) {
-        browserSync(appSettings)
-    } else {
-        browserSync(distSettings)
-    }
-})
+    if (prod == true) { browserSync(appSettings) } 
+    else { browserSync(distSettings) }
+});
+
+// Task to clean out files to be replaced on tasks!
+gulp.task('clean:dev', function(cb){
+    del(prod ? ['app', 'img/sprites.png'] : ['dist', 'img/sprites.png'], cb)
+});
 
 // Watch the homepage!
 gulp.task('homepage', function(){
@@ -88,10 +83,7 @@ gulp.task('scripts', function(){
     .pipe(p.if(prod, p.sourcemaps.write()))
     .pipe(p.rename('main.min.js'))
     .pipe(p.if(prod, gulp.dest(config.pAssetsPath + 'js'), gulp.dest(config.dAssetsPath + 'js')))
-    .pipe(p.notify({
-        message: 'JS Uglified!',
-        onLast: true
-    }))
+    .pipe(p.notify({ message: 'JS Uglified!', onLast: true }))
     .pipe(browserSync.reload(bs_reload))
 });
 
@@ -100,7 +92,8 @@ gulp.task('sass', function () {
     // Sass and styling variables
     var sassInput = 'sass/main.scss';
     var sassOptions = { 
-        outputStyle: 'expanded' 
+        outputStyle: 'expanded',
+        includePaths: ['components/']
     };
 
     // Sass variables for the dist folder
@@ -111,8 +104,6 @@ gulp.task('sass', function () {
     var autoprefixerOptions = {
       browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
     };
-
-
 
   return gulp
     .src(sassInput)
@@ -126,77 +117,55 @@ gulp.task('sass', function () {
     .pipe(p.rename("style.min.css"))
     // Sends the Sass file to either the app or dist folder
     .pipe(p.if(prod, gulp.dest(config.pAssetsPath + 'css'), gulp.dest(config.dAssetsPath + 'css')))
-    .pipe(p.notify({
-        message: 'Sass Processed!',
-        onLast: true
-    }))
+    .pipe(p.notify({ message: 'Sass Processed!', onLast: true }))
     .pipe(browserSync.reload(bs_reload))
 });
 
-// Compress all the image things!
-gulp.task('img', function () {
-    return gulp.src('img/**/*')
-        .pipe(customPlumber('Error running Images'))
-        .pipe(p.imagemin({
-            progressive: true
-        }))
-        
-        .pipe(p.if(prod, gulp.dest(config.pAssetsPath + '/img'), gulp.dest(config.dAssetsPath + '/img')))
-        .pipe(p.notify({
-            message: 'Images Optimized!',
-            onLast: true
-        }))
-        .pipe(browserSync.reload(bs_reload))
-});
-
 gulp.task('sprites', function () {
+    if (prod === true) { var imgPath = config.pAssetsPath + 'img'; }
+    else { var imgPath = config.dAssetsPath + 'img'; }
+
     gulp.src('img/**/*')
     .pipe(p.spritesmith({
         cssName: '_sprites.scss', // CSS file 
         imgName: 'sprites.png',
         imgPath: '../img/sprites.png' // Image file
     }))
-    .pipe(p.if('*.png', gulp.dest('img')))
+    .pipe(p.if('*.png', gulp.dest(imgPath)))
     .pipe(p.if('*.scss', gulp.dest('sass/components')))
 });
 
+gulp.task('nunjucks', function() {
+    nunjucksRender.nunjucks.configure(['templates/'], {watch: false});
 
-
-// Get all the Jade things!
-gulp.task('jade', function() {
-    var my_locals = {};
-
-    var appJadeSettings = {
-        locals: my_locals,
-        pretty: ' '
-    };
-
-    var distJadeSettings = {
-        locals: my_locals
-    };
-
-    gulp.src('jade/**/**/*.jade')
-        .pipe(p.if(prod, p.jade(appJadeSettings), p.jade(distJadeSettings)))
-        .pipe(customPlumber('Error running Jade'))
-        .pipe(p.if(prod, gulp.dest(config.projectPath), gulp.dest(config.distPath)))
-        .pipe(p.notify({
-            message: 'HTML Jaded!',
-            onLast: true
+    // Gets .html and .nunjucks files in pages
+    return gulp.src('pages/**/*.+(html|nunjucks)')
+        .pipe(p.data(function() {
+            return JSON.parse(fs.readFileSync('./data/data.json'))
         }))
-
+        .pipe(nunjucksRender())
+        .pipe(customPlumber('Error running Nunjucks'))
+        .pipe(p.if(prod, gulp.dest(config.projectPath), gulp.dest(config.distPath)))
+        .pipe(p.notify({ message: 'HTML Nunjucked!', onLast: true }))
         .pipe(browserSync.reload(bs_reload))
 });
-
 
 
 // Task to watch the things!
 gulp.task('watch', function(){
     gulp.watch('js/**/**/*.js', ['scripts']);
     gulp.watch('sass/**/**/*.scss', ['sass']);
-    gulp.watch('jade/**/**/*.jade', ['jade']);
-    gulp.watch('jade/img/**/**/*', ['images']);
+    gulp.watch(['pages/**/*.+(html|nunjucks)', 'templates/**/*.+(html|nunjucks)', 'data/**/**/*.json'], ['nunjucks']);
+    gulp.watch(['img/**/**/*',], ['images']);
     gulp.watch('index.html', ['homepage']);
 });
 
-gulp.task('default', ['browserSync', 'scripts', 'sass', 'jade', 'watch']);
-gulp.task('images', ['sprites', 'img']);
+gulp.task('default', function(callback) {
+  runSequence(
+    'clean:dev',
+    'sprites',
+    ['scripts', 'sass', 'nunjucks'], 
+    ['browserSync', 'watch'],
+    callback
+  )
+});
