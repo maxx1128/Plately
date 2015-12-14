@@ -30,9 +30,9 @@
   'components/lists',
   'components/pre',
   'components/buttons',
-  'components/sprites';
+  'components/sprites',
+  'components/sprites-settings';
 
-@include sprites($spritesheet-sprites);
 
 @import
   'pages/home';

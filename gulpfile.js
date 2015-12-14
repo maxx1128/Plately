@@ -135,21 +135,27 @@ gulp.task('sprites', function () {
     .pipe(p.if('*.scss', gulp.dest('sass/components')))
 });
 
-gulp.task('nunjucks', function() {
+gulp.task('nunjucks', ['json:merge'], function() {
     nunjucksRender.nunjucks.configure(['templates/'], {watch: false});
 
     // Gets .html and .nunjucks files in pages
     return gulp.src('pages/**/*.+(html|nunjucks)')
+        .pipe(customPlumber('Error running Nunjucks'))
         .pipe(p.data(function() {
             return JSON.parse(fs.readFileSync('./data/data.json'))
         }))
         .pipe(nunjucksRender())
-        .pipe(customPlumber('Error running Nunjucks'))
         .pipe(p.if(prod, gulp.dest(config.projectPath), gulp.dest(config.distPath)))
         .pipe(p.notify({ message: 'HTML Nunjucked!', onLast: true }))
         .pipe(browserSync.reload(bs_reload))
 });
 
+gulp.task('lint:sass', function() {
+    return gulp.src('sass/**/*.scss')
+        .pipe(p.scssLint({
+            config: '.scss-lint.yml'
+        }));
+});
 
 // Task to watch the things!
 gulp.task('watch', function(){
