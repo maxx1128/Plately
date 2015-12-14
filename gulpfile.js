@@ -68,11 +68,23 @@ gulp.task('clean:dev', function(cb){
     del(prod ? ['app', 'img/sprites.png'] : ['dist', 'img/sprites.png'], cb)
 });
 
+// Merge the JSON files!
+gulp.task('json:merge', function(){
+    gulp.src('./data/partials/**/*.json')
+        .pipe(p.extend('data.json'))
+        .pipe(gulp.dest('./data'))
+});
+
 // Watch the homepage!
 gulp.task('homepage', function(){
     gulp.src('index.html')
     .pipe(browserSync.reload(bs_reload))
 });
+
+
+
+
+
 
 // Uglify, to compress JS files
 gulp.task('scripts', function(){

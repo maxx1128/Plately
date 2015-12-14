@@ -1,9 +1,1 @@
-{
-  "images": [{
-    "src": "image-one.png",
-    "alt": "Image seven alt text"
-  }, {
-    "src": "image-two.png",
-    "alt": "Image two alt text"
-  }]
-}
+{"name":"Maxwell Antonucci","items":[{"title":"First Post Here","id":1},{"title":"Second Post Here","id":2}],"images":[{"src":"image-one.png","alt":"Image seven alt text"},{"src":"image-two.png","alt":"Image two alt text"}],"supername":"Pegaso Atlier"}
