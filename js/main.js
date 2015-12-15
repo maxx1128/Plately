@@ -1,23 +1,24 @@
-//=require ../components/jquery/dist/jquery.min.js
+//  =require ../components/jquery/dist/jquery.min.js
 
-$(document).ready(function () {
+$(document).ready(function() {
 
-// Components
+  //  Components
 
-// Utilities
-//=require utils/variables.js
-//=require utils/functions.js
+  //  Utilities
+  //  =require utils/variables.js
+  //  =require utils/functions.js
 
-// Base
-//=require base/base.js
+  //  Base
+  //  =require base/base.js
 
-// Components
-//=require components/components.js
+  //  Components
+  //  =require components/components.js
 
-// Pages
-//=require pages/page.js
+  //  Pages
+  //  =require pages/page.js
 
-// Apps
-//=require apps/app.js
+  //  Apps
+  //  =require apps/app.js
 
-}); //Doc ready is done!
+});
+ //  Doc ready is done!

@@ -40,7 +40,6 @@ function customPlumber(errTitle) {
     });
 }
 
-
 // Browser Sync settings and config
 var bs_reload = {
     stream: true
@@ -63,7 +62,7 @@ gulp.task('browserSync', function() {
     else { browserSync(distSettings) }
 });
 
-// Task to clean out files to be replaced on tasks!
+// Task to clean out files to be replaced on tasks
 gulp.task('clean:dev', function(cb){
     del(prod ? ['app', 'img/sprites.png'] : ['dist', 'img/sprites.png'], cb)
 });
@@ -82,11 +81,9 @@ gulp.task('homepage', function(){
 });
 
 
+// Gulp Tasks for basic automation below //
 
-
-
-
-// Uglify, to compress JS files
+// Concats and minifies the JS files
 gulp.task('scripts', function(){
     gulp.src('js/main.js')
     .pipe(customPlumber('Error running Scripts'))
@@ -99,6 +96,7 @@ gulp.task('scripts', function(){
     .pipe(browserSync.reload(bs_reload))
 });
 
+// Converts the Sass partials into a single CSS file
 gulp.task('sass', function () {
     
     // Sass and styling variables
@@ -133,6 +131,7 @@ gulp.task('sass', function () {
     .pipe(browserSync.reload(bs_reload))
 });
 
+// Creates a map of image sprites
 gulp.task('sprites', function () {
     if (prod === true) { var imgPath = config.pAssetsPath + 'img'; }
     else { var imgPath = config.dAssetsPath + 'img'; }
@@ -147,6 +146,8 @@ gulp.task('sprites', function () {
     .pipe(p.if('*.scss', gulp.dest('sass/components')))
 });
 
+// Converts Nunjucks templates and pages into HTML files
+// Always runs the JSON merge task first for changes in data
 gulp.task('nunjucks', ['json:merge'], function() {
     nunjucksRender.nunjucks.configure(['templates/'], {watch: false});
 
@@ -162,11 +163,35 @@ gulp.task('nunjucks', ['json:merge'], function() {
         .pipe(browserSync.reload(bs_reload))
 });
 
+
+
+
+
+// Linting tasks below for checking the SCSS and JS files //
+
 gulp.task('lint:sass', function() {
     return gulp.src('sass/**/*.scss')
         .pipe(p.scssLint({
             config: '.scss-lint.yml'
-        }));
+        }))
+        .pipe(p.notify({ message: 'Sass Linted!', onLast: true }))
+});
+
+gulp.task('lint:js', function () {
+  return gulp.src('js/**/*.js')
+  .pipe(customPlumber('JSHint Error'))
+  .pipe(p.jshint())
+  .pipe(p.jshint.reporter('jshint-stylish'))
+  .pipe(p.jshint.reporter('fail', {
+    ignoreWarning: true,
+    ignoreInfo: true
+  }))
+  .pipe(p.jscs({
+    fix: true,
+    configPath: '.jscsrc'
+  }))
+  .pipe(gulp.dest('js'))
+  .pipe(p.notify({ message: 'JS Linted!', onLast: true }))
 });
 
 // Task to watch the things!
@@ -178,6 +203,10 @@ gulp.task('watch', function(){
     gulp.watch('index.html', ['homepage']);
 });
 
+
+
+// Tasks that run multiple other tasks, including default //
+
 gulp.task('default', function(callback) {
   runSequence(
     'clean:dev',
@@ -187,3 +216,5 @@ gulp.task('default', function(callback) {
     callback
   )
 });
+
+gulp.task('lint', ['lint:js', 'lint:sass']);
