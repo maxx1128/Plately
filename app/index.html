@@ -1,6 +1,14 @@
-{% extends "layout.nunjucks" %}
-
-{% block content %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plately</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="assets/css/style.min.css">
+</head>
+<body>
+  
+   
 
 <h1>Headings</h1>
   <h1>h1. Heading</h1>
@@ -22,22 +30,46 @@
   
   <h1>JSON Data</h1>
 
-  My name, <strong>{{ name }}</strong>, is coming from the JSON files. So is the below array of data.
+  My name, <strong>Maxwell Antonucci</strong>, is coming from the JSON files. So is the below array of data.
 
   <ul>
-    {% for item in items %}
-      <li>{{ item.title }}, #{{item.id}}
-        {% if loop.first %} - I'm the first item!{% endif %}
-        {% if loop.last %} - I'm the last item!{% endif %}
+    
+      <li>First Post Here, #1
+         - I'm the first item!
+        
       </li>
       
-      {% if item.id == 2 %}
+      
+
+    
+      <li>Second Post Here, #2
+        
+        
+      </li>
+      
+      
           <ul>
             <li>I'm below the second item!</li>
           </ul>
-      {% endif %}
+      
 
-    {% endfor %}
+    
+      <li>Third Post Here, #3
+        
+        
+      </li>
+      
+      
+
+    
+      <li>Fourth Post Here, #4
+        
+         - I'm the last item!
+      </li>
+      
+      
+
+    
   </ul>
 
   <hr>
@@ -163,4 +195,8 @@
    </tbody>
   </table>
 
-{% endblock %}
+
+
+  <script src="assets/js/main.min.js"></script>
+</body>
+</html>
