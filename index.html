@@ -20,9 +20,9 @@
 
     <section class="main-content">
       <h1>
-<a id="plately---v-200" class="anchor" href="#plately---v-200" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plately - v 2.0.0</h1>
+<a id="plately---v-300" class="anchor" href="#plately---v-300" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plately - v 3.0.0</h1>
 
-<p>Plately is a simple starting template I use for front-end web development projects. It's set up to quickly let developers start creating with Jade, Sass, jQuery, and any other dependencies they need to add.</p>
+<p>Plately is a starting template I use for front-end web development projects. It uses Gulp so I can quickly start coding with Nunjucks, Sass, Javascript, JSON, and image sprites.</p>
 
 <h2>
 <a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
@@ -44,10 +44,22 @@
 <a id="folders-that-are-already-there" class="anchor" href="#folders-that-are-already-there" aria-hidden="true"><span class="octicon octicon-link"></span></a>Folders that are already there:</h4>
 
 <ul>
-<li>Jade: Where all the Jade files are stored, which are converted into HTML for the project.</li>
-<li>Img: This is in the Jade folder, and is where all your images go.</li>
-<li>JS: Where your jQuery and Javacript files go, which is the interactivity and logic for the project. Structured to better organize the different files.</li>
-<li>Sass: Where all the Sass files go, separated by a folder structure for better organization.</li>
+<li>
+<strong>app:</strong> Where the production version of your project is built</li>
+<li>
+<strong>data:</strong> Where all JSON files go that contain needed data for other files</li>
+<li>
+<strong>dist:</strong> Where the version of your project built to be shared or distributed goes</li>
+<li>
+<strong>img:</strong> Where all image files go, which are converted into a sprite map for quicker reference</li>
+<li>
+<strong>js:</strong> For all Javascript files, and must include any needed references to any Javascript dependencies in the components folder</li>
+<li>
+<strong>pages:</strong> <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a> code that creates the main content for each page. Will need to reference a templates file</li>
+<li>
+<strong>sass:</strong> Where all the <a href="http://sass-lang.com/">Sass</a> files go, separated by a folder structure for better organization</li>
+<li>
+<strong>templates:</strong> Nunjucks templates that create the HTML code around every page</li>
 </ul>
 
 <h4>
@@ -55,34 +67,12 @@
 
 <blockquote>
 <p>These are created with the commands in the "How to Set Up" section below.</p>
-</blockquote>
 
 <ul>
-<li>Build: The folder that ultimately contains all your final project files - HTML, CSS, Javascript, images, the whole thing.</li>
-<li>Components: All the external dependencies for the project, such as libraries and frameworks. Can be installed and managed with Bower.</li>
+<li>components: All the external dependencies for the project, such as libraries and frameworks. Can be installed and managed with Bower.</li>
 <li>node_modules: All the npm dependencies that put the project together. Take a long time to install but are vital to creating anything at all with Plately.</li>
 </ul>
-
-<h2>
-<a id="npm-dependencies" class="anchor" href="#npm-dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>NPM Dependencies</h2>
-
-<ul>
-<li>express: A web application framework that currently just puts the site on localhost:3000 while gulp is running.</li>
-<li>gulp: Basic Gulp module for running the workflow.</li>
-<li>gulp-autoprefixer: Automatically adds browser prefixes to certain CSS styles to ensure cross-compatibility.</li>
-<li>gulp-concat: For merging different JS files together from the JS folder into a single one for the Assets folder.</li>
-<li>gulp-imagemin: For optimizing images in the images placed in the Jade/Img folder and sent to Build.</li>
-<li>gulp-include: for combining and minifying JS files.</li>
-<li>gulp-jade: For converting Jade files to HTML.</li>
-<li>gulp-livereload: For using the Chrome LiveReload extension so pages refresh automatically with changes.</li>
-<li>gulp-notify: Notifying of completed processes or errors.</li>
-<li>gulp-plumber: So any mistakes send a message without halting the workflow.</li>
-<li>gulp-rename: Renaming any files before sending them to the Build folder.</li>
-<li>gulp-sass: For converting Sass to CSS.</li>
-<li>gulp-sourcemaps: Adding sourcemaps to CSS and JS files to speed up debugging.</li>
-<li>gulp-uglify: For compressing JS files.</li>
-<li>gulp-uncss: Removes any CSS element selectors that aren't being used in the Build folder.</li>
-</ul>
+</blockquote>
 
 <h2>
 <a id="bower-dependencies" class="anchor" href="#bower-dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bower Dependencies</h2>
@@ -99,7 +89,7 @@
 <h2>
 <a id="how-to-set-up" class="anchor" href="#how-to-set-up" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to Set Up</h2>
 
-<p>There are several commands to get all the needed dependencies installed and ready to view.</p>
+<p>There are several terminal commands to get all the needed dependencies installed and ready to view.</p>
 
 <div class="highlight highlight-source-shell"><pre>npm install</pre></div>
 
@@ -116,57 +106,19 @@
 <div class="highlight highlight-source-shell"><pre>gulp</pre></div>
 
 <ul>
-<li>This is the basic command that constructs the Build folder. It turns the Jade into HTML, the Sass into CSS, optimizes the images, and puts together all the Javascript and jQuery files. This also runs in the background and updates the Build folder any time there's a saved change to any of these files.</li>
-<li>While this is running, you can also view the project on a browser on localhost:3000.</li>
+<li>This is the basic command that refreshes the project in either the app or build folder. The project will automatically run on your local server and open a tab in your default browser.</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>gulp lint</pre></div>
+
+<ul>
+<li>This is an optional command for spotting errors in the Javascript files, automatically making Javascript syntax corrections, and logging syntax mistakes for Sass files.</li>
 </ul>
 
 <h2>
-<a id="gulp-commands" class="anchor" href="#gulp-commands" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gulp Commands</h2>
+<a id="creating-the-app-and-dist-projects" class="anchor" href="#creating-the-app-and-dist-projects" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating the App and Dist projects</h2>
 
-<blockquote>
-<p>These are other gulp commands to run from the terminal for building the project. Most of them are the individual commands run as part of the default "gulp" command, in case you don't need to run all at once.</p>
-</blockquote>
-
-<div class="highlight highlight-source-shell"><pre>gulp scripts</pre></div>
-
-<ul>
-<li>This only merges and minifies your JS files.</li>
-</ul>
-
-<div class="highlight highlight-source-shell"><pre>gulp sass</pre></div>
-
-<ul>
-<li>This only processes and converts your Sass files.</li>
-</ul>
-
-<div class="highlight highlight-source-shell"><pre>gulp uncss</pre></div>
-
-<ul>
-<li>This runs through all your Build's CSS, compares it to your HTML, and removes any CSS that's not being used.</li>
-</ul>
-
-<div class="highlight highlight-source-shell"><pre>gulp images</pre></div>
-
-<ul>
-<li>This goes through all the images in the Img folder, optimizes them to reduce size, and sends them to the build folder.</li>
-</ul>
-
-<div class="highlight highlight-source-shell"><pre>gulp jade</pre></div>
-
-<ul>
-<li>This converts all your Jade files to HTML and sends them to the build folder.</li>
-</ul>
-
-<div class="highlight highlight-source-shell"><pre>gulp prod</pre></div>
-
-<ul>
-<li>This is for when your project is ready to be launched. It updates your Sass and JS documentation and optimizes your CSS through minifying it, removing sourcemaps, and adding vendor prefixes. It also runs UnCSS to remove unused CSS, which will need to be removed for dynamic sites such as one-page apps.</li>
-</ul>
-
-<h2>
-<a id="special-thanks-to" class="anchor" href="#special-thanks-to" aria-hidden="true"><span class="octicon octicon-link"></span></a>Special Thanks to</h2>
-
-<p><a href="https://github.com/thoughtbot">Thoughtbot</a> for their wonderful open source tools for front end development. Especially for <a href="http://bitters.bourbon.io/">Bitters</a>, which was the starting point for much of this project's initial CSS scaling styles and variables. I did play with it and add some extra functions, but much of the original Sass is there.</p>
+<p>Plately is set up so Gulp build the project into the app folder. To have it go into the dist folder with optimized assets, change the <code>prod</code> variable on line 23 on <code>gulpfile.js</code> to <strong>false</strong> before running the <code>gulp</code> command again. Simply change it back to <strong>true</strong> to go back to the app folder.</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/maxx1128/Plately">Plately</a> is maintained by <a href="https://github.com/maxx1128">maxx1128</a>.</span>
