@@ -2,8 +2,9 @@
 // ======
 
 @import 
- 'bourbon/app/assets/stylesheets/bourbon',
- 'susy/sass/susy';
+  'bourbon/app/assets/stylesheets/bourbon',
+  'susy/sass/susy'
+;
 
 @import
   'utils/variables/breakpoints',
@@ -11,18 +12,22 @@
   'utils/variables/typography',
   'utils/variables/layout',
   'utils/variables/forms',
-  'utils/variables/animation';
+  'utils/variables/animation'
+;
 
 @import
   'utils/functions',
   'utils/mixins',
-  'utils/placeholders';
+  'utils/placeholders'
+;
 
 @import
-  'base/typography';
+  'base/typography'
+;
 
 @import
-  'layout/grid';
+  'layout/grid'
+;
 
 @import
   'components/tables',
@@ -31,12 +36,16 @@
   'components/pre',
   'components/buttons',
   'components/sprites',
-  'components/sprites-settings';
+  'components/sprites-settings',
+  'components/hoverTile'
+;
 
 
 @import
-  'pages/home';
+  'pages/home'
+;
 
 @import
   'themes/theme',
-  'themes/admin';
+  'themes/admin'
+;
