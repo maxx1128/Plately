@@ -199,7 +199,7 @@ gulp.task('watch', function(){
     gulp.watch('js/**/**/*.js', ['scripts']);
     gulp.watch('sass/**/**/*.scss', ['sass']);
     gulp.watch(['pages/**/*.+(html|nunjucks)', 'templates/**/**/*.+(html|nunjucks)', 'data/**/**/*.json'], ['nunjucks']);
-    gulp.watch(['img/**/**/*',], ['images']);
+    gulp.watch(['img/**/**/*',], ['sprites']);
     gulp.watch('index.html', ['homepage']);
 });
 
