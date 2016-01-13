@@ -6,7 +6,7 @@
    #{$key} {
       font-size: $scaled-font-size;
 
-      @include susy-media($tablet-screen) {
+      @include bp($tablet-screen) {
         font-size: $main-font-size;
       }
    }   

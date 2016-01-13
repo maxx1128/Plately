@@ -2,8 +2,7 @@
 // ======
 
 @import 
-  'bourbon/app/assets/stylesheets/bourbon',
-  'susy/sass/susy'
+  'bourbon/app/assets/stylesheets/bourbon'
 ;
 
 @import
@@ -22,11 +21,11 @@
 ;
 
 @import
-  'base/typography'
+  'layout/grid'
 ;
 
 @import
-  'layout/grid'
+  'base/typography'
 ;
 
 @import

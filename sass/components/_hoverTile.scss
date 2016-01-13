@@ -15,7 +15,7 @@
   height: $hover-tile-height;
   margin-bottom: $base-line-height;
   
-  @include susy-breakpoint($medium-screen) {
+  @include bp($medium-screen) {
     width: 40%;
   }
 

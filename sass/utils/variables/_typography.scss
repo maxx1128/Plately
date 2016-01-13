@@ -19,7 +19,7 @@ $modular-scale-ratio: $minor-third;
 $modular-scale-base: $base-font-size;
 
 // When the screen gets below a certain size, this is the percentage of the original font size the font becomes. For example, a value of .9 means the font shrinks to 90% of its size on smaller screens.
-$scaled-font-ratio: .9;
+$scaled-font-ratio: .8;
 
 // The base line height for all major text elements aside from headers.
 $base-line-height: 1.6;
