@@ -136,7 +136,7 @@ gulp.task('sprites', function () {
     if (prod === true) { var imgPath = config.pAssetsPath + 'img'; }
     else { var imgPath = config.dAssetsPath + 'img'; }
 
-    gulp.src('img/**/*')
+    gulp.src('sprites/**/*')
     .pipe(p.spritesmith({
         cssName: '_sprites.scss', // CSS file 
         imgName: 'sprites.png',
@@ -144,6 +144,15 @@ gulp.task('sprites', function () {
     }))
     .pipe(p.if('*.png', gulp.dest(imgPath)))
     .pipe(p.if('*.scss', gulp.dest('sass/components')))
+});
+
+gulp.task('imagemin', function() {
+    return gulp.src('images/**/*')
+    .pipe(p.imagemin({
+        progressive: true
+    }))
+
+    .pipe(p.if(prod, gulp.dest(config.pAssetsPath + 'img'), gulp.dest(config.dAssetsPath + 'img')))
 });
 
 // Converts Nunjucks templates and pages into HTML files
@@ -204,13 +213,12 @@ gulp.task('watch', function(){
 });
 
 
-
 // Tasks that run multiple other tasks, including default //
 
 gulp.task('default', function(callback) {
   runSequence(
     'clean:dev',
-    'sprites',
+    ['sprites', 'imagemin'],
     ['scripts', 'sass', 'nunjucks'], 
     ['browserSync', 'watch'],
     callback

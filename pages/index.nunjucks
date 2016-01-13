@@ -27,12 +27,12 @@
 
   <ul>
     {% for item in items %}
-      <li>{{ item.title }}, #{{item.id}}
+      <li>{{ item.title }}, #{{loop.index}}
         {% if loop.first %} - I'm the first item!{% endif %}
         {% if loop.last %} - I'm the last item!{% endif %}
       </li>
       
-      {% if item.id == 2 %}
+      {% if loop.index == 2 %}
           <ul>
             <li>I'm below the second item!</li>
           </ul>
