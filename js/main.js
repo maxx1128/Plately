@@ -1,24 +1,5 @@
-//  =require ../components/jquery/dist/jquery.min.js
+var $ = require('jquery');
 
-$(document).ready(function() {
+var foo = require('./test.js');
 
-  //  Components
-
-  //  Utilities
-  //  =require utils/variables.js
-  //  =require utils/functions.js
-
-  //  Base
-  //  =require base/base.js
-
-  //  Components
-  //  =require components/components.js
-
-  //  Pages
-  //  =require pages/page.js
-
-  //  Apps
-  //  =require apps/app.js
-
-});
- //  Doc ready is done!
+console.log(foo(5));

@@ -5,7 +5,10 @@ var p = require('gulp-load-plugins')(),
 var browserSync = require('browser-sync'),
     fs = require('fs'),
     del = require('del'),
-    runSequence = require('run-sequence');
+    runSequence = require('run-sequence'),
+    browserify = require('browserify'),
+    watchify = require('watchify'),
+    source = require('vinyl-source-stream');
 
 // Important variables used throughout the gulp file //
 
@@ -81,20 +84,32 @@ gulp.task('homepage', function(){
 });
 
 
-// Gulp Tasks for basic automation below //
+// Browserify for creating javascript bundle
+var bundler = browserify({
+    // Required watchify args
+    cache: {},
+    packageCache: {},
+    fullPaths: true,
+    // Browserify options
+    entries: ['js/main.js'],
+    debug: true
+  });
 
-// Concats and minifies the JS files
-gulp.task('scripts', function(){
-    gulp.src('js/main.js')
+var bundle = function() {
+  return bundler
+    .bundle()
     .pipe(customPlumber('Error running Scripts'))
-    .pipe(p.if(prod, p.sourcemaps.init()))
-    .pipe(p.include())
-    .pipe(p.if(prod, p.sourcemaps.write()))
-    .pipe(p.rename('main.min.js'))
+    .on('error', errorLog)
+    .pipe(source('main.min.js'))
     .pipe(p.if(prod, gulp.dest(config.pAssetsPath + 'js'), gulp.dest(config.dAssetsPath + 'js')))
     .pipe(p.notify({ message: 'JS Uglified!', onLast: true }))
     .pipe(browserSync.reload(bs_reload))
+}
+
+gulp.task('browserify', function() {
+  return bundle()     ;
 });
+
 
 // Converts the Sass partials into a single CSS file
 gulp.task('sass', function () {
@@ -146,6 +161,7 @@ gulp.task('sprites', function () {
     .pipe(p.if('*.scss', gulp.dest('sass/components')))
 });
 
+// Imagemin task for images not added into a sprite map
 gulp.task('imagemin', function() {
     return gulp.src('images/**/*')
     .pipe(p.imagemin({
@@ -205,11 +221,17 @@ gulp.task('lint:js', function () {
 
 // Task to watch the things!
 gulp.task('watch', function(){
-    gulp.watch('js/**/**/*.js', ['scripts']);
     gulp.watch('sass/**/**/*.scss', ['sass']);
     gulp.watch(['pages/**/*.+(html|nunjucks)', 'templates/**/**/*.+(html|nunjucks)', 'data/**/**/*.json'], ['nunjucks']);
     gulp.watch(['img/**/**/*',], ['sprites']);
     gulp.watch('index.html', ['homepage']);
+});
+
+gulp.task('watch-js', function() {
+  var watchifyBundler = watchify(bundler);
+  watchifyBundler.on('update', bundle);
+
+  return bundle();
 });
 
 
@@ -219,8 +241,8 @@ gulp.task('default', function(callback) {
   runSequence(
     'clean:dev',
     ['sprites', 'imagemin'],
-    ['scripts', 'sass', 'nunjucks'], 
-    ['browserSync', 'watch'],
+    ['browserify', 'sass', 'nunjucks'], 
+    ['browserSync', 'watch', 'watch-js'],
     callback
   )
 });

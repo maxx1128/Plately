@@ -26,7 +26,6 @@
     "gulp-extend": "^0.2.0",
     "gulp-if": "^2.0.0",
     "gulp-imagemin": "^2.4.0",
-    "gulp-include": "^2.0.2",
     "gulp-jscs": "^3.0.2",
     "gulp-jshint": "^2.0.0",
     "gulp-livereload": "^3.8.0",
@@ -45,10 +44,14 @@
   },
   "devDependencies": {
     "browser-sync": "^2.10.0",
+    "browserify": "^13.0.0",
     "del": "^1.2.1",
     "gulp": "^3.9.0",
     "gulp-load-plugins": "^1.1.0",
-    "run-sequence": "^1.1.5"
+    "jquery": "^2.2.0",
+    "run-sequence": "^1.1.5",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
   },
   "license": "MIT"
 }
