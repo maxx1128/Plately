@@ -8,7 +8,8 @@ var browserSync = require('browser-sync'),
     runSequence = require('run-sequence'),
     browserify = require('browserify'),
     watchify = require('watchify'),
-    source = require('vinyl-source-stream');
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer');
 
 // Important variables used throughout the gulp file //
 
@@ -91,8 +92,7 @@ var bundler = browserify({
     packageCache: {},
     fullPaths: true,
     // Browserify options
-    entries: ['js/main.js'],
-    debug: true
+    entries: ['js/main.js']
   });
 
 var bundle = function() {
@@ -101,6 +101,8 @@ var bundle = function() {
     .pipe(customPlumber('Error running Scripts'))
     .on('error', errorLog)
     .pipe(source('main.min.js'))
+    .pipe(buffer())
+    .pipe(p.uglify())
     .pipe(p.if(prod, gulp.dest(config.pAssetsPath + 'js'), gulp.dest(config.dAssetsPath + 'js')))
     .pipe(p.notify({ message: 'JS Uglified!', onLast: true }))
     .pipe(browserSync.reload(bs_reload))

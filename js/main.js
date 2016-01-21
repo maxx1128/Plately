@@ -1,5 +1,8 @@
-var $ = require('jquery');
+var $ = require('jquery'),
+	foo = require('./test');
 
-var foo = require('./test.js');
+console.log(foo.multiply(5));
+console.log(foo.total + ' is the total!');
 
-console.log(foo(5));
+
+// foo.hideItem('h1, h2, h3');
