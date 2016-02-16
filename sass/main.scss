@@ -2,19 +2,12 @@
 // ======
 
 @import 
-  'bourbon/app/assets/stylesheets/bourbon'
+  'bourbon/app/assets/stylesheets/bourbon',
+  'Synapse-Grid/synapse-grid'
 ;
 
 @import
-  'utils/variables/breakpoints',
-  'utils/variables/colors',
-  'utils/variables/typography',
-  'utils/variables/layout',
-  'utils/variables/forms',
-  'utils/variables/animation'
-;
-
-@import
+  'utils/variables',
   'utils/functions',
   'utils/mixins',
   'utils/placeholders'

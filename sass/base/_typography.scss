@@ -6,7 +6,7 @@
    #{$key} {
       font-size: $scaled-font-size;
 
-      @include bp($tablet-screen) {
+      @include bp($scaled-breakpoint) {
         font-size: $main-font-size;
       }
    }   
