@@ -8,29 +8,34 @@ $huge-screen: em(1200px);
 
 
 
-
 // ----- Typography Variables ----- //
 
-$base-font-family: $lucida-grande;  // Default font family for all text except headers.
-$heading-font-family: $base-font-family;  // Default font family for only headers.
-$base-font-size: 1em; // The font size that all other element font sizes are scaled off of.
-$base-font-scale: 0;  // Initial scale of the modular scale ration you want your font sizes to begin at. Typically left at zero
-$modular-scale-ratio: $minor-third;  // Modular scale the fonts will use for sizes.
-$modular-scale-base: $base-font-size;  // Base font size for creating scaled font sizes.
+$base-font-size: 100;
+$line-height: 1.625;
+
+$base: 16 * ($base-font-size / 100);
+$base-rem: ($base-font-size / 100);
+$leading: round($base * $line-height);
+$leading-rem: $leading / $base;
+
+$base-font-family: $lucida-grande;
+$heading-font-family: $base-font-family;
+
+$modular-scale-ratio: $major-third;
+$modular-scale-base: $base * 1px;  // Base font size for creating scaled font sizes.
+
 $scaled-font-ratio: .8; // When the screen gets below a certain size, this is the percentage of the original font size the font becomes.
 $scaled-breakpoint: $tablet-screen; // The screen width the text scales up to its original size
-$base-line-height: 1.6;  // The base line height for all major text elements aside from headers.
-$heading-line-height: 1.1; // The base line height for only headers.
 
 // This uses the Bourbon modular-scale function to create the structure of how fonts will be sized in the modular scale. An each loop is used to generate the scaled font sizes.
 $modular-size-map: (
-   h1: $base-font-scale + 6,
-   h2: $base-font-scale + 5,
-   h3: $base-font-scale + 4,
-   h4: $base-font-scale + 3,
-   h5: $base-font-scale + 2,
-   h6: $base-font-scale + 1,
-   p: $base-font-scale,
+   h1: 6,
+   h2: 5,
+   h3: 4,
+   h4: 3,
+   h5: 2,
+   h6: 1,
+   p: 0,
 );
 
 
@@ -77,8 +82,8 @@ $form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $l
 
 // ----- Layout Variables ----- //
 
-$base-border-radius: 5px; // Standard border-radius amount
-$base-spacing: $base-line-height * 1em; // Basic spacing
+$base-border-radius: $leading-rem * 0.5em; // Standard border-radius amount
+$base-spacing: $leading-rem * 1em; // Basic spacing
 $small-spacing: $base-spacing / 2; // Half of basic spacing
 
 // Lays out the different z-index values to help keep them organized. Based off what commom elements they'd be used for.

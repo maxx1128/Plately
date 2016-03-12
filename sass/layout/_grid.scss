@@ -7,8 +7,14 @@ $synapse: (
         lg: $desktop-screen,
         xlg: $huge-screen
     ),
-  spaceUnits: (8px, 1em, 2em, 3em, 4em),
-  side-margin: 1em
+  spaceUnits: (
+      $small-spacing, 
+      $base-spacing, 
+      ($base-spacing * 2), 
+      ($base-spacing * 3), 
+      ($base-spacing * 4)
+    ),
+  side-margin: $base-spacing
 );
 
 body {

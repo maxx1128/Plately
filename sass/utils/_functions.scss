@@ -1,3 +1,11 @@
 // -- Functions Page -- //
 
-// Note: Sass functions that are likely to be needed to set variable values are on their respective sheets in the util folder
+// For using organized z-index values
+@function z-index($key) {
+  @if map-has-key($z-layers, $key) {
+    @return map-get($z-layers, $key);
+  }
+ 
+  @warn "Unknown `#{$key}` in $z-layers.";
+  @return null;
+}
