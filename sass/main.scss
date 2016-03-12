@@ -7,18 +7,19 @@
 ;
 
 @import
+  'utils/mixins',
   'utils/variables',
   'utils/functions',
-  'utils/mixins',
   'utils/placeholders'
 ;
 
 @import
-  'layout/grid'
+  'base/reset',
+  'base/typography'
 ;
 
 @import
-  'base/typography'
+  'layout/grid'
 ;
 
 @import
