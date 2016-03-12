@@ -21,6 +21,7 @@
     "Jade"
   ],
   "dependencies": {
+    "browsernizr": "^2.1.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-data": "^1.2.1",
     "gulp-extend": "^0.2.0",
