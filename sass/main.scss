@@ -3,7 +3,8 @@
 
 @import 
   'bourbon/app/assets/stylesheets/bourbon',
-  'Synapse-Grid/synapse-grid'
+  'Synapse-Grid/synapse-grid',
+  'bemify/sass/bemify'
 ;
 
 @import
@@ -14,7 +15,7 @@
 ;
 
 @import
-  'base/reset',
+  'base/normalize',
   'base/typography'
 ;
 
@@ -28,9 +29,11 @@
   'components/lists',
   'components/pre',
   'components/buttons',
+  'components/main-nav',
+  'components/hover-nav',
+  'components/side-nav',
   'components/sprites',
-  'components/sprites-settings',
-  'components/hoverTile'
+  'components/sprites-settings'
 ;
 
 

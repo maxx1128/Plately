@@ -1,7 +1,6 @@
 $synapse: (
   columns: 12,
   layouts: (
-        xs:  0px,
         sm:  $mobile-h-screen, 
         md:  $tablet-screen,
         lg: $desktop-screen,
@@ -18,7 +17,18 @@ $synapse: (
 );
 
 body {
-  @include syn(xs, 12, 0, ('pad-1'));
+  @include syn(sm, 12, 0, ('pad-1'));
 	@include syn(md, 10, 1, ('pad-0'));
 	@include syn(lg, 8, 2, (''));
 }
+
+@include block('element') {
+  color: red;
+
+  @include child('child') {
+    color: blue;
+  }
+}
+
+// @include generate-padding();
+// @include generate-margin();

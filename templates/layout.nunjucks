@@ -1,3 +1,5 @@
+{% import "partials/navigations.nunjucks" as nav %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

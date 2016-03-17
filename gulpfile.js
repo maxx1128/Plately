@@ -176,7 +176,7 @@ gulp.task('imagemin', function() {
 // Converts Nunjucks templates and pages into HTML files
 // Always runs the JSON merge task first for changes in data
 gulp.task('nunjucks', ['json:merge'], function() {
-    nunjucksRender.nunjucks.configure(['templates/'], {watch: false});
+    nunjucksRender.nunjucks.configure(['templates/'], {watch: true});
 
     // Gets .html and .nunjucks files in pages
     return gulp.src('pages/**/*.+(html|nunjucks)')

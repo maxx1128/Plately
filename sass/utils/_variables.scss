@@ -1,6 +1,13 @@
+// ----- BEM Variables ----- //
+
+$element-separator: '__';
+$modifier-separator: '--';
+$state-prefix: 'is';
+
+
+
 // ----- Grid Variables ----- //
 
-// These are the core breakpoints for the grid. They use the values in the breakpoint lengths map to determine the breakpoints.
 $mobile-h-screen: em(480px);
 $tablet-screen: em(787px);
 $desktop-screen: em(900px);
@@ -11,7 +18,7 @@ $huge-screen: em(1200px);
 // ----- Typography Variables ----- //
 
 $base-font-size: 100;
-$line-height: 1.625;
+$line-height: 2;
 
 $base: 16 * ($base-font-size / 100);
 $base-rem: ($base-font-size / 100);
@@ -19,7 +26,7 @@ $leading: round($base * $line-height);
 $leading-rem: $leading / $base;
 
 $base-font-family: $lucida-grande;
-$heading-font-family: $base-font-family;
+$heading-font-family: $verdana;
 
 $modular-scale-ratio: $major-third;
 $modular-scale-base: $base * 1px;  // Base font size for creating scaled font sizes.
@@ -82,7 +89,7 @@ $form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $l
 
 // ----- Layout Variables ----- //
 
-$base-border-radius: $leading-rem * 0.5em; // Standard border-radius amount
+$base-border-radius: $leading-rem * 0.25em; // Standard border-radius amount
 $base-spacing: $leading-rem * 1em; // Basic spacing
 $small-spacing: $base-spacing / 2; // Half of basic spacing
 

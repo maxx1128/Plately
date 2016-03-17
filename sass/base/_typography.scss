@@ -35,7 +35,7 @@ h6 {
   font-family: $heading-font-family;
   @include line-height(2);
 
-  @include margin-top(2.5);
+  @include margin-top(2);
   @include margin-bottom(1);
 }
 

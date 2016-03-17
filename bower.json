@@ -12,6 +12,7 @@
   "devDependencies": {
     "bourbon": "~4.2.4",
     "jquery": "~2.1.4",
-    "Synapse-Grid": "https://github.com/maxx1128/Synapse-Grid.git"
+    "Synapse-Grid": "https://github.com/maxx1128/Synapse-Grid.git",
+    "bemify": "~0.1.1"
   }
 }
