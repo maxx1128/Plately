@@ -20,7 +20,7 @@
 {% macro card() %}
 
 <div class="card">
-  <div class="card-image"></div>
+  <div class="card__image"></div>
   <div class="card-header">
     <h4>First Card</h4>
   </div>

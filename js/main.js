@@ -1,7 +1,7 @@
 var $ = require('jquery'),
-	nav = require('./component-nav'),
-	content = require('./component-content'),
-	callout = require('./component-callout');
+	nav = require('./components/nav'),
+	content = require('./components/content'),
+	callout = require('./components/callout');
 
 // Modernizr tests and the trigger to run them
 require('browsernizr/test/css/flexbox');
