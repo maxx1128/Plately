@@ -1,0 +1,32 @@
+{% macro dropdown() %}
+
+<div class="dropdown">
+  <div class="dropdown-container">
+    <p class="dropdown-description">Description</p>
+    <p class="dropdown-button">Click to Select</p>
+    <ul class="dropdown-menu dropdown-select">
+      <li>Dropdown Menu Item</li>
+      <li>Another Item</li>
+      <li>Item Three</li>
+      <li>The Last One</li>
+    </ul>
+  </div>
+</div>
+
+{% endmacro %}
+
+
+
+{% macro card() %}
+
+<div class="card">
+  <div class="card-image"></div>
+  <div class="card-header">
+    <h4>First Card</h4>
+  </div>
+  <div class="card-copy">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, officiis sunt neque facilis culpa molestiae necessitatibus delectus veniam provident.</p>
+  </div>
+</div>
+
+{% endmacro %}

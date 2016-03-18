@@ -1,4 +1,6 @@
 {% import "partials/navigations.nunjucks" as nav %}
+{% import "partials/content.nunjucks" as content %}
+{% import "partials/callout.nunjucks" as callout %}
 
 <!DOCTYPE html>
 <html lang="en">

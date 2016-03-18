@@ -170,13 +170,21 @@
 
 			{{ nav.side() }}
 
-	<h2>Footer</h2>
-
 	<h2>Dropdown Menu</h2>
+
+		{{ content.dropdown() }}
 
 	<h2>Cards</h2>
 
+		<div class="cards">
+			{{ content.card() }}
+			{{ content.card() }}
+			{{ content.card() }}
+		</div>
+
 	<h2>Modal</h2>
+		{{ callout.modal() }}
+
 		<p>Styles for top right close and class for other close elements</p>
 
 {% endblock %}

@@ -1,6 +1,7 @@
 var $ = require('jquery'),
-	foo = require('./test'),
-	nav = require('./component-nav');
+	nav = require('./component-nav'),
+	content = require('./component-content'),
+	callout = require('./component-callout');
 
 // Modernizr tests and the trigger to run them
 require('browsernizr/test/css/flexbox');
@@ -9,8 +10,6 @@ require('browsernizr');
 nav.basic();
 nav.side();
 
-console.log(foo.multiply(5));
-console.log(foo.total + ' is the total!');
+content.dropdown();
 
-
-// foo.hideItem('h1, h2, h3');
+callout.modal("#modal-1");
