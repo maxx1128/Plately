@@ -132,6 +132,22 @@ gulp.task('sass', function () {
       browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
     };
 
+    var unCSSApp_Settings = {
+        html: ['app/**/*.+(html|nunjucks)'],
+        ignore: [
+            /.is-/,
+            /.has-/
+        ]
+    }
+
+    var unCSSDist_Settings = {
+        html: ['dist/**/*.+(html|nunjucks)'],
+        ignore: [
+            /.is-/,
+            /.has-/
+        ]
+    }
+
   return gulp
     .src(sassInput)
     .pipe(customPlumber('Error running Sass'))
@@ -139,6 +155,7 @@ gulp.task('sass', function () {
     .pipe(p.if(prod, p.sourcemaps.init()))
     // Write Sass for either dev or prod
     .pipe(p.if(prod, p.sass(sassOptions), p.sass(sassDistOptions)))
+    .pipe(p.if(prod, p.uncss(unCSSApp_Settings), p.uncss(unCSSDist_Settings)))
     .pipe(p.if(!prod, p.autoprefixer(autoprefixerOptions)))
     .pipe(p.if(prod, p.sourcemaps.write()))
     .pipe(p.rename("style.min.css"))
@@ -224,7 +241,7 @@ gulp.task('lint:js', function () {
 // Task to watch the things!
 gulp.task('watch', function(){
     gulp.watch('sass/**/**/*.scss', ['sass']);
-    gulp.watch(['pages/**/*.+(html|nunjucks)', 'templates/**/**/*.+(html|nunjucks)', 'data/**/**/*.json'], ['nunjucks']);
+    gulp.watch(['pages/**/*.+(html|nunjucks)', 'templates/**/**/*.+(html|nunjucks)', 'data/**/**/*.json'], ['nunjucks', 'sass']);
     gulp.watch(['img/**/**/*',], ['sprites']);
     gulp.watch('index.html', ['homepage']);
 });

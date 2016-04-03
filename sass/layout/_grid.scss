@@ -23,5 +23,6 @@ body {
   @include syn(xlg, 8, 2, (''));
 }
 
-// @include generate-padding();
-// @include generate-margin();
+
+@include generate-padding();
+@include generate-margin();
