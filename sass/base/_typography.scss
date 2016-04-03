@@ -37,6 +37,14 @@ h6 {
 
   @include margin-top(2);
   @include margin-bottom(1);
+
+  // For headers in a condensed or small area with less room for spacing
+  &.no-marg {
+    @include margin-top(0.5);
+    @include margin-bottom(0.5);
+
+    @include line-height(1.5);
+  }
 }
 
 h1 + h2 {
@@ -87,4 +95,20 @@ img,
 picture {
   margin: 0;
   max-width: 100%;
+}
+
+blockquote {
+  @include padding($small-spacing $base-spacing);
+  @include margin(0);
+  box-sizing: border-box;
+
+  border-top: 2px solid color(dark);
+  border-bottom: 2px solid color(dark);
+
+  text-align: center;
+
+
+  @include syn(xs, 12, 0, (marg-t-1 marg-b-2));
+  @include syn(sm, 10, 1, (''));
+  @include syn(md, 6, 0, (marg-0 marg-l-2 float-r));
 }

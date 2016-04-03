@@ -29,12 +29,6 @@
   'components/lists',
   'components/pre',
   'components/buttons',
-  'components/main-nav',
-  'components/hover-nav',
-  'components/side-nav',
-  'components/cards',
-  'components/modal',
-  'components/dropdown',
   'components/sprites',
   'components/sprites-settings'
 ;
@@ -42,9 +36,4 @@
 
 @import
   'pages/home'
-;
-
-@import
-  'themes/theme',
-  'themes/admin'
 ;

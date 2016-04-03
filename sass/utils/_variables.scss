@@ -17,18 +17,18 @@ $huge-screen: em(1200px);
 
 // ----- Typography Variables ----- //
 
-$base-font-size: 100;
-$line-height: 2;
+$base-font-size: 105;
+$line-height: 2.15;
 
 $base: 16 * ($base-font-size / 100);
 $base-rem: ($base-font-size / 100);
 $leading: round($base * $line-height);
 $leading-rem: $leading / $base;
 
-$base-font-family: $lucida-grande;
+$base-font-family: $helvetica;
 $heading-font-family: $verdana;
 
-$modular-scale-ratio: $major-third;
+$modular-scale-ratio: $minor-third;
 $modular-scale-base: $base * 1px;  // Base font size for creating scaled font sizes.
 
 $scaled-font-ratio: .8; // When the screen gets below a certain size, this is the percentage of the original font size the font becomes.
@@ -42,6 +42,7 @@ $modular-size-map: (
    h4: 3,
    h5: 2,
    h6: 1,
+   blockquote: 1,
    p: 0,
 );
 
