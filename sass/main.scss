@@ -1,39 +1,32 @@
 // Main CSS File
 // ======
 
-@import 
-  'bourbon/app/assets/stylesheets/bourbon',
-  'Synapse-Grid/synapse-grid',
-  'bemify/sass/bemify'
-;
+@import
+'bourbon/app/assets/stylesheets/bourbon',
+'Synapse-Grid/synapse-grid',
+'normalize-css/normalize';
 
 @import
-  'utils/mixins',
-  'utils/variables',
-  'utils/functions',
-  'utils/placeholders'
-;
+'utils/mixins',
+'utils/variables',
+'utils/functions',
+'utils/placeholders';
 
 @import
-  'base/normalize',
-  'base/typography'
-;
+'base/typography';
 
 @import
-  'layout/grid'
-;
+'layout/grid';
 
 @import
-  'components/tables',
-  'components/forms',
-  'components/lists',
-  'components/pre',
-  'components/buttons',
-  'components/sprites',
-  'components/sprites-settings'
-;
+'components/tables',
+'components/forms',
+'components/lists',
+'components/pre',
+'components/buttons',
+'components/sprites',
+'components/sprites-settings';
 
 
 @import
-  'pages/home'
-;
+'pages/home';

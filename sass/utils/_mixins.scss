@@ -52,7 +52,8 @@
   } @else {
     & > :first-child {
       @include flex-cell;
-    }
+  }
+
     & > :last-child {
       @include fix-cell($fix-direction, $fix-width);
       margin-left: $fix-margin;
@@ -61,7 +62,7 @@
 }
 
 // Mixin dependency for Fix-Flex
-@mixin fix-cell($fix-direction,$fix-width) {
+@mixin fix-cell($fix-direction, $fix-width) {
   width: $fix-width;
   display: block;
   max-width: none;
@@ -101,18 +102,18 @@
 /// @see keyframes
 /// @group Dependencies
 @mixin animation($animate...) {
-    $max: length($animate);
-    $animations: '';
+  $max: length($animate);
+  $animations: '';
 
-    @for $i from 1 through $max {
-        $animations: #{$animations + nth($animate, $i)};
+  @for $i from 1 through $max {
+    $animations: #{$animations + nth($animate, $i)};
 
-        @if $i < $max {
-            $animations: #{$animations + ", "};
-        }
+    @if $i < $max {
+        $animations: #{$animations + ", "};
     }
-    -webkit-animation: $animations;
-    -moz-animation:    $animations;
-    -o-animation:      $animations;
-    animation:         $animations;
+  }
+  -webkit-animation: $animations;
+  -moz-animation:    $animations;
+  -o-animation:      $animations;
+  animation:         $animations;
 }

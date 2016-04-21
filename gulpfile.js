@@ -1,15 +1,16 @@
-var gulp = require('gulp');  
-var p = require('gulp-load-plugins')(),
-    nunjucksRender = require('gulp-nunjucks-render');
+var gulp          = require('gulp');  
+var p             = require('gulp-load-plugins')(),
+    nunjucksRender= require('gulp-nunjucks-render'),
+    combineMq    = require('gulp-combine-mq');
 
-var browserSync = require('browser-sync'),
-    fs = require('fs'),
-    del = require('del'),
-    runSequence = require('run-sequence'),
-    browserify = require('browserify'),
-    watchify = require('watchify'),
-    source = require('vinyl-source-stream'),
-    buffer = require('vinyl-buffer');
+var browserSync   = require('browser-sync'),
+    fs            = require('fs'),
+    del           = require('del'),
+    runSequence   = require('run-sequence'),
+    browserify    = require('browserify'),
+    watchify      = require('watchify'),
+    source        = require('vinyl-source-stream'),
+    buffer        = require('vinyl-buffer');
 
 // Important variables used throughout the gulp file //
 
@@ -120,12 +121,13 @@ gulp.task('sass', function () {
     var sassInput = 'sass/main.scss';
     var sassOptions = { 
         outputStyle: 'expanded',
-        includePaths: ['components/']
+        includePaths: [config.componentPath]
     };
 
     // Sass variables for the dist folder
     var sassDistOptions = { 
-        outputStyle: 'compressed' 
+        outputStyle: 'compressed',
+        includePaths: [config.componentPath]
     };
 
     var autoprefixerOptions = {
@@ -156,6 +158,7 @@ gulp.task('sass', function () {
     // Write Sass for either dev or prod
     .pipe(p.if(prod, p.sass(sassOptions), p.sass(sassDistOptions)))
     .pipe(p.if(prod, p.uncss(unCSSApp_Settings), p.uncss(unCSSDist_Settings)))
+    .pipe(p.if(prod, combineMq({ beautify: true }), combineMq({ beautify: false })))
     .pipe(p.if(!prod, p.autoprefixer(autoprefixerOptions)))
     .pipe(p.if(prod, p.sourcemaps.write()))
     .pipe(p.rename("style.min.css"))

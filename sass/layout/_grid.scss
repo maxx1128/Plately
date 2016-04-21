@@ -1,28 +1,5 @@
-$synapse: (
-  columns: 12,
-  layouts: (
-        xs:  0,
-        sm:  $mobile-h-screen, 
-        md:  $tablet-screen,
-        lg: $desktop-screen,
-        xlg: $huge-screen
-    ),
-  spaceUnits: (
-      $small-spacing, 
-      $base-spacing, 
-      ($base-spacing * 2), 
-      ($base-spacing * 3), 
-      ($base-spacing * 4)
-    ),
-  side-margin: $base-spacing
-);
-
 body {
-  @include syn(xs, 12, 0, ('pad-1'));
-	@include syn(md, 10, 1, ('pad-0'));
+  @include syn(xs, 12, 0, (pad-2 border-b));
+  @include syn(md, 10, 1, (pad-1));
   @include syn(xlg, 8, 2, (''));
 }
-
-
-@include generate-padding();
-@include generate-margin();

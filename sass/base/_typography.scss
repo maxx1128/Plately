@@ -1,12 +1,11 @@
 // The base typography elements
 body {
+  @include font-size(1);
+  @include line-height(1);
+
   color: $base-font-color;
   font-family: $base-font-family;
-  font-feature-settings: "kern", "liga", "pnum";
-  
-  @include font-size(1);
-  
-  @include line-height(1);
+  font-feature-settings: 'kern', 'liga', 'pnum';
 }
 
 
@@ -15,15 +14,15 @@ body {
   $main-font-size: modular-scale($value);
   $scaled-font-size: $main-font-size * $scaled-font-ratio;
 
-   #{$key} {
-      font-size: $scaled-font-size;
-      font-size: rem($scaled-font-size);
+  #{$key} {
+    font-size: $scaled-font-size;
+    font-size: rem($scaled-font-size);
 
-      @include bp($scaled-breakpoint) {
-        font-size: $main-font-size;
-        font-size: rem($main-font-size);
-      }
-   }   
+    @include bp($scaled-breakpoint) {
+      font-size: $main-font-size;
+      font-size: rem($main-font-size);
+    }
+  }
 }
 
 h1,
@@ -32,11 +31,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $heading-font-family;
   @include line-height(2);
-
   @include margin-top(2);
   @include margin-bottom(1);
+
+  font-family: $heading-font-family;
 
   // For headers in a condensed or small area with less room for spacing
   &.no-marg {
@@ -47,23 +46,15 @@ h6 {
   }
 }
 
-h1 + h2 {
-  @include margin-top(1);
-}
+h1 + h2 { @include margin-top(1); }
 
 h2 + h3,
 h3 + h4,
-h4 + h5 {
-  @include margin-top(.5);
-}
+h4 + h5 { @include margin-top(0.5); }
 
-h5 + h6 {
-  @include margin-top(-.5);
-}
+h5 + h6 { @include margin-top(-0.5); }
 
-p {
-  @include margin-bottom(1);
-}
+p { @include margin-bottom(1); }
 
 a {
   color: $action-color;
@@ -72,19 +63,14 @@ a {
 
   &:active,
   &:focus,
-  &:hover {
-    color: shade($action-color, 25%);
-  }
+  &:hover { color: shade($action-color, 25%); }
 }
 
 hr {
-  border-bottom: $base-border;
-  border-left: 0;
-  border-right: 0;
-  border-top: 0;
-
   @include margin-top(1);
   @include margin-bottom(1);
+
+  border: $base-border 0 0 0;
 }
 
 strong { font-weight: 700; }
@@ -98,17 +84,13 @@ picture {
 }
 
 blockquote {
-  @include padding($small-spacing $base-spacing);
-  @include margin(0);
-  box-sizing: border-box;
-
-  border-top: 2px solid color(dark);
-  border-bottom: 2px solid color(dark);
-
-  text-align: center;
-
-
-  @include syn(xs, 12, 0, (marg-t-1 marg-b-2));
-  @include syn(sm, 10, 1, (''));
+  @include syn(xs, 0, 0, (marg-0 marg-t-1 marg-b-2 align-c border-b));
+  @include syn(sm, 10, 0, (margin-auto));
   @include syn(md, 6, 0, (marg-0 marg-l-2 float-r));
+  @include syn(lg, 4, 0, (''));
+
+  @include padding($small-spacing $base-spacing);
+
+  border-top: $base-border;
+  border-bottom: $base-border;
 }
