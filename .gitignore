@@ -2,4 +2,7 @@ node_modules/*
 components/*
 .sass-cache/*
 
+app/*
+dist/*
+
 npm-debug.log
