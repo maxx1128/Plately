@@ -10,14 +10,14 @@ $huge-screen: em(1200px);
 // ----- Typography Variables ----- //
 
 $base-font-size: 105;
-$line-height: 2;
+$line-height: 1.9;
 
 $base: 16 * ($base-font-size / 100);
 $base-rem: ($base-font-size / 100);
 $leading: round($base * $line-height);
 $leading-rem: $leading / $base;
 
-$base-font-family: $helvetica;
+$base-font-family: $lucida-grande;
 $heading-font-family: $verdana;
 
 $modular-scale-ratio: $minor-third;

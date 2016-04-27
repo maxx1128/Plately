@@ -13,17 +13,17 @@
 'utils/placeholders';
 
 @import
-'base/typography';
+'base/typography',
+'base/tables',
+'base/forms',
+'base/lists',
+'base/pre',
+'base/buttons';
 
 @import
 'layout/grid';
 
 @import
-'components/tables',
-'components/forms',
-'components/lists',
-'components/pre',
-'components/buttons',
 'components/sprites',
 'components/sprites-settings';
 
