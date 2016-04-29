@@ -170,21 +170,6 @@ gulp.task('sass', function () {
     .pipe(browserSync.reload(bs_reload))
 });
 
-// Creates a map of image sprites
-gulp.task('sprites', function () {
-    if (prod === true) { var imgPath = config.pAssetsPath + 'img'; }
-    else { var imgPath = config.dAssetsPath + 'img'; }
-
-    gulp.src('sprites/**/*')
-    .pipe(p.spritesmith({
-        cssName: '_sprites.scss', // CSS file 
-        imgName: 'sprites.png',
-        imgPath: '../img/sprites.png' // Image file
-    }))
-    .pipe(p.if('*.png', gulp.dest(imgPath)))
-    .pipe(p.if('*.scss', gulp.dest('sass/components')))
-});
-
 // Imagemin task for images not added into a sprite map
 gulp.task('imagemin', function() {
     return gulp.src('images/**/*')
@@ -256,7 +241,7 @@ gulp.task('test', function(done) {
 gulp.task('watch', function(){
     gulp.watch('sass/**/**/*.scss', ['sass']);
     gulp.watch(['pages/**/*.+(html|nunjucks)', 'templates/**/**/*.+(html|nunjucks)', 'data/**/**/*.json'], ['nunjucks', 'sass']);
-    gulp.watch(['img/**/**/*',], ['sprites']);
+    gulp.watch(['img/**/**/*',], ['imagemin']);
     gulp.watch('index.html', ['homepage']);
 });
 
@@ -273,7 +258,7 @@ gulp.task('watch-js', function() {
 gulp.task('default', function(callback) {
   runSequence(
     'clean:dev',
-    ['sprites', 'imagemin'],
+    'imagemin',
     ['browserify', 'sass', 'nunjucks'], 
     ['browserSync', 'watch', 'watch-js'],
     callback
