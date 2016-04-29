@@ -12,6 +12,8 @@ var browserSync   = require('browser-sync'),
     source        = require('vinyl-source-stream'),
     buffer        = require('vinyl-buffer');
 
+var Server = require('karma').Server;
+
 // Important variables used throughout the gulp file //
 
 // Configurations for different file paths
@@ -240,6 +242,15 @@ gulp.task('lint:js', function () {
   .pipe(gulp.dest('js'))
   .pipe(p.notify({ message: 'JS Linted!', onLast: true }))
 });
+
+gulp.task('test', function(done) {
+  new Server({
+    configFile: process.cwd() + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
+
+
 
 // Task to watch the things!
 gulp.task('watch', function(){
