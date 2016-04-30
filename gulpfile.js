@@ -228,21 +228,28 @@ gulp.task('lint:js', function () {
   .pipe(p.notify({ message: 'JS Linted!', onLast: true }))
 });
 
-gulp.task('test', function(done) {
+
+// All tests and auto-documentation below
+
+gulp.task('test-js', function(done) {
   new Server({
     configFile: process.cwd() + '/karma.conf.js',
     singleRun: true
   }, done).start();
 });
 
+gulp.task('hologram', function() {
+  gulp.src('hologram/hologram.yml')
+  .pipe(p.hologram());
+});
 
 
 // Task to watch the things!
 gulp.task('watch', function(){
-    gulp.watch('sass/**/**/*.scss', ['sass']);
-    gulp.watch(['pages/**/*.+(html|nunjucks)', 'templates/**/**/*.+(html|nunjucks)', 'data/**/**/*.json'], ['nunjucks', 'sass']);
-    gulp.watch(['img/**/**/*',], ['imagemin']);
-    gulp.watch('index.html', ['homepage']);
+  gulp.watch('sass/**/**/*.scss', ['sass']);
+  gulp.watch(['pages/**/*.+(html|nunjucks)', 'templates/**/**/*.+(html|nunjucks)', 'data/**/**/*.json'], ['nunjucks', 'sass']);
+  gulp.watch(['img/**/**/*',], ['imagemin']);
+  gulp.watch('index.html', ['homepage']);
 });
 
 gulp.task('watch-js', function() {

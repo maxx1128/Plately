@@ -4,5 +4,6 @@ components/*
 
 app/*
 dist/*
+docs/*
 
 npm-debug.log
