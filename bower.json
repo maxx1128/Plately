@@ -13,6 +13,7 @@
     "bourbon": "~4.2.4",
     "jquery": "~2.1.4",
     "Synapse-Grid": "https://github.com/maxx1128/Synapse-Grid.git",
-    "normalize-css": "normalize.css#~4.0.0"
+    "normalize-css": "normalize.css#~4.0.0",
+    "bootcamp": "~1.1.7"
   }
 }

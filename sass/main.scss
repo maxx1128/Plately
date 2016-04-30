@@ -4,6 +4,7 @@
 @import
 'bourbon/app/assets/stylesheets/bourbon',
 'Synapse-Grid/synapse-grid',
+'bootcamp/dist/bootcamp',
 'normalize-css/normalize';
 
 @import
@@ -23,9 +24,18 @@
 @import
 'layout/grid';
 
-// Components would go here
+// Components go here
 // @import
-
 
 @import
 'pages/home';
+
+
+// Testing info below
+$bc-setting-verbose:  false;
+$bc-setting-warnings: false;
+
+@include runner-start;
+@import 'tests/general';
+@import 'tests/math';
+@include runner-end;

@@ -9,3 +9,34 @@
   @warn "Unknown `#{$key}` in $z-layers.";
   @return null;
 }
+
+
+
+// Test function for calculating powers
+@function power($base, $exponent) {
+  $result: 1;
+
+  @if $exponent >= 0 {
+    @for $i from 1 through $exponent {
+      $result: $result * $base;
+    }
+  } @else {
+    @for $i from $exponent to 0 {
+      $result: $result / $base;
+    }
+  }
+
+  @return $result;
+}
+
+
+// Removes the value from any unit
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+
+// Limits a number to a min and max range
+@function clamp($value, $min, $max) {
+  @return if($value > $max, $max, if($value < $min, $min, $value));
+}
