@@ -1,27 +1,22 @@
 // The base typography elements
 body {
-  @include font-size(1);
-  @include line-height(1);
+  font-size: type(font-size);
+  line-height: type(line-height);
 
-  color: $base-font-color;
-  font-family: $base-font-family;
+  color: color(mono, black);
+  font-family: type(font-family);
   font-feature-settings: 'kern', 'liga', 'pnum';
 }
 
+$header-list: h1, h2, h3, h4, h5, h6;
 
-// This generates the font sizes based on modular scale so they're consistent and easy to manage.
-@each $key, $value in $modular-size-map {
-  $main-font-size: modular-scale($value);
-  $scaled-font-size: $main-font-size * $scaled-font-ratio;
+@each $header in $header-list {
 
-  #{$key} {
-    font-size: $scaled-font-size;
-    font-size: rem($scaled-font-size);
+  #{$header} {
+    @include margin(type(margin, $header) null);
 
-    @include bp($scaled-breakpoint) {
-      font-size: $main-font-size;
-      font-size: rem($main-font-size);
-    }
+    font-size: type(font-size, $header);
+    line-height: type(line-height, $header);
   }
 }
 
@@ -30,67 +25,39 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-  @include line-height(2);
-  @include margin-top(2);
-  @include margin-bottom(1);
+h6 { font-family: type(font-family, header); }
 
-  font-family: $heading-font-family;
+p { margin-bottom: type(margin); }
 
-  // For headers in a condensed or small area with less room for spacing
-  &.no-marg {
-    @include margin-top(0.5);
-    @include margin-bottom(0.5);
+a {
+  @include transition(anim(time));
+  color: color(action);
+  text-decoration: none;
 
-    @include line-height(1.5);
+  @include hovers() {
+    @include transition(anim(time));
+    color: color(action, hover);
   }
 }
 
-h1 + h2 { @include margin-top(1); }
-
-h2 + h3,
-h3 + h4,
-h4 + h5 { @include margin-top(0.5); }
-
-h5 + h6 { @include margin-top(-0.5); }
-
-p { @include margin-bottom(1); }
-
-a {
-  color: $action-color;
-  text-decoration: none;
-  transition: color $base-duration $base-timing;
-
-  &:active,
-  &:focus,
-  &:hover { color: shade($action-color, 25%); }
-}
-
 hr {
-  @include margin-top(1);
-  @include margin-bottom(1);
+  @include margin(type(margin) null);
 
-  border: $base-border 0 0 0;
+  border: container(border) 0 0 0;
 }
 
-strong { font-weight: 700; }
+strong { font-weight: type(font-weight, bold); }
 
 em { font-style: italic; }
 
-img,
-picture {
-  margin: 0;
-  max-width: 100%;
-}
-
 blockquote {
-  @include syn(xs, 0, 0, (marg-0 marg-t-1 marg-b-2 align-c border-b));
-  @include syn(sm, 10, 0, (margin-auto));
-  @include syn(md, 6, 0, (marg-0 marg-l-2 float-r));
-  @include syn(lg, 4, 0, (''));
+  @include syn(base, 0, 0, (marg-0 marg-t-1 marg-b-2 pad-2 align-c border-b));
+  @include syn(small, 10, 0, (center-m));
+  @include syn(medium, 6, 0, (marg-0 marg-l-2 float-r));
+  @include syn(large, 4, 0, (''));
 
-  @include padding($small-spacing $base-spacing);
+  font-size: type(font-size, h6);
 
-  border-top: $base-border;
-  border-bottom: $base-border;
+  border-top: container(border, thick);
+  border-bottom: container(border, thick);
 }

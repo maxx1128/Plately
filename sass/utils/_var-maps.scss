@@ -1,0 +1,222 @@
+/*
+These are all Sass maps that set the global variables used throughout the site
+Rules:
+1) No styles for elements can be declared here
+2) Any variables not in maps must be prefixed with 'g-', and not be used on ANY other stylesheet. Please keep their names as short as possible
+3) No map can reference a value in another map, only 'g-' vars if needed
+4) Always use these variables on their own. Never use them in operations to output different values, like dividing one in half. Always add this value to the map instead.
+*/
+
+
+// ----- Grid Variables ----- //
+
+$breakpoint-map: (
+  small: em(480px),
+  medium: em(787px),
+  large: em(900px),
+  max-width: em(1200px)
+);
+
+
+
+// ----- Layout Variables ----- //
+
+// Lays out the different z-index values to help keep them organized. Based off what commom elements they'd be used for.
+$z-layers: (
+  bottomless-pit: -9999,
+  default: 1,
+  dropdown: 3000,
+  overlay: 4000,
+  modal: 4001
+);
+
+
+$g-base-spacing: 1em;
+
+// Spacing units for padding, margin, etc
+$spacing-map: (
+  triple: ($g-base-spacing * 3),
+  double: ($g-base-spacing * 2),
+  half-more: ($g-base-spacing * 1.5),
+
+  base: $g-base-spacing,
+
+  half: ($g-base-spacing / 2),
+  third: ($g-base-spacing / 3),
+  quarter: ($g-base-spacing / 4),
+  fifth: ($g-base-spacing / 5),
+  sixth: ($g-base-spacing / 6),
+  eighth: ($g-base-spacing / 8)
+);
+
+
+
+
+// ----- Typography Variables ----- //
+
+// Bourbon var to determine the modular scale
+// in their function to return consistent, scaled values
+$modular-scale-ratio: $minor-third;
+$modular-scale-base: em(16px);
+
+$typography-map: (
+  font-family: (
+    base: $verdana,
+
+    header: $helvetica,
+    serif: $georgia,
+    mono: $monospace
+  ),
+
+  font-size: (
+    h1: modular-scale(6),
+    h2: modular-scale(5),
+    h3: modular-scale(4),
+    h4: modular-scale(3),
+    h5: modular-scale(2),
+    h6: modular-scale(1),
+    base: modular-scale(0),
+    small: modular-scale(-1),
+    tiny: modular-scale(-2)
+  ),
+
+  font-weight: (
+    bold: 700,
+    base: 400,
+    light: 100
+  ),
+
+  line-height: (
+    h1: 2.99rem,
+    h2: 2.49rem,
+    h3: 2.07rem,
+    h4: 1.73rem,
+    h5: 1.73rem,
+    h6: 1.73rem,
+    base: 1.83rem,
+    small: 1.44rem,
+    tiny: 1.2rem
+  ),
+
+  margin: (
+    h1: spacing(half-more),
+    h2: spacing(half-more),
+    h3: spacing(half-more),
+    h4: spacing(),
+    h5: spacing(),
+    h6: spacing(),
+    base: spacing(half-more),
+    small: spacing(),
+    tiny: spacing()
+  )
+);
+
+
+// ----- Color Variables ----- //
+
+// The base primary
+$g-color-main: #999;
+$g-color-action: #477dca;
+$g-color-info: #0074d9;
+$g-color-success: #2ecc40;
+$g-color-warning: #FFDC00;
+$g-color-alert: #ff4136;
+
+
+// Map for storing all color variables
+$color-map: (
+  main: (
+    lightest: tint($g-color-main, 85%),
+    lighter: tint($g-color-main, 50%),
+    light: tint($g-color-main, 15%),
+    base: $g-color-main,
+    dark: shade($g-color-main, 15%),
+    darker: shade($g-color-main, 50%),
+    darkest: shade($g-color-main, 85%)
+  ),
+
+  action: (
+    base: $g-color-action,
+    hover: shade($g-color-action, 15%)
+  ),
+
+  mono: (
+    white: #fffefc,
+    black: #111
+  ),
+
+  info: (
+    base: $g-color-info,
+    hover: shade($g-color-info, 15%)
+  ),
+
+  success: (
+    base: $g-color-success,
+    hover: shade($g-color-success, 15%)
+  ),
+
+  warning: (
+    base: $g-color-warning,
+    hover: shade($g-color-warning, 15%)
+  ),
+
+  alert: (
+    base: $g-color-alert,
+    hover: shade($g-color-alert, 15%)
+  ),
+);
+
+
+
+// ----- Container Variables ----- //
+
+
+$containers-map: (
+  background: (
+    base: color(main, lightest),
+    dark: color(main, lighter),
+  ),
+
+  border: (
+    base: 1px solid color(main),
+    dark: 1px solid color(mono, black),
+    thick: 3px solid color(main)
+  ),
+
+  border-radius: (
+    small: 1px,
+
+    base: 3px,
+    
+    large: 8px
+  ),
+
+  drop-shadow: (
+    base: 1px 1px 3px color(mono, black)
+  ),
+
+  fill: (
+    base: color(main, darker),
+    dark: color(main, dark)
+  ),
+
+  margin: (
+    base: spacing()
+  ),
+
+  padding: (
+    half: spacing(half),
+    base: spacing(),
+    large: spacing(double)
+  )
+);
+
+
+// ----- Animation Variables ----- //
+
+$animations-map: (
+  time: (
+    base: 0.5s,
+    flow: ease
+  )
+);

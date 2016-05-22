@@ -1,9 +1,9 @@
 pre {
-  padding: $base-spacing;
+  padding: spacing();
   overflow: scroll;
 
-  color: color(light);
-  font-family: $monospace;
+  color: color(mono, white);
+  font-family: type(font-family, mono);
 
-  background-color: color(dark);
+  background-color: color(mono, black);
 }

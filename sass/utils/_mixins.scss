@@ -22,15 +22,38 @@
 
 
 
-// Mobile-first breakpoint
-@mixin bp($point) {
-  @media screen and (min-width: $point) { @content; }
+// Mixin to use with the breakpoint map, sets any styles to be used above a certain screen width
+@mixin larger-than($point-name) {
+  $width: map-get($breakpoint-map, $point-name);
+
+  @media (min-width: $width) {
+    @content;
+  }
 }
 
-// Max-width breakpoint. Use only if needed
-@mixin max-bp($point) {
-  @media screen and (max-width: $point) { @content; }
+// Mixin to use with the breakpoint map, sets any styles to be used below a certain screen width. Try to use the larger-than mixin unless it can't be avoided.
+@mixin smaller-than($point-name) {
+  $width: map-get($breakpoint-map, $point-name);
+
+  @media (max-width: $width) {
+    @content;
+  }
 }
+
+
+// For adding styles fast to all hover states
+// Useful for buttons, links, and the like
+@mixin hovers() {
+  &:hover,
+  &:focus,
+  &:active { @content; }
+}
+
+
+
+
+
+
 
 
 // The fix-cell and flex-cell mixins included components of the fix-flex mixin, which is used for items with a fixed width on one side and flexible on the other.

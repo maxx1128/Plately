@@ -1,31 +1,10 @@
-/*doc
----
-title: Lists
-name: lists
-category: Index
----
-```html_example
-<ul>
-  <li>Item 1</li>
-  <li>Item 2</li>
-  <li>Item 3</li>
-</ul>
-
-<ol>
-  <li>Item 1</li>
-  <li>Item 2</li>
-  <li>Item 3</li>
-</ol>
-```
-*/
-
 ul,
 ol {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  margin-bottom: $small-spacing;
-  padding-left: $base-spacing * 1.75;
+  margin-bottom: spacing(half);
+  padding-left: spacing(half-more);
 }
 
 ul { list-style-type: disc; }
@@ -33,11 +12,11 @@ ul { list-style-type: disc; }
 ol { list-style-type: decimal; }
 
 dl {
-  margin-bottom: $small-spacing;
+  margin-bottom: spacing(half);
 
   dt {
-    font-weight: bold;
-    margin-top: $small-spacing;
+    font-weight: type(font-weight, bold);
+    margin-top: spacing(half);
   }
 
   dd { margin: 0; }

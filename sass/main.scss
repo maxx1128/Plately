@@ -8,10 +8,16 @@
 'normalize-css/normalize';
 
 @import
+'utils/var-functions',
+'utils/var-maps';
+
+@import
 'utils/mixins',
-'utils/variables',
 'utils/functions',
 'utils/placeholders';
+
+@import
+'layout/grid';
 
 @import
 'base/typography',
@@ -19,17 +25,11 @@
 'base/forms',
 'base/lists',
 'base/pre',
-'base/buttons';
-
-@import
-'layout/grid';
+'base/buttons',
+'base/img';
 
 // Components go here
 // @import
-
-@import
-'pages/home';
-
 
 // Testing info below
 $bc-setting-verbose:  false;

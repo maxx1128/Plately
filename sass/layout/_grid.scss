@@ -1,5 +1,33 @@
-body {
-  @include syn(xs, 12, 0, (pad-2 border-b));
-  @include syn(md, 10, 1, (pad-1));
-  @include syn(xlg, 8, 2, (''));
+// For the synapse grid
+$synapse: (
+  columns: 12,
+  layouts: (
+    base:  0,
+    small:  size(small),
+    medium:  size(medium),
+    large: size(large),
+    x-large: size(max-width)
+  ),
+
+  spaceUnits: (
+    spacing(half),
+    spacing(),
+    spacing(half-more),
+    spacing(double),
+    spacing(triple)
+  )
+);
+
+@mixin synapse-custom($var) {
+  @if ($var == 'max-width') {
+    margin: 0 auto;
+    display: block;
+    max-width: breakpoint(max-width);
+  }
+}
+
+.container {
+  @include syn(base, 12, 0, (pad-2 border-b));
+  @include syn(medium, 10, 0, (pad-vert-1 max-width));
+  @include syn(x-large, 8, 0, (''));
 }
